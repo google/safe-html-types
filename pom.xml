@@ -5,20 +5,25 @@
   <modelVersion>4.0.0</modelVersion>
   <name>Safe HTML Types</name>
   <groupId>com.google.common.html.types</groupId>
-  <artifactId>types</artifactId>
+  <artifactId>parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
   <description>
-    Wrapper types for web content strings.
-
-    These strings must meet a contract that enable web
-    applications to be secure-by-construction against
-    important classes of vulnerabilities like XSS.
-
-    This is meant to be used in conjunction with the
-    error_prone checker, and safe template languages.
+    Parent project for typed strings of web content that can be
+    used to bring safe-by-construction methods to web applications.
 
     https://github.com/google/safe-html-types/blob/master/README.md
   </description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.7</java.version>
+    <guava.version>18.0</guava.version>
+    <gwt.version>2.8.0-beta1</gwt.version>
+  </properties>
+
   <url>https://github.com/google/safe-html-types</url>
   <inceptionYear>2015</inceptionYear>
 
@@ -65,71 +70,10 @@
     <tag>HEAD</tag>
   </scm>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.7</java.version>
-    <guice.version>3.0</guice.version>
-    <guava.version>18.0</guava.version>
-    <asm.version>5.0.3</asm.version>
-    <autovalue.version>1.0</autovalue.version>
-    <gwt.version>2.8.0-beta1</gwt.version>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <version>2.5.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <version>${gwt.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <version>${gwt.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>jsr250-api</artifactId>
-      <version>1.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.errorprone</groupId>
-      <artifactId>error_prone_annotations</artifactId>
-      <version>2.0.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>[4.11,)</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava-testlib</artifactId>
-      <!-- Same as guava or else we get convergence errors. -->
-      <version>${guava.version}</version>
-    </dependency>
-  </dependencies>
+  <modules>
+    <module>proto</module>
+    <module>types</module>
+  </modules>
 
   <build>
     <defaultGoal>package</defaultGoal>
@@ -142,85 +86,6 @@
         <version>1.0-m5.1</version>
         <configuration>
           <!-- see goals wiki page for configuration options -->
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.comoyo.maven.plugins</groupId>
-        <artifactId>protoc-bundled-plugin</artifactId>
-        <version>1.4.46</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- recognize the generated *Proto.java files as sources -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.9.1</version>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-sources/protobuf</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <debug>true</debug>
-          <debuglevel>lines,vars,source</debuglevel>
-          <compilerArgument>-Werror</compilerArgument>
-          <compilerArgument>-Xlint:deprecation</compilerArgument>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
-        <configuration>
-          <notimestamp>true</notimestamp>
-          <windowtitle>Safe HTML Strings</windowtitle>
-          <author>false</author>
-          <doctitle>
-            <![CDATA[
-                  <h1>Safe HTML Types</h1>
-                ]]>
-          </doctitle>
-          <bottom>
-            <![CDATA[
-                  <div id="footer">
-                  <div id="footerlogo" style="float:left">
-                    <img src="http://www.google.com/images/art.gif" alt="Google colored balls">
-                  </div>
-                  <div id="copyright" style="float:left">
-                    <p>&copy; 2015 Google -
-                      <a href="http://www.google.com/privacy.html">Privacy Policy</a> -
-                      <a href="http://www.google.com/terms_of_service.html">Terms and Conditions</a> -
-                      <a href="http://www.google.com/about.html">About Google</a>
-                    </p>
-                  </div>
-                ]]>
-          </bottom>
         </configuration>
       </plugin>
     </plugins>
