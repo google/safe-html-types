@@ -22,6 +22,8 @@
     <java.version>1.7</java.version>
     <guava.version>18.0</guava.version>
     <gwt.version>2.8.0-beta1</gwt.version>
+    <!-- Specify the version for the core maven build plugins -->
+    <build.plugins.plugin.version>2.4</build.plugins.plugin.version>
   </properties>
 
   <url>https://github.com/google/safe-html-types</url>
@@ -69,6 +71,20 @@
     <url>https://github.com/google/safe-html-types.git</url>
     <tag>HEAD</tag>
   </scm>
+
+  <distributionManagement>
+    <!-- Full version from
+      http://central.sonatype.org/pages/apache-maven.html#distribution-management-and-authentication
+    -->
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <modules>
     <module>proto</module>
