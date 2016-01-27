@@ -16,12 +16,8 @@ This document provides a short overview of this approach and its benefits.
 
 
 [^1]:
-    In 2014, there were [several hundred][bug stats]
-    *externally discovered* XSS vulnerabilities in Google applications. That
-    is, several hundred vulnerabilities that were *not* found through code
-    review nor testing, were shipped to production, and *then* discovered and
-    reported by an external party.
-
+    In 2014, XSS accounted for ca. 65% of vulnerabilities reported through
+    Google's [Vulnerability Reward ("Bug Bounty") Program][bug stats].
 
 ## Inherently safe APIs
 
