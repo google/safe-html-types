@@ -16,102 +16,14 @@
     https://github.com/google/safe-html-types/blob/master/README.md
   </description>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <version>2.5.0</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <defaultGoal>package</defaultGoal>
 
-    <plugins>
-      <plugin>
-        <groupId>com.comoyo.maven.plugins</groupId>
-        <artifactId>protoc-bundled-plugin</artifactId>
-        <version>1.4.46</version>
-        <configuration>
-          <inputDirectories>
-            <inputDirectory>${project.basedir}/../src/main/protobuf</inputDirectory>
-          </inputDirectories>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- recognize the generated *Proto.java files as sources -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.9.1</version>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-sources/protobuf</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <debug>true</debug>
-          <debuglevel>lines,vars,source</debuglevel>
-          <compilerArgument>-Werror</compilerArgument>
-          <compilerArgument>-Xlint:deprecation</compilerArgument>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
-        <configuration>
-          <notimestamp>true</notimestamp>
-          <windowtitle>Safe HTML Types</windowtitle>
-          <author>false</author>
-          <doctitle>
-            <![CDATA[
-                  <h1>Safe HTML Types</h1>
-                ]]>
-          </doctitle>
-          <bottom>
-            <![CDATA[
-                  <div id="footer">
-                  <div id="footerlogo" style="float:left">
-                    <img src="http://www.google.com/images/art.gif" alt="Google colored balls">
-                    </div>
-                  <div id="copyright" style="float:left">
-                    <p>&copy; 2015 Google -
-                      <a href="http://www.google.com/privacy.html">Privacy Policy</a> -
-                      <a href="http://www.google.com/terms_of_service.html">Terms and Conditions</a> -
-                      <a href="http://www.google.com/about.html">About Google</a>
-                    </p>
-                  </div>
-                ]]>
-          </bottom>
-          <additionalparam>-Xdoclint:none</additionalparam>
-        </configuration>
-      </plugin>
-    </plugins>
+    <!-- package up the proto file as a resource -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/../src/main/protobuf</directory>
+      </resource>
+    </resources>
   </build>
 </project>

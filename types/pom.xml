@@ -24,13 +24,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.google.common.html.types</groupId>
-      <artifactId>proto</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
@@ -101,6 +94,59 @@
           <debuglevel>lines,vars,source</debuglevel>
           <compilerArgument>-Werror</compilerArgument>
           <compilerArgument>-Xlint:deprecation</compilerArgument>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.comoyo.maven.plugins</groupId>
+        <artifactId>protoc-bundled-plugin</artifactId>
+        <version>1.4.46</version>
+        <configuration>
+          <inputDirectories>
+            <inputDirectory>${project.basedir}/../src/main/protobuf</inputDirectory>
+          </inputDirectories>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- recognize the generated *Proto.java files as sources -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/protobuf</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <!-- Seal the JAR so that package private access cannot
+                   be violated by other projects. -->
+              <Sealed>true</Sealed>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
 
