@@ -16,6 +16,8 @@
 
 package com.google.common.html.types.escape;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 /**
  * An {@link Escaper} that converts literal text into a format safe for
  * inclusion in a particular context (such as an XML document). Typically (but
@@ -304,6 +306,7 @@ public abstract class UnicodeEscaper extends Escaper {
     return copy;
   }
 
+  @CanIgnoreReturnValue
   static <T> T checkNotNull(T reference) {
     if (reference == null) {
       throw new NullPointerException();

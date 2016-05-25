@@ -25,13 +25,13 @@
     <dependency>
       <groupId>com.google.common.html.types</groupId>
       <artifactId>types</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
 
   <build>
-    <defaultGoal>package</defaultGoal>
+    <defaultGoal>verify</defaultGoal>
 
     <plugins>
       <plugin>

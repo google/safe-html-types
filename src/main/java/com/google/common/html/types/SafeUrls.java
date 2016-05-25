@@ -21,8 +21,10 @@
 package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.io.BaseEncoding;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -140,6 +142,29 @@ public final class SafeUrls {
       return "about:invalid#" + identifier;
     }
     return url;
+  }
+
+  /**
+   * Creates a {@code data:text/html} URL whose content is populated from the given
+   * {@code SafeHtml} object.
+   *
+   * <p>The resulting {@code data}-scheme URL's content is UTF-8-encoded, and further encoded using
+   * base-64 transfer encoding.
+   *
+   * @see http://tools.ietf.org/html/rfc2397
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs
+   */
+  public static SafeUrl createHtmlDataUrl(SafeHtml html) {
+    try {
+      String dataUrl =
+          "data:text/html;charset=UTF-8;base64,"
+              + BaseEncoding.base64().encode(html.getSafeHtmlString().getBytes("UTF-8"));
+      return create(dataUrl);
+    } catch (UnsupportedEncodingException e) {
+      // Should never happen.  We use getBytes(String) instead of getBytes(CharSet) because
+      // there's no java.nio.charset.StandardCharsets in older Android SDKs.
+      throw new RuntimeException(e);
+    }
   }
 
   /**

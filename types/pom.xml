@@ -2,7 +2,7 @@
   <parent>
     <groupId>com.google.common.html.types</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -44,13 +44,6 @@
     </dependency>
 
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <version>${gwt.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>jsr250-api</artifactId>
       <version>1.0</version>
@@ -82,25 +75,41 @@
     <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
     <testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory>
 
+    <testResources>
+      <testResource>  <!-- The default -->
+        <directory>${project.basedir}/../src/test/resources</directory>
+      </testResource>
+    </testResources>
+
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <debug>true</debug>
-          <debuglevel>lines,vars,source</debuglevel>
-          <compilerArgument>-Werror</compilerArgument>
-          <compilerArgument>-Xlint:deprecation</compilerArgument>
-        </configuration>
+        <artifactId>exec-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <id>Generate fences.xml</id>
+            <!--
+                We want to run this after the classes are available to examine.
+            -->
+            <phase>process-classes</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <executable>${project.basedir}/../src/main/scripts/make_fences_xml.sh</executable>
+              <arguments>
+                <argument>${project.build.outputDirectory}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
         <groupId>com.comoyo.maven.plugins</groupId>
         <artifactId>protoc-bundled-plugin</artifactId>
-        <version>1.4.46</version>
         <configuration>
           <inputDirectories>
             <inputDirectory>${project.basedir}/../src/main/protobuf</inputDirectory>
@@ -119,7 +128,6 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.9.1</version>
         <executions>
           <execution>
             <id>add-source</id>
@@ -153,7 +161,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
         <configuration>
           <notimestamp>true</notimestamp>
           <windowtitle>Safe HTML Types</windowtitle>

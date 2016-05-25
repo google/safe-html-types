@@ -80,7 +80,7 @@ Most builders for such types have been designed to ensure the type contract at
 an API level. However, the types support
 [unchecked conversions](security_reviewers_guide.md#unchecked_conversions) to
 support unusual/exceptional use cases; their use must be hand-reviewed. The
-unchecked conversions are [BUILD-visibility-restricted](https://bazel.io/docs/be/common-definitions.html#common.visibility)
+unchecked conversions are [BUILD-visibility-restricted](http://bazel.io/docs/be/common-definitions.html#common.visibility)
 (modulo limitations of the language's deps strictness), and in most cases this
 review should already have happened.
 
@@ -132,7 +132,7 @@ quick and shouldn't result in much work.[^automation]
     into callers of the code you're reviewing; it should be possible to
     determine if a call-site of a potentially-dangerous API is actually safe
     only by looking at the surrounding code.  If this is not the case, the code
-    is not conforming to [unchecked Safe HTML](https://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md) guidelines
+    is not conforming to [unchecked Safe HTML](http://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md) guidelines
 
 In a time-constrained review, you may not be able to exhaustively check all
 items. However, a project that uses safe HTML APIs and strict templates
@@ -415,7 +415,7 @@ To address this, we have:
 1.  Created safe wrapper APIs for injection-prone APIs.  These wrappers either
     run-time sanitize their argument (if possible) or consume an appropriate
     security-contract type (`SafeHtml`, `SafeUrl`, etc).
-2.  Created [JSConformance](https://github.com/google/closure-compiler/wiki/JS-Conformance-Framework) rules that disallow use of the
+2.  Created [JSConformance](http://github.com/google/closure-compiler/wiki/JS-Conformance-Framework) rules that disallow use of the
     underlying injection-prone platform APIs, except in white-listed usages
     (such as, inside their corresponding safe wrapper).
 3.  Refactored Closure to add safe alternatives to injection-prone Closure

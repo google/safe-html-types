@@ -69,7 +69,7 @@ public final class SafeHtmlBuilder {
   // Keep documentation in setType() in sync with this list.
   /** These elements are whilelisted to use the type attribute. */
   private static final Set<String> TYPE_ELEMENTS_WHITELIST = createUnmodifiableSet(
-      "button", "command", "input", "li", "menu", "ol", "ul");
+      "button", "command", "input", "li", "menu", "ol", "ul", "link");
 
   private final String elementName;
   /** We use LinkedHashMap to maintain attribute insertion order. */
@@ -304,7 +304,8 @@ public final class SafeHtmlBuilder {
 
   /**
    * Sets the {@code type} attribute for this element, if it's one of {@code button},
-   * {@code command}, {@code input}, {@code li}, {@code menu}, {@code ol}, or {@code ul}.
+   * {@code command}, {@code input}, {@code li}, {@code link}, {@code menu},
+   * {@code ol}, or {@code ul}.
    *
    * @throws IllegalArgumentException if type cannot be set on this element
    */

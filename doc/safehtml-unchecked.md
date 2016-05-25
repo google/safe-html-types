@@ -194,7 +194,7 @@ review for any unchecked conversions that remain.
 Unchecked conversions may be used in tests where necessary or convenient (since
 this cannot result in vulnerabilities in production code). However, to
 distinguish test and non-test use, we typically provide a for-test-only
-unchecked conversion in a [`testonly=1`](https://bazel.io/docs/be/common-definitions.html#common.testonly) target,
+unchecked conversion in a [`testonly=1`](http://bazel.io/docs/be/common-definitions.html#common.testonly) target,
 e.g.,
 [`c.g.c.html.types.testing.HtmlConversions.newSafeHtmlForTest`][HtmlConversions.newSafeHtmlForTest]
 and [`goog.html.testing.newSafeHtmlForTest`]

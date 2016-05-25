@@ -1,0 +1,8 @@
+language: java
+sudo: false
+jdk:
+  - oraclejdk7
+  - oraclejdk8
+
+install: "mvn install -Dmaven.javadoc.skip=true -DskipITs=true -B -V"
+script: "./run_all_tests.sh"

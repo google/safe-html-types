@@ -305,6 +305,20 @@ public final class SafeStyleBuilder {
     return this;
   }
 
+  /**
+   * Sets {@code value} as the {@code color} property.
+   *
+   * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
+   * tab, and the set {@code [+-.!#%_/*]}. In addition, comment markers - {@code //}, {@code /*},
+   * and <code>*&#47;</code>- are disallowed too. Non-conforming values are replaced with
+   * {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/color"
+   */
+  public SafeStyleBuilder color(String value) {
+    properties.put("color", sanitizeRegularValue(value));
+    return this;
+  }
 
   /**
    * Appends {@code values} to the {@code font-family} property. Values will be comma separated.

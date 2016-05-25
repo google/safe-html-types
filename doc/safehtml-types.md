@@ -18,7 +18,7 @@ Consumers of these types include template systems like
 [Closure Templates](https://developers.google.com/closure/templates/docs/security), and
 [Closure DOM APIs][Closure DOM APIs].
 End-to-end type safety from certain classes of vulnerabilities, principally
-[cross-site scripting (XSS)](https://www.google.com/about/appsecurity/learning/xss/), is the goal.
+[cross-site scripting (XSS)](http://www.google.com/about/appsecurity/learning/xss/), is the goal.
 
 
 ## Types

@@ -2,6 +2,7 @@ package com.example;
 
 import com.google.common.html.types.SafeHtml;
 import com.google.common.html.types.SafeHtmlBuilder;
+import com.google.common.html.types.SafeUrl;
 import com.google.common.html.types.SafeUrls;
 
 /**

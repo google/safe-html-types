@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <groupId>com.example.safehtmltypes</groupId>
+  <artifactId>banned_use_of_proto_setter</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
+  <name>Safe HTML Types Example - Banned use of Protobuf Setter</name>
+  <description>
+    This example shows how Fences can be used to abort a maven
+    build when SafeHtmlProto$Builder and friends are used in an
+    unapproved manner.
+
+    See tutorial.md for how to modify this code so that it passes.
+  </description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.7</java.version>
+    <build.plugins.plugin.version>2.4</build.plugins.plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.common.html.types</groupId>
+      <artifactId>types</artifactId>
+      <version>1.0.2-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>verify</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.4.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.security</groupId>
+            <artifactId>fences-maven-enforcer-rule</artifactId>
+            <version>1.5-beta</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>enforce</id>
+            <phase>verify</phase>
+            <configuration>
+              <rules>
+                <!-- See http://mikesamuel.github.io/fences-maven-enforcer-rule/getting_started.html -->
+                <fences
+                 implementation="com.google.security.fences.FencesMavenEnforcerRule">
+                  <!-- Import the rules packages with the safe HTML types -->
+                  <import>com.google.common.html.types:types</import>
+                  <!-- Make sure violation reports point at local sources of information -->
+                  <addendum>security@example.com | http://wiki/code-quality</addendum>
+                </fences>
+              </rules>
+            </configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

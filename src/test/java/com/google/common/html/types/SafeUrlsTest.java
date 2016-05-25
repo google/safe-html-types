@@ -24,6 +24,7 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import com.google.common.html.types.testing.HtmlConversions;
 
 import junit.framework.TestCase;
 
@@ -148,5 +149,13 @@ public class SafeUrlsTest extends TestCase {
     url = "tel:+1234567890";
     safeUrl = SafeUrls.sanitize(url, schemes);
     assertEquals(url, safeUrl.getSafeUrlString());
+  }
+
+  public void testHtmlDataUrl() {
+    SafeHtml html = HtmlConversions.newSafeHtmlForTest("<h1>Hello World!!?!</h1>..");
+    SafeUrl dataUrl = SafeUrls.createHtmlDataUrl(html);
+    assertEquals(
+        "data:text/html;charset=UTF-8;base64,PGgxPkhlbGxvIFdvcmxkISE/ITwvaDE+Li4=",
+        dataUrl.getSafeUrlString());
   }
 }

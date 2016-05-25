@@ -87,7 +87,7 @@ In some cases, the approach in the previous section is not possible; for
 instance, if the method whose use must be restricted is in a public API that
 cannot be refactored.
 
-In Java, we can use [Error Prone](https://github.com/google/error-prone) to restrict call sites of
+In Java, we can use [Error Prone](http://github.com/google/error-prone) to restrict call sites of
 specific methods:
 
 *   Create an Error Prone checker that disallows call-sites to particular
@@ -95,12 +95,12 @@ specific methods:
 
     The checker should be declared `UNSUPPRESSIBLE` (to prevent it from being
     disabled via `@SuppressWarnings`).
-*   Expose the checker as a [`java_plugin`](https:http://bazel.io/docs/be/java.html#java_plugin)
+*   Expose the checker as a [`java_plugin`](http:http://bazel.io/docs/be/java.html#java_plugin)
     which is in turn referenced in the `exported_plugins` of the rule that
     provides the API that needs to be restricted
 *   Optionally, the checker can be suppressed through an annotation
     which is BUILD visibility-restricted to be usable only
-    in [testing code](https://bazel.io/docs/be/common-definitions.html#common.testonly)
+    in [testing code](http://bazel.io/docs/be/common-definitions.html#common.testonly)
 
 
 When introducing such a mechanism, it can be a useful pattern to introduce
@@ -112,14 +112,14 @@ existing, unreviewed, potentially vulnerable legacy uses
 
 
 In some cases, it is not feasible to use language-level visibility and
-[BUILD visibility](https://bazel.io/docs/be/common-definitions.html#common.visibility) mechanisms to restrict
+[BUILD visibility](http://bazel.io/docs/be/common-definitions.html#common.visibility) mechanisms to restrict
 inappropriate use.
 
 For instance, for the protocol buffer representation of the
 [safe HTML types](safehtml-types.md), we needed to approximate package-private
 visibility for protocol buffer fields.  There is no visibility concept in
 protobuf, and we resorted to a
-[global presubmit](https://dev.chromium.org/developers/how-tos/depottools/presubmit-scripts]).
+[global presubmit](http://dev.chromium.org/developers/how-tos/depottools/presubmit-scripts]).
 
 
 
