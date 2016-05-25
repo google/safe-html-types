@@ -3,7 +3,7 @@
   <name>Safe HTML Types</name>
   <groupId>com.google.common.html.types</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <description>
