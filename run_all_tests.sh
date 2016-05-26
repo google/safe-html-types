@@ -11,7 +11,7 @@ fi
 [ -n "$MVN" ]
 
 # Older versions of javadoc do not recognize the -Xdoclint flag used in the POM.
-export SKIP_JAVADOC="$(echo -- "$TRAVIS_JDK_VERSION" | grep -q openjdk6 && echo -n true || echo -n false)"
+export SKIP_JAVADOC="$(echo -- "$TRAVIS_JDK_VERSION" | egrep -q 'jdk[67]' && echo -n true || echo -n false)"
 
 # Make sure that the tests run, and we can produce the 3 jars needed
 # by maven central
