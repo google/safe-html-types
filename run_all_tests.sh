@@ -10,16 +10,12 @@ if [ -z "$MVN" ]; then
 fi
 [ -n "$MVN" ]
 
-# Older versions of javadoc do not recognize the -Xdoclint flag used in the POM.
-export SKIP_JAVADOC="$(echo -- "$TRAVIS_JDK_VERSION" | egrep -q 'jdk[67]' && echo -n true || echo -n false)"
-
 # Make sure that the tests run, and we can produce the 3 jars needed
 # by maven central
 $MVN clean verify \
     org.apache.maven.plugins:maven-javadoc-plugin:jar \
     org.apache.maven.plugins:maven-source-plugin:jar \
     install \
-    -Dmaven.javadoc.skip="$SKIP_JAVADOC" \
     -B -V
 
 function fail() {
