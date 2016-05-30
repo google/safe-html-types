@@ -161,6 +161,17 @@ public class SafeHtmlBuilderTest extends TestCase {
         new SafeHtmlBuilder("link").setHref(url).setRel("stylesheet"));
   }
 
+  public void testAllowsResourceUrlInLinkedDangerousContexts() {
+    TrustedResourceUrl url = TrustedResourceUrls.fromConstant("a");
+    assertSameHtml(
+        "<link rel=\"serviceworker\" href=\"a\">",
+        new SafeHtmlBuilder("link").setRel("serviceworker").setHref(url));
+
+    assertSameHtml(
+        "<link rel=\"import\" href=\"a\">",
+        new SafeHtmlBuilder("link").setRel("next").setHref(url).setRel("import"));
+  }
+
   public void testAllowsSafeUrlInLinkedIcon() {
     assertSameHtml("<link rel=\"icon\" href=\"a\">", new SafeHtmlBuilder("link")
         .setRel("icon")
@@ -182,6 +193,39 @@ public class SafeHtmlBuilderTest extends TestCase {
     } catch (IllegalArgumentException expected) {
     }
 
+  }
+
+  public void testDoesntAllowSafeUrlInOtherDangerousContexts() {
+    try {
+      new SafeHtmlBuilder("link").setRel("import").setHref(newSafeUrlForTest("a"));
+      fail("Setting <link href> to SafeUrl with rel=\"import\" shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
+
+    try {
+      new SafeHtmlBuilder("link").setRel("manifest").setHref(newSafeUrlForTest("a"));
+      fail("Setting <link href> to SafeUrl with rel=\"manifest\" shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
+
+    try {
+      new SafeHtmlBuilder("link").setRel("serviceworker").setHref(newSafeUrlForTest("a"));
+      fail("Setting <link href> to SafeUrl with rel=\"serviceworker\" shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
+
+    // Test different order and rel change
+    try {
+      new SafeHtmlBuilder("link").setRel("next").setHref(newSafeUrlForTest("a")).setRel("import");
+      fail("Setting <link href> to SafeUrl with rel=\"import\" shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
+
+    try {
+      new SafeHtmlBuilder("link").setHref(newSafeUrlForTest("a")).setRel("import");
+      fail("Setting <link href> to SafeUrl with rel=\"import\" shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
   }
 
   public void testDoesntAllowInvalidTagNames() {
