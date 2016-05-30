@@ -152,8 +152,25 @@ public class SafeUrlsTest extends TestCase {
   }
 
   public void testHtmlDataUrl() {
-    SafeHtml html = HtmlConversions.newSafeHtmlForTest("<h1>Hello World!!?!</h1>..");
+    SafeHtml html = HtmlConversions.newSafeHtmlForTest(
+        "<h1>Hello World!!?!</h1><br />"
+        + "<span>4 is &gt; 1 + 2, and 2 * 0.5 &lt; 3, and & is &amp; in HTML.</span><br />"
+        + "<a href=\"https://google.com/search?q=test#random%20suff\">Google Search</a>"
+        + "<p>And some non-ascii text: 日本語は面白いね。</p>");
     SafeUrl dataUrl = SafeUrls.createHtmlDataUrl(html);
+    assertEquals(
+       "data:text/html;charset=UTF-8,%3Ch1%3EHello%20World!!%3F!%3C%2Fh1%3E%3Cbr%20%2F%3E%3C"
+           + "span%3E4%20is%20&gt;%201%20+%202,%20and%202%20*%200.5%20&lt;%203,%20and%20&%20is%20"
+           + "&amp;%20in%20HTML.%3C%2Fspan%3E%3Cbr%20%2F%3E%3Ca%20href=%22https:%2F%2Fgoogle.com"
+           + "%2Fsearch%3Fq=test%23random%2520suff%22%3EGoogle%20Search%3C%2Fa%3E%3Cp%3EAnd"
+           + "%20some%20non-ascii%20text:%20%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AF%E9%9D%A2%E7"
+           + "%99%BD%E3%81%84%E3%81%AD%E3%80%82%3C%2Fp%3E",
+        dataUrl.getSafeUrlString());
+  }
+
+  public void testHtmlDataUrlBase64() {
+    SafeHtml html = HtmlConversions.newSafeHtmlForTest("<h1>Hello World!!?!</h1>..");
+    SafeUrl dataUrl = SafeUrls.createHtmlDataUrlBase64(html);
     assertEquals(
         "data:text/html;charset=UTF-8;base64,PGgxPkhlbGxvIFdvcmxkISE/ITwvaDE+Li4=",
         dataUrl.getSafeUrlString());
