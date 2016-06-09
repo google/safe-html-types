@@ -107,6 +107,8 @@ public class SafeUrlsTest extends TestCase {
     assertSanitizedAsUnsafeUrl("data:blah");
     // Not whitelisted by default.
     assertSanitizedAsUnsafeUrl("tel:+1234567890");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("sms:+1234567890");
     // Restricted characters before [/?#].
     assertSanitizedAsUnsafeUrl("&");
     assertSanitizedAsUnsafeUrl(":");
@@ -135,6 +137,7 @@ public class SafeUrlsTest extends TestCase {
   public void testSanitize_customSchemes() {
     Set<CustomSafeUrlScheme> schemes = new HashSet<CustomSafeUrlScheme>();
     schemes.add(CustomSafeUrlScheme.TEL);
+    schemes.add(CustomSafeUrlScheme.SMS);
 
     // Default schemes still permitted.
     String url = "http://example.com/";
@@ -147,6 +150,11 @@ public class SafeUrlsTest extends TestCase {
 
     // 'tel' now allowed.
     url = "tel:+1234567890";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'sms' now allowed.
+    url = "sms:+1234567890";
     safeUrl = SafeUrls.sanitize(url, schemes);
     assertEquals(url, safeUrl.getSafeUrlString());
   }

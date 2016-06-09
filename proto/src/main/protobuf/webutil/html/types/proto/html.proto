@@ -94,4 +94,5 @@ enum CustomSafeUrlScheme {
   // unintentional or out-of-context clicks could result in unintended calling
   // charges.
   TEL = 0;
+  SMS = 1;
 }
