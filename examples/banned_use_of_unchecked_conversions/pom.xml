@@ -25,7 +25,7 @@
     <dependency>
       <groupId>com.google.common.html.types</groupId>
       <artifactId>types</artifactId>
-      <version>1.0.4-SNAPSHOT</version>
+      <version>1.0.4</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
