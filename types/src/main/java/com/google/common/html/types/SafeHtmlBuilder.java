@@ -71,6 +71,15 @@ public final class SafeHtmlBuilder {
   private static final Set<String> TYPE_ELEMENTS_WHITELIST = createUnmodifiableSet(
       "button", "command", "input", "li", "menu", "ol", "ul", "link");
 
+  /**
+   * These elements are whitelisted {@code link rel} types, meaning that we consider their related
+   * href attribute to have a {@code SafeUrl} context. For other rel types, the default requirement
+   * is {@code TrustedResourceUrl}.
+   */
+  private static final Set<String> LINK_REL_ELEMENTS_WHITELIST = createUnmodifiableSet(
+    "alternate", "author", "bookmark", "canonical", "cite", "help", "icon", "license", "next",
+    "prefetch", "prerender", "prev", "search", "subresource", "tag");
+
   private final String elementName;
   /** We use LinkedHashMap to maintain attribute insertion order. */
   private final Map<String, String> attributes = new LinkedHashMap<String, String>();
@@ -192,17 +201,20 @@ public final class SafeHtmlBuilder {
 
   /**
    * Sets the {@code href} attribute for any element. For {@code <link>} elements, setting
-   * this attribute is allowed only if the {@code rel} attribute doesn't contain the substring
-   * "{@code stylesheet}", in which case a TrustedResourceUrl is required.
+   * this attribute is allowed with a SafeUrl only if the {@code rel} attribute is in
+   * {@link LINK_REL_ELEMENTS_WHITELIST}, otherwise a case a TrustedResourceUrl is required.
    *
    * @throws IllegalArgumentException if {@code value} is set unsafely on a {@code link} element
    */
   public SafeHtmlBuilder setHref(SafeUrl value) {
     if (elementName.equals("link")) {
       String rel = attributes.get("rel");
-      if (rel != null && rel.toLowerCase().contains("stylesheet")) {
-        throw new IllegalArgumentException("Attribute \"href\" on <link rel=\"stylesheet\"> loads "
-            + "code, TrustedResourceUrl required.");
+      if (rel != null) {
+        rel = rel.toLowerCase();
+        if (!LINK_REL_ELEMENTS_WHITELIST.contains(rel)) {
+          throw new IllegalArgumentException("Attribute \"href\" on <link rel=\"" + rel + "\"> "
+              + "is not whitelisted, TrustedResourceUrl required.");
+        }
       }
     }
     hrefSetFromSafeUrl = true;
@@ -281,9 +293,9 @@ public final class SafeHtmlBuilder {
 
   /**
    * Sets the {@code rel} attribute for any element. For {@code <link>} elements, setting this
-   * attribute to {@code stylesheet} is allowed only if the {@code href} attribute hasn't been set
-   * with a {@link SafeUrl} (instead of a {@link TrustedResourceUrl}. {@code value} must consist
-   * only of letters and spaces.
+   * attribute to a type not in {@link LINK_REL_ELEMENTS_WHITELIST} is allowed only if the
+   * {@code href} attribute hasn't been set with a {@link SafeUrl} (instead of a
+   * {@link TrustedResourceUrl}). {@code value} must consist only of letters and spaces.
    *
    * @throws IllegalArgumentException if {@code value} is invalid or is set unsafely on a
    *     {@code link} element
@@ -293,10 +305,10 @@ public final class SafeHtmlBuilder {
       throw new IllegalArgumentException("Invalid value for \"rel\" attribute \"" + value + "\". "
           + "Only letters and spaces allowed.");
     }
-    if (elementName.equals("link") && value.toLowerCase().contains("stylesheet")
+    if (elementName.equals("link") && !LINK_REL_ELEMENTS_WHITELIST.contains(value.toLowerCase())
         && hrefSetFromSafeUrl) {
-      throw new IllegalArgumentException("Attribute \"rel\" containing \"stylesheet\" on "
-          + "<link href=\"...\"> loads code. TrustedResourceUrl required to set \"href\".");
+      throw new IllegalArgumentException("Attribute \"rel\" equals \"" + value.toLowerCase()
+          + "\" on <link href=\"...\"> loads code. TrustedResourceUrl required to set \"href\".");
 
     }
     return setAttribute("rel", value);

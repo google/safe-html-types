@@ -33,7 +33,7 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>2.5.0</version>
+      <version>${protobuf.version}</version>
     </dependency>
 
     <dependency>
@@ -72,14 +72,6 @@
 
   <build>
     <defaultGoal>package</defaultGoal>
-    <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
-    <testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory>
-
-    <testResources>
-      <testResource>  <!-- The default -->
-        <directory>${project.basedir}/../src/test/resources</directory>
-      </testResource>
-    </testResources>
 
     <plugins>
       <plugin>
@@ -98,7 +90,7 @@
             </goals>
             <configuration>
               <workingDirectory>${project.basedir}</workingDirectory>
-              <executable>${project.basedir}/../src/main/scripts/make_fences_xml.sh</executable>
+              <executable>src/main/scripts/make_fences_xml.sh</executable>
               <arguments>
                 <argument>${project.build.outputDirectory}</argument>
               </arguments>
@@ -112,8 +104,10 @@
         <artifactId>protoc-bundled-plugin</artifactId>
         <configuration>
           <inputDirectories>
-            <inputDirectory>${project.basedir}/../src/main/protobuf</inputDirectory>
+            <inputDirectory>${project.parent.basedir}/proto/src/main/protobuf</inputDirectory>
           </inputDirectories>
+	  <protobufVersion>${protobuf.version}</protobufVersion>
+          <protocExec>${protoc.executable}</protocExec>
         </configuration>
         <executions>
           <execution>

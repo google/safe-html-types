@@ -22,6 +22,7 @@ package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.io.BaseEncoding;
+import com.google.common.net.UrlEscapers;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
 import java.io.UnsupportedEncodingException;
@@ -148,13 +149,32 @@ public final class SafeUrls {
    * Creates a {@code data:text/html} URL whose content is populated from the given
    * {@code SafeHtml} object.
    *
+   * <p>The resulting {@code data}-scheme URL's content is UTF-8-encoded, but the
+   * encoding of non-ASCII characters is done using the standard %xx hex encoding.
+   *
+   * @see http://tools.ietf.org/html/rfc2397
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs
+   */
+  public static SafeUrl createHtmlDataUrl(SafeHtml html) {
+    // Use urlPathSegmentEscaper because all other Escapers convert spaces to "+" instead of "%20",
+    // which are rendered as normal "+"s in the browser instead of being rendered as spaces.
+    String dataUrl =
+        "data:text/html;charset=UTF-8,"
+            + UrlEscapers.urlPathSegmentEscaper().escape(html.getSafeHtmlString());
+    return create(dataUrl);
+  }
+
+  /**
+   * Creates a {@code data:text/html} URL whose content is populated from the given
+   * {@code SafeHtml} object.
+   *
    * <p>The resulting {@code data}-scheme URL's content is UTF-8-encoded, and further encoded using
    * base-64 transfer encoding.
    *
    * @see http://tools.ietf.org/html/rfc2397
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs
    */
-  public static SafeUrl createHtmlDataUrl(SafeHtml html) {
+  public static SafeUrl createHtmlDataUrlBase64(SafeHtml html) {
     try {
       String dataUrl =
           "data:text/html;charset=UTF-8;base64,"
