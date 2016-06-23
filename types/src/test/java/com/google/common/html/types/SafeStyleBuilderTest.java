@@ -68,7 +68,7 @@ public class SafeStyleBuilderTest extends TestCase {
     SafeStyle style = new SafeStyleBuilder().backgroundAttachmentAppend("aZ").build();
     assertEquals("background-attachment:aZ;", style.getSafeStyleString());
   }
-  
+
   public void testSanitizesEnumProperty() {
     assertbackgroundAttachmentAppendSanitized("");
     assertbackgroundAttachmentAppendSanitized(" ");

@@ -77,7 +77,7 @@ public final class SafeScript {
 
   /**
    * Returns a debug representation of this value's underlying string, NOT the string representation
-   * of the SafeScript. 
+   * of the SafeScript.
    *
    * <p>Having {@code toString()} return a debug representation is intentional. This type has
    * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method

@@ -60,7 +60,7 @@ public final class SafeHtmls {
    */
   public static SafeHtml fromScriptUrl(TrustedResourceUrl trustedResourceUrl) {
     String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
-    return create("<script type=\"text/javascript\" src=\"" + escapedUrl + "\"></script>"); 
+    return create("<script type=\"text/javascript\" src=\"" + escapedUrl + "\"></script>");
   }
 
   /**
