@@ -29,6 +29,8 @@ package webutil.html.types;
 // types when translated into JSPB array representation (the wrapped value
 // for each type will use a different array slot).
 
+// Message containing a string that is safe to use in HTML contexts in DOM APIs
+// and HTML documents.
 message SafeHtmlProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
@@ -38,6 +40,9 @@ message SafeHtmlProto {
       ];
 }
 
+// Message containing a string that is safe to use in URL contexts in DOM APIs
+// and HTML documents, where the URL context does not refer to a resource that
+// loads code.
 message SafeUrlProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
@@ -46,6 +51,9 @@ message SafeUrlProto {
       ;
 }
 
+// Message containing a string that is safe to use in all URL contexts in DOM
+// APIs and HTML documents; even where the referred-to resource is interpreted
+// as code, e.g., as the src of a script element.
 message TrustedResourceUrlProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
@@ -55,6 +63,8 @@ message TrustedResourceUrlProto {
           ;
 }
 
+// Message containing a sequence of CSS declarations safe to use in style
+// contexts in an HTML document or in DOM APIs.
 message SafeStyleProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
@@ -63,6 +73,8 @@ message SafeStyleProto {
       ;
 }
 
+// Message containing JavaScript code that is safe to use as the content of an
+// HTML script element.
 message SafeScriptProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
@@ -72,6 +84,8 @@ message SafeScriptProto {
       ];
 }
 
+// Message containing a complete CSS style sheet, safe to use in style contexts
+// in an HTML document or DOM APIs.
 message SafeStyleSheetProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
