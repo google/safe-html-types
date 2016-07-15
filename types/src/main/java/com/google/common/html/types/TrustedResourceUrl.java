@@ -16,9 +16,8 @@
 
 package com.google.common.html.types;
 
-import jsinterop.annotations.JsType;
-
 import javax.annotation.concurrent.Immutable;
+import jsinterop.annotations.JsType;
 
 /**
  * A URL which is under application control and from which script, CSS, and other resources that

@@ -16,9 +16,8 @@
 
 package com.google.common.html.types;
 
-import jsinterop.annotations.JsType;
-
 import javax.annotation.concurrent.Immutable;
+import jsinterop.annotations.JsType;
 
 /**
  * A string-like object which represents JavaScript code and that carries the security type

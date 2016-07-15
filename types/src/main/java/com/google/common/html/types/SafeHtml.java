@@ -16,9 +16,8 @@
 
 package com.google.common.html.types;
 
-import jsinterop.annotations.JsType;
-
 import javax.annotation.concurrent.Immutable;
+import jsinterop.annotations.JsType;
 
 /**
  * A string that is safe to use in HTML context in DOM APIs and HTML documents.
