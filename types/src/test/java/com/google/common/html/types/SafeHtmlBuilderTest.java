@@ -24,10 +24,8 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-
-import junit.framework.TestCase;
-
 import java.util.ArrayList;
+import junit.framework.TestCase;
 
 /** Test case for {@link SafeHtmlBuilder}. */
 @GwtCompatible

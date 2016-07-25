@@ -25,11 +25,9 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.html.types.testing.HtmlConversions;
-
-import junit.framework.TestCase;
-
 import java.util.HashSet;
 import java.util.Set;
+import junit.framework.TestCase;
 
 /**
  * Unit tests for {@link SafeUrls}.
