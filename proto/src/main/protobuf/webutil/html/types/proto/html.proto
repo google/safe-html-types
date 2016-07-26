@@ -20,7 +20,6 @@ syntax = "proto2";
 option java_package = "com.google.common.html.types";
 option java_outer_classname = "Html";
 option java_multiple_files = true;
-option java_generate_equals_and_hash = true;
 
 package webutil.html.types;
 
