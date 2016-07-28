@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,7 +54,6 @@ public final class SafeHtmlBuilder {
   // They are uncompiled because we couldn't depend on java.util.regex.Pattern or
   // com.google.gwt.regexp.shared.RegExp
   private static final String VALID_ELEMENT_NAMES_REGEXP = "[a-z0-9-]+";
-  private static final String VALID_REL_VALUES_REGEXP = "[a-zA-Z ]+";
   private static final String VALID_DATA_ATTRIBUTES_REGEXP = "data-[a-zA-Z-]+";
 
   /** These elements are blacklisted. We could support them safely but currently we don't. */
@@ -210,7 +210,7 @@ public final class SafeHtmlBuilder {
     if (elementName.equals("link")) {
       String rel = attributes.get("rel");
       if (rel != null) {
-        rel = rel.toLowerCase();
+        rel = rel.toLowerCase(Locale.ENGLISH);
         if (!LINK_REL_ELEMENTS_WHITELIST.contains(rel)) {
           throw new IllegalArgumentException("Attribute \"href\" on <link rel=\"" + rel + "\"> "
               + "is not whitelisted, TrustedResourceUrl required.");
@@ -301,15 +301,11 @@ public final class SafeHtmlBuilder {
    *     {@code link} element
    */
   public SafeHtmlBuilder setRel(String value) {
-    if (!value.matches(VALID_REL_VALUES_REGEXP)) {
-      throw new IllegalArgumentException("Invalid value for \"rel\" attribute \"" + value + "\". "
-          + "Only letters and spaces allowed.");
-    }
-    if (elementName.equals("link") && !LINK_REL_ELEMENTS_WHITELIST.contains(value.toLowerCase())
-        && hrefSetFromSafeUrl) {
-      throw new IllegalArgumentException("Attribute \"rel\" equals \"" + value.toLowerCase()
+  if (elementName.equals("link") && !LINK_REL_ELEMENTS_WHITELIST.contains(
+          value.toLowerCase(Locale.ENGLISH)) && hrefSetFromSafeUrl) {
+      throw new IllegalArgumentException("Attribute \"rel\" equals \""
+          + value.toLowerCase(Locale.ENGLISH)
           + "\" on <link href=\"...\"> loads code. TrustedResourceUrl required to set \"href\".");
-
     }
     return setAttribute("rel", value);
   }

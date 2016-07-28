@@ -288,14 +288,6 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
-  public void testDoesntAllowArbitraryRelAttribute() {
-    try {
-      new SafeHtmlBuilder("link").setRel(":");
-      fail("<link rel> should allow letters and spaces only.");
-    } catch (IllegalArgumentException expected) {
-    }
-  }
-
   public void testPreservesAttributesOrder() {
     assertSameHtml("<div class=\"a\" id=\"id1\"></div>",
         new SafeHtmlBuilder("div").setClass("a").setId("id1"));
