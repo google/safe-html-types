@@ -140,7 +140,7 @@ public class SafeHtmlBuilderTest extends TestCase {
         .setDataAttribute("data-tooltip", "a"));
   }
 
-  public void testDoesntAllowArbitraryDataAttribute() {
+  public void testDisallowsArbitraryDataAttribute() {
     try {
       new SafeHtmlBuilder("a").setDataAttribute("href", "");
       fail("Data attribute shouldn't allow setting arbitrary attributes.");
@@ -176,7 +176,7 @@ public class SafeHtmlBuilderTest extends TestCase {
         .setHref(newSafeUrlForTest("a")));
   }
 
-  public void testDoesntAllowSafeUrlInLinkedStylesheets() {
+  public void testDisallowsSafeUrlInLinkedStylesheets() {
     // Test case-insensitive too.
     try {
       new SafeHtmlBuilder("link").setRel("Stylesheet").setHref(newSafeUrlForTest("a"));
@@ -193,7 +193,7 @@ public class SafeHtmlBuilderTest extends TestCase {
 
   }
 
-  public void testDoesntAllowSafeUrlInOtherDangerousContexts() {
+  public void testDisallowsSafeUrlInOtherDangerousContexts() {
     try {
       new SafeHtmlBuilder("link").setRel("import").setHref(newSafeUrlForTest("a"));
       fail("Setting <link href> to SafeUrl with rel=\"import\" shouldn't be allowed.");
@@ -226,7 +226,7 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
-  public void testDoesntAllowInvalidTagNames() {
+  public void testDisallowsInvalidTagNames() {
     try {
       new SafeHtmlBuilder("a href='a'");
       fail("Invalid tag name shouldn't be allowed.");
@@ -234,7 +234,7 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
-  public void testDoesntAllowUnsafeTagNames() {
+  public void testDisallowsUnsafeTagNames() {
     try {
       new SafeHtmlBuilder("script");
       fail("<script> shouldn't be allowed.");
@@ -272,7 +272,7 @@ public class SafeHtmlBuilderTest extends TestCase {
         new SafeHtmlBuilder("a").setTitle("a").setTitle("c"));
   }
 
-  public void testDoesntAllowUsingNullValues() {
+  public void testDisallowsUsingNullValues() {
     try {
       new SafeHtmlBuilder("a").setTitle(null);
       fail("The null attribute value shouldn't be allowed.");
@@ -280,10 +280,21 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
-  public void testDoesntAllowSafeUrlInVideoSrcAttribute() {
+  public void testDisallowsSafeUrlInVideoSrcAttribute() {
     try {
       new SafeHtmlBuilder("video").setSrc(newSafeUrlForTest("b"));
       fail("<video src> should require TrustedResourceUrl.");
+    } catch (IllegalArgumentException expected) {
+    }
+  }
+
+  /**
+   * Whitelists depend on element name being lower cased.
+   */
+  public void testDisallowsUpperCaseElementNames() {
+    try {
+      new SafeHtmlBuilder("dIv");
+      fail("Element names with upper case should be disallowed");
     } catch (IllegalArgumentException expected) {
     }
   }
@@ -304,7 +315,7 @@ public class SafeHtmlBuilderTest extends TestCase {
             .setType("hidden"));
   }
 
-  public void testDoesntAllowTypeAttributeForNonWhitelistedElement() {
+  public void testDisallowsTypeAttributeForNonWhitelistedElement() {
     try {
       new SafeHtmlBuilder("img").setType("hidden");
       fail("<img> should not allow 'type' attribute");
