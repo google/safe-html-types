@@ -201,6 +201,66 @@ public final class SafeStyleBuilder {
   }
 
   /**
+   * Sets {@code value} as the {@code border-top} property.
+   *
+   * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
+   * tab, and the set {@code [+-.!#%_/*]}. In addition, comment markers - {@code //}, {@code /*},
+   * and <code>*&#47;</code>- are disallowed too. Non-conforming values are replaced with
+   * {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/border-top"
+   */
+  public SafeStyleBuilder borderTop(String value) {
+    properties.put("border-top", sanitizeRegularValue(value));
+    return this;
+  }
+
+  /**
+   * Sets {@code value} as the {@code border-bottom} property.
+   *
+   * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
+   * tab, and the set {@code [+-.!#%_/*]}. In addition, comment markers - {@code //}, {@code /*},
+   * and <code>*&#47;</code>- are disallowed too. Non-conforming values are replaced with
+   * {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom"
+   */
+  public SafeStyleBuilder borderBottom(String value) {
+    properties.put("border-bottom", sanitizeRegularValue(value));
+    return this;
+  }
+
+  /**
+   * Sets {@code value} as the {@code border-right} property.
+   *
+   * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
+   * tab, and the set {@code [+-.!#%_/*]}. In addition, comment markers - {@code //}, {@code /*},
+   * and <code>*&#47;</code>- are disallowed too. Non-conforming values are replaced with
+   * {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/border-right"
+   */
+  public SafeStyleBuilder borderRight(String value) {
+    properties.put("border-right", sanitizeRegularValue(value));
+    return this;
+  }
+
+  /**
+   * Sets {@code value} as the {@code border-left} property.
+   *
+   * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
+   * tab, and the set {@code [+-.!#%_/*]}. In addition, comment markers - {@code //}, {@code /*},
+   * and <code>*&#47;</code>- are disallowed too. Non-conforming values are replaced with
+   * {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/border-left"
+   */
+  public SafeStyleBuilder borderLeft(String value) {
+    properties.put("border-left", sanitizeRegularValue(value));
+    return this;
+  }
+
+  /**
    * Sets {@code value} as the {@code bottom} property.
    *
    * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
