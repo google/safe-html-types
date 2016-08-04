@@ -304,6 +304,19 @@ public final class SafeStyleBuilder {
     properties.put("border-color", sanitizeRegularValue(value));
     return this;
   }
+  
+  /**
+   * Sets {@code value} as the {@code border-collapse} property.
+   *
+   * <p>The values must consist of only ASCII alphabetic or '-' characters. A non-conforming value
+   * will be replaced with {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse"
+   */
+  public SafeStyleBuilder borderCollapse(String value) {
+    properties.put("border-collapse", sanitizeEnumValue(value));
+    return this;
+  }
 
   /**
    * Sets {@code value} as the {@code color} property.
