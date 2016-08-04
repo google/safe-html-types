@@ -479,6 +479,19 @@ public final class SafeStyleBuilder {
   }
 
   /**
+   * Sets {@code value} as the {@code text-align} property.
+   *
+   * <p>The values must consist of only ASCII alphabetic or '-' characters. A non-conforming value
+   * will be replaced with {@link #INNOCUOUS_PROPERTY_STRING}.
+   *
+   * @see "https://developer.mozilla.org/en-US/docs/Web/CSS/text-align"
+   */
+  public SafeStyleBuilder textAlign(String value) {
+    properties.put("text-align", sanitizeEnumValue(value));
+    return this;
+  }
+
+  /**
    * Sets {@code value} as the {@code right} property.
    *
    * <p>The value must contain only whitelisted characters; those are alphanumerics, space,
