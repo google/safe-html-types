@@ -63,8 +63,8 @@ public final class SafeHtmlBuilder {
 
   /** http://whatwg.org/html/syntax.html#void-elements. */
   private static final Set<String> VOID_ELEMENTS = createUnmodifiableSet(
-      "area", "base", "br", "col", "embed", "hr", "input", "img", "keygen", "link", "menuitem",
-      "meta", "param", "source", "track", "wbr");
+      "area", "base", "br", "col", "embed", "hr", "input", "img", "keygen", "link", "meta",
+      "param", "source", "track", "wbr");
 
   // Keep documentation in setType() in sync with this list.
   /** These elements are whilelisted to use the type attribute. */
