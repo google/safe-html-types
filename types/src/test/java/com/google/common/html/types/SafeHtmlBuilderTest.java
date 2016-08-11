@@ -193,6 +193,16 @@ public class SafeHtmlBuilderTest extends TestCase {
 
   }
 
+  public void testDisallowsAllowSafeUrlArbitraryTagHrefAttr() {
+    // Test case-insensitive too.
+    try {
+      new SafeHtmlBuilder("foo").setHref(newSafeUrlForTest("a"));
+      fail("Setting <foo href> to SafeUrl shouldn't be allowed.");
+    } catch (IllegalArgumentException expected) {
+    }
+
+  }
+
   public void testDisallowsSafeUrlInOtherDangerousContexts() {
     try {
       new SafeHtmlBuilder("link").setRel("import").setHref(newSafeUrlForTest("a"));
