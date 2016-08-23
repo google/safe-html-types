@@ -1,6 +1,9 @@
 // **** GENERATED CODE, DO NOT MODIFY ****
 // This file was generated via preprocessing from input:
 // java/com/google/common/html/types/SafeHtmlBuilder.java.tpl
+// Please make changes to that file and run
+// java/com/google/common/html/types/gen_srcs.sh
+// to regenerate the .java files.
 // ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
@@ -34,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -46,8 +50,9 @@ import javax.annotation.concurrent.NotThreadSafe;
  * enforced if they pose no security risk). A large number of runtime failures are possible and it
  * is therefore recommended to thoroughly unit test code using this builder.
  */
-@NotThreadSafe
+@Generated(value = "//java/com/google/common/html/types:gen_srcs.sh")
 @GwtCompatible
+@NotThreadSafe
 public final class SafeHtmlBuilder {
   // Keep these regular expressions compatible across Java and JavaScript native implementations.
   // They are uncompiled because we couldn't depend on java.util.regex.Pattern or
@@ -77,6 +82,7 @@ public final class SafeHtmlBuilder {
   private final String elementName;
   /** We use LinkedHashMap to maintain attribute insertion order. */
   private final Map<String, String> attributes = new LinkedHashMap<String, String>();
+
   private final List<SafeHtml> contents = new ArrayList<SafeHtml>();
 
   private boolean useSlashOnVoid = false;
