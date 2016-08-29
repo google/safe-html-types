@@ -37,7 +37,7 @@ import javax.annotation.concurrent.Immutable;
  * before being assigned to the property.
  * </ul>
  *
- * TODO(user): Do we need to require SafeStyle to be the entire content of a style attribute
+ * TODO(mlourenco): Do we need to require SafeStyle to be the entire content of a style attribute
  * or the {}-wrapped block above? It would seem that validating untrusted properties would be
  * enough to guarantee that it also would not affect any surrounding, constant, properties. See
  * discussion in cl/61826926.
@@ -63,7 +63,7 @@ import javax.annotation.concurrent.Immutable;
  * appended to {@code background:url("}, the resulting string may result in the execution of a
  * malicious script.
  *
- * TODO(user): Consider whether we should implement UTF-8 interchange validity checks and
+ * TODO(mlourenco): Consider whether we should implement UTF-8 interchange validity checks and
  * blacklisting of newlines (including Unicode ones) and other whitespace characters (\t, \f).
  * Document here if so and also update SafeStyles.fromConstant().
  *
@@ -118,7 +118,7 @@ public final class SafeStyle {
 
   /**
    * Returns a debug representation of this value's underlying string, NOT the string representation
-   * of the style declaration(s).
+   * of the style declaration(s). 
    *
    * <p>Having {@code toString()} return a debug representation is intentional. This type has
    * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method
@@ -135,7 +135,7 @@ public final class SafeStyle {
    * Returns this value's underlying string. See class documentation for what guarantees exist on
    * the returned string.
    */
-  // NOTE(user): jslayout depends on this exact method name when generating code, be careful if
+  // NOTE(mlourenco): jslayout depends on this exact method name when generating code, be careful if
   // changing it.
   public String getSafeStyleString() {
     return privateDoNotAccessOrElseSafeStyleWrappedValue;

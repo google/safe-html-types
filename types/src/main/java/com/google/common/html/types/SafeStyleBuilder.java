@@ -31,12 +31,12 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * A builder for values of type {@link SafeStyle}.
- *
+ * 
  * <p>The builder allows a sequence of CSS declarations to be constructed by combining trusted
  * and untrusted values. Trusted values are passed via {@link CompileTimeConstant} strings and
  * enums. Untrusted values are passed via regular strings and are subject to runtime sanitization
  * and, if deemed unsafe, replaced by an innocuous value, {@link #INNOCUOUS_PROPERTY_STRING}.
- *
+ * 
  * <p>This builder does not guarantee semantically valid CSS, only that the generated SafeStyle
  * fulfills its type contract.
  *
@@ -45,13 +45,13 @@ import javax.annotation.concurrent.NotThreadSafe;
  */
 @NotThreadSafe @GwtCompatible
 public final class SafeStyleBuilder {
-
-  // TODO(user): Change SafeUrl to also use "JSafeHtml".
+  
+  // TODO(mlourenco): Change SafeUrl to also use "JSafeHtml".
   private static final String INNOCUOUS_PROPERTY_STRING = "zJSafeHtmlzinvalid";
-
+  
   private final LinkedHashMap<String, String> properties = new LinkedHashMap<String, String>();
 
-  // TODO(user): Consider whether we want to avoid or discourage the  following asymmetry:
+  // TODO(mlourenco): Consider whether we want to avoid or discourage the  following asymmetry:
   // .backgroundAttachmendAppend("1", "2").backgroundImageAppendConstant("1,2")
 
   /**
@@ -67,7 +67,7 @@ public final class SafeStyleBuilder {
     appendToProperty("background-attachment", sanitizeAndJoinEnumValues(value, otherValues));
     return this;
   }
-
+  
   /**
    * Sets {@code constant} as the {@code background-color} property.
    *
@@ -99,7 +99,7 @@ public final class SafeStyleBuilder {
     properties.put("background-color", sanitizeRegularValue(value));
     return this;
   }
-
+  
   /**
    * Appends {@code constant} to the {@code background-image} property, if necessary inserting a
    * leading comma. Note that {@code constant} itself can contain commas, to separate multiple
@@ -128,7 +128,7 @@ public final class SafeStyleBuilder {
    * It also percent-encoded to prevent it from interefering with the structure of the surrounding
    * CSS.
    *
-   * <p>TODO(user): The right thing to do would be to CSS-escape but percent-encoding is
+   * <p>TODO(mlourenco): The right thing to do would be to CSS-escape but percent-encoding is
    * easier for now because we don't have a CSS-escaper. As URLs in CSS are likely to point to
    * domains we control it seems extremely unlikely that this will break anything.
    *
@@ -527,12 +527,12 @@ public final class SafeStyleBuilder {
       char c = value.charAt(i);
       if (c == '<' || c == '>' || c == '"' || c == '\'' || c == ';') {
         throw new IllegalArgumentException(
-            "Value contains HTML/CSS meta-characters ([<>\"';]): " + value);
+            "Value contains HTML/CSS meta-characters ([<>\"';]): " + value);  
       } else if (
             value.startsWith("/*", i) || value.startsWith("*/", i) || value.startsWith("//", i)) {
           throw new IllegalArgumentException(
-              "Value contains CSS comment marker (/*, */ or //): " + value);
-      }
+              "Value contains CSS comment marker (/*, */ or //): " + value);    
+      } 
     }
     return value;
   }
@@ -560,7 +560,7 @@ public final class SafeStyleBuilder {
     }
     return sb.toString();
   }
-
+  
   /**
    * For properties that can only be set to an enum we just allow alphabetic and '-' characters.
    */
@@ -584,7 +584,7 @@ public final class SafeStyleBuilder {
     }
     return true;
   }
-
+  
   /**
    * This method implements the same logic as jslayout's CSS sanitizer for "regular" properties,
    * except that commas are not whitelisted here, as they could be used inject extra values into

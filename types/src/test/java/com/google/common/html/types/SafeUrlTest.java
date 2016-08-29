@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 @GwtCompatible
 public class SafeUrlTest extends TestCase {
 
-  // TODO(user): Remove usage newSafeUrlForTest once we have a GWT
+  // TODO(mlourenco): Remove usage newSafeUrlForTest once we have a GWT
   // version of builders.
 
   public void testToString_returnsDebugString() {

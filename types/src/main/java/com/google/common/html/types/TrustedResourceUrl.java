@@ -76,7 +76,7 @@ public final class TrustedResourceUrl {
    * Returns this value's underlying string. See class documentation for what guarantees exist on
    * the returned string.
    */
-  // NOTE(user): jslayout depends on this exact method name when generating code, be careful if
+  // NOTE(mlourenco): jslayout depends on this exact method name when generating code, be careful if
   // changing it.
   public String getTrustedResourceUrlString() {
     return privateDoNotAccessOrElseTrustedResourceUrlWrappedValue;

@@ -170,7 +170,7 @@ public abstract class UnicodeEscaper extends Escaper {
   protected final String escapeSlow(String s, int index) {
     int end = s.length();
 
-    // NOTE(user): To make this code not require GWT supersource, we
+    // NOTE(mlourenco): To make this code not require GWT supersource, we
     // don't use a thread-local, via a call to Platform, and instead allocate
     // a new array on each call. Since this is meant exclusively for URLs
     // (via PercentEscaper), 256 looks like a better choice than the previous

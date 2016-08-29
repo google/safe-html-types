@@ -63,7 +63,7 @@ public final class SafeHtml {
 
   /**
    * Returns a debug representation of this value's underlying string, NOT the string representation
-   * of the SafeHtml.
+   * of the SafeHtml. 
    *
    * <p>Having {@code toString()} return a debug representation is intentional. This type has
    * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method
@@ -80,7 +80,7 @@ public final class SafeHtml {
    * Returns this value's underlying string. See class documentation for what guarantees exist on
    * the returned string.
    */
-  // NOTE(user): jslayout depends on this exact method name when generating code, be careful if
+  // NOTE(mlourenco): jslayout depends on this exact method name when generating code, be careful if
   // changing it.
   public String getSafeHtmlString() {
     return privateDoNotAccessOrElseSafeHtmlWrappedValue;

@@ -16,7 +16,7 @@
 
 package com.google.common.html.types;
 
-import static com.google.common.html.types.testing.HtmlConversions.newTrustedResourceUrlForTest;
+import static com.google.common.html.types.testing.HtmlConversions.newSafeHtmlForTest;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
@@ -24,26 +24,28 @@ import com.google.common.testing.EqualsTester;
 import junit.framework.TestCase;
 
 /**
- * Unit tests for {@link TrustedResourceUrl}.
+ * Unit tests for {@link SafeHtml}.
  */
 @GwtCompatible
-public class TrustedResourceUrlTest extends TestCase {
+public class SafeHtmlTest extends TestCase {
 
-  // TODO(user): Remove usage newTrustedResourceUrlForTest once we have a GWT
+  // TODO(mlourenco): Remove usage newSafeStyleForTest once we have a GWT
   // version of builders.
 
   public void testToString_returnsDebugString() {
-    assertEquals("TrustedResourceUrl{url}", newTrustedResourceUrlForTest("url").toString());
+    String html = "<b>Hello World</b>";
+    assertEquals("SafeHtml{" + html + "}", newSafeHtmlForTest(html).toString());
   }
 
   public void testEqualsAndHashCode() {
     new EqualsTester()
+        .addEqualityGroup(SafeHtml.EMPTY)
         .addEqualityGroup(
-            newTrustedResourceUrlForTest("url1"),
-            newTrustedResourceUrlForTest("url1"))
+            newSafeHtmlForTest("<b>Hello World</b> One"),
+            newSafeHtmlForTest("<b>Hello World</b> " + "One"))
         .addEqualityGroup(
-            newTrustedResourceUrlForTest("url2"),
-            newTrustedResourceUrlForTest("url2"))
+            newSafeHtmlForTest("<b>Hello World</b> Two"),
+            newSafeHtmlForTest("<b>Hello World</b> Two"))
         .testEquals();
   }
 }

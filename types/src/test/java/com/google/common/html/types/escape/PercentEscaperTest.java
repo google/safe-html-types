@@ -148,7 +148,7 @@ public class PercentEscaperTest extends TestCase {
     return "%" + hex.charAt((c >> 4) & 0xf) + hex.charAt(c & 0xf);
   }
 
-  // NOTE(user): Methods below copied from Escapers.java and EscaperAsserts.java.
+  // NOTE(mlourenco): Methods below copied from Escapers.java and EscaperAsserts.java.
 
   /**
    * Asserts that a Unicode escaper escapes the given code point into the

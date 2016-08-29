@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 @GwtCompatible
 public class SafeStyleTest extends TestCase {
 
-  // TODO(user): Remove usage newSafeStyleForTest once we have a GWT
+  // TODO(mlourenco): Remove usage newSafeStyleForTest once we have a GWT
   // version of builders.
 
   public void testToString_returnsDebugString() {
