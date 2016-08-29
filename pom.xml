@@ -3,7 +3,7 @@
   <name>Safe HTML Types</name>
   <groupId>com.google.common.html.types</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <description>
@@ -125,7 +125,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.0.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -148,7 +148,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.4</version>
+          <version>3.0.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -163,7 +163,7 @@
         <plugin>
           <groupId>com.comoyo.maven.plugins</groupId>
           <artifactId>protoc-bundled-plugin</artifactId>
-          <version>1.4.46</version>
+          <version>1.4.56</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>

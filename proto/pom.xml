@@ -2,7 +2,7 @@
   <parent>
     <groupId>com.google.common.html.types</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -19,11 +19,39 @@
   <build>
     <defaultGoal>package</defaultGoal>
 
-    <!-- package up the proto file as a resource -->
-    <resources>
-      <resource>
-        <directory>${project.basedir}/../src/main/protobuf</directory>
-      </resource>
-    </resources>
+    <!-- copy the .proto file to the target directory. -->
+    <plugins>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <!-- mirror the protobuf package -->
+              <outputDirectory>${project.build.outputDirectory}/webutil/html/types</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/protobuf</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- make sure the jar plugin packages up the .proto file -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*.proto</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

@@ -23,14 +23,20 @@
     <dependency>
       <groupId>com.google.common.html.types</groupId>
       <artifactId>types</artifactId>
-      <version>1.0.4-SNAPSHOT</version>
+      <version>1.0.5-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <!-- The third party library -->
     <dependency>
       <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
       <artifactId>html-types</artifactId>
-      <version>20160422.1</version>
+      <version>20160827.1</version>
+      <exclusions>
+        <exclusion>  <!-- use the version under test instead -->
+          <groupId>com.google.common.html.types</groupId>
+          <artifactId>types</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 

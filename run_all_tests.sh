@@ -9,6 +9,7 @@ if [ -z "$MVN" ]; then
   export MVN="$(which mvn)"
 fi
 [ -n "$MVN" ]
+echo using MVN="$MVN"
 
 # Make sure that the tests run, and we can produce the 3 jars needed
 # by maven central
@@ -20,6 +21,10 @@ $MVN clean verify \
 
 function fail() {
   echo -- "$*"
+  echo ============ MAVEN LOG ============
+  cat mvn-log.txt
+  echo ============ MAVEN LOG ============
+
   exit -1
 }
 
