@@ -80,7 +80,7 @@ Most builders for such types have been designed to ensure the type contract at
 an API level. However, the types support
 [unchecked conversions](security_reviewers_guide.md#unchecked_conversions) to
 support unusual/exceptional use cases; their use must be hand-reviewed. The
-unchecked conversions are [BUILD-visibility-restricted](http://bazel.io/docs/be/common-definitions.html#common.visibility)
+unchecked conversions are [BUILD-visibility-restricted](http://bazel.build/docs/be/common-definitions.html#common.visibility)
 (modulo limitations of the language's deps strictness), and in most cases this
 review should already have happened.
 

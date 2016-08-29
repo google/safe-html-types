@@ -95,12 +95,12 @@ specific methods:
 
     The checker should be declared `UNSUPPRESSIBLE` (to prevent it from being
     disabled via `@SuppressWarnings`).
-*   Expose the checker as a [`java_plugin`](http:http://bazel.io/docs/be/java.html#java_plugin)
+*   Expose the checker as a [`java_plugin`](http:http://bazel.build/docs/be/java.html#java_plugin)
     which is in turn referenced in the `exported_plugins` of the rule that
     provides the API that needs to be restricted
 *   Optionally, the checker can be suppressed through an annotation
     which is BUILD visibility-restricted to be usable only
-    in [testing code](http://bazel.io/docs/be/common-definitions.html#common.testonly)
+    in [testing code](http://bazel.build/docs/be/common-definitions.html#common.testonly)
 
 
 When introducing such a mechanism, it can be a useful pattern to introduce
@@ -112,7 +112,7 @@ existing, unreviewed, potentially vulnerable legacy uses
 
 
 In some cases, it is not feasible to use language-level visibility and
-[BUILD visibility](http://bazel.io/docs/be/common-definitions.html#common.visibility) mechanisms to restrict
+[BUILD visibility](http://bazel.build/docs/be/common-definitions.html#common.visibility) mechanisms to restrict
 inappropriate use.
 
 For instance, for the protocol buffer representation of the
