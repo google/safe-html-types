@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.google.common.html.types</groupId>
       <artifactId>types</artifactId>
-      <version>1.0.5-SNAPSHOT</version>
+      <version>1.0.6-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <!-- The third party library -->
