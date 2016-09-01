@@ -23,7 +23,7 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
-import com.google.common.html.types.escape.PercentEscaper;
+import com.google.common.net.PercentEscaper;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
 import java.util.LinkedHashMap;
