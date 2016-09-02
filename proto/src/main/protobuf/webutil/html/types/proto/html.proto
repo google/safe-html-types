@@ -39,6 +39,7 @@ message SafeHtmlProto {
       ];
 }
 
+
 // Message containing a string that is safe to use in URL contexts in DOM APIs
 // and HTML documents, where the URL context does not refer to a resource that
 // loads code.

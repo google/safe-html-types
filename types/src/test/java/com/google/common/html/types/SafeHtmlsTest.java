@@ -25,7 +25,8 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-
+import java.util.ArrayList;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -69,6 +70,11 @@ public class SafeHtmlsTest extends TestCase {
 
     assertEquals("&lt;3",
         SafeHtmls.concat(SafeHtmls.htmlEscape("<"), SafeHtmls.htmlEscape("3")).getSafeHtmlString());
+
+    List<SafeHtml> htmls = new ArrayList<>();
+    htmls.add(SafeHtmls.htmlEscape("<"));
+    htmls.add(SafeHtmls.htmlEscape("3"));
+    assertEquals("&lt;3", SafeHtmls.concat(htmls).getSafeHtmlString());
   }
 
   public void testComment() {

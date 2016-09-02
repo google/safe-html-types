@@ -24,6 +24,7 @@ import static com.google.common.html.types.BuilderUtils.coerceToInterchangeValid
 import static com.google.common.html.types.BuilderUtils.escapeHtmlInternal;
 
 import com.google.common.annotations.GwtCompatible;
+import java.util.Arrays;
 
 /**
  * Protocol conversions, builders and factory methods for {@link SafeHtml}.
@@ -100,14 +101,22 @@ public final class SafeHtmls {
    * {@code htmls}.
    */
   public static SafeHtml concat(SafeHtml... htmls) {
+    return concat(Arrays.asList(htmls));
+  }
+
+  /**
+   * Creates a new SafeHtml which contains, in order, the string representations of the given
+   * {@code htmls}.
+   */
+  public static SafeHtml concat(Iterable<SafeHtml> htmls) {
     int concatLength = 0;
-    for (int i = 0; i < htmls.length; i++) {
-      concatLength += htmls[i].getSafeHtmlString().length();
+    for (SafeHtml html : htmls) {
+      concatLength += html.getSafeHtmlString().length();
     }
 
     StringBuilder result = new StringBuilder(concatLength);
-    for (int i = 0; i < htmls.length; i++) {
-      result.append(htmls[i].getSafeHtmlString());
+    for (SafeHtml html : htmls) {
+      result.append(html.getSafeHtmlString());
     }
     return create(result.toString());
   }
