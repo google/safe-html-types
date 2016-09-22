@@ -149,6 +149,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("alt", value);
   }
 
+  /** Sets the {@code bgcolor} attribute for this element. */
+  public SafeHtmlBuilder setBgcolor(String value) {
+    return setAttribute("bgcolor", value);
+  }
+
   /** Sets the {@code class} attribute for this element. */
   public SafeHtmlBuilder setClass(String value) {
     return setAttribute("class", value);
@@ -157,6 +162,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code color} attribute for this element. */
   public SafeHtmlBuilder setColor(String value) {
     return setAttribute("color", value);
+  }
+
+  /** Sets the {@code colspan} attribute for this element. */
+  public SafeHtmlBuilder setColspan(String value) {
+    return setAttribute("colspan", value);
   }
 
   /** Values that can be passed to {@link #setDir(DirValue)}. */
