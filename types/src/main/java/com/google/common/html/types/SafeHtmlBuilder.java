@@ -272,7 +272,7 @@ public final class SafeHtmlBuilder {
   }
 
   /** Sets the {@code name} attribute for this element. */
-  public SafeHtmlBuilder setName(String value) {
+  public SafeHtmlBuilder setName(@CompileTimeConstant final String value) {
     return setAttribute("name", value);
   }
 
