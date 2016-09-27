@@ -144,6 +144,11 @@ public final class SafeHtmlBuilder {
     return this;
   }
 
+  /** Sets the {@code align} attribute for this element. */
+  public SafeHtmlBuilder setAlign(String value) {
+    return setAttribute("align", value);
+  }
+
   /** Sets the {@code alt} attribute for this element. */
   public SafeHtmlBuilder setAlt(String value) {
     return setAttribute("alt", value);
@@ -152,6 +157,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code bgcolor} attribute for this element. */
   public SafeHtmlBuilder setBgcolor(String value) {
     return setAttribute("bgcolor", value);
+  }
+
+  /** Sets the {@code border} attribute for this element. */
+  public SafeHtmlBuilder setBorder(String value) {
+    return setAttribute("border", value);
   }
 
   /** Sets the {@code class} attribute for this element. */
@@ -194,6 +204,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code dir} attribute for this element. */
   public SafeHtmlBuilder setDir(DirValue value) {
     return setAttribute("dir", value.toString());
+  }
+
+  /** Sets the {@code height} attribute for this element. */
+  public SafeHtmlBuilder setHeight(String value) {
+    return setAttribute("height", value);
   }
 
   /** These elements are whitelisted to use href with a SafeUrl value. */
@@ -305,6 +320,21 @@ public final class SafeHtmlBuilder {
     return setAttribute("rel", value);
   }
 
+  /** Sets the {@code rows} attribute for this element. */
+  public SafeHtmlBuilder setRows(String value) {
+    return setAttribute("rows", value);
+  }
+
+  /** Sets the {@code selected} attribute for this element. */
+  public SafeHtmlBuilder setSelected(String value) {
+    return setAttribute("selected", value);
+  }
+
+  /** Sets the {@code size} attribute for this element. */
+  public SafeHtmlBuilder setSize(String value) {
+    return setAttribute("size", value);
+  }
+
   /** These elements are whitelisted to use src with a SafeUrl value. */
   private static final Set<String> SRC_SAFE_URL_ELEMENT_WHITELIST =
       createUnmodifiableSet("img", "input");
@@ -403,9 +433,19 @@ public final class SafeHtmlBuilder {
     return setAttribute("type", value);
   }
 
+  /** Sets the {@code valign} attribute for this element. */
+  public SafeHtmlBuilder setValign(String value) {
+    return setAttribute("valign", value);
+  }
+
   /** Sets the {@code value} attribute for this element. */
   public SafeHtmlBuilder setValue(String value) {
     return setAttribute("value", value);
+  }
+
+  /** Sets the {@code width} attribute for this element. */
+  public SafeHtmlBuilder setWidth(String value) {
+    return setAttribute("width", value);
   }
 
   /**
