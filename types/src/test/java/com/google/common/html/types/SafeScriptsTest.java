@@ -23,6 +23,7 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import java.nio.charset.Charset;
 
 import junit.framework.TestCase;
 
@@ -46,5 +47,14 @@ public class SafeScriptsTest extends TestCase {
 
   public void testFromConstant_allowEmptyString() {
     assertSame(SafeScript.EMPTY, SafeScripts.fromConstant(""));
+  }
+
+  @GwtIncompatible("SafeScripts.fromResource")
+  public void testFromResource() throws Exception {
+    SafeScript safeScript =
+        SafeScripts.fromResource(
+            SafeScriptsTest.class, "resources/script.js", Charset.forName("UTF-8"));
+
+    assertEquals("alert('test');\n", safeScript.getSafeScriptString());
   }
 }

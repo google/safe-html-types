@@ -72,8 +72,32 @@
 
   <build>
     <defaultGoal>package</defaultGoal>
-
     <plugins>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+            <execution>
+              <id>Copy SafeScripts test data</id>
+              <phase>process-test-resources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>
+                  ${project.build.directory}/test-classes/com/google/common/html/types/resources
+                </outputDirectory>
+                <overwrite>true</overwrite>
+                <resources>
+                  <resource>
+                    <directory>src/test/java/com/google/common/html/types/resources</directory>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
+      </plugin>
       <plugin>
         <artifactId>exec-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
