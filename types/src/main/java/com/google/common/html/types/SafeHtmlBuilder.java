@@ -241,29 +241,29 @@ public final class SafeHtmlBuilder {
    * <p>The attribute {@code href} with a {@code SafeUrl} value is allowed on these elements:
    *
    * <ul>
-   * <li>{@code a}
-   * <li>{@code area}
-   * <li>{@code link}
+   *   <li>{@code a}
+   *   <li>{@code area}
+   *   <li>{@code link}
    * </ul>
    *
    * <p>On {@code link} elements, {@code href} may only be set to a SafeUrl value if {@code rel} is
    * one of the following values:
    *
    * <ul>
-   * <li>{@code alternate}
-   * <li>{@code author}
-   * <li>{@code bookmark}
-   * <li>{@code canonical}
-   * <li>{@code cite}
-   * <li>{@code help}
-   * <li>{@code icon}
-   * <li>{@code license}
-   * <li>{@code next}
-   * <li>{@code prefetch}
-   * <li>{@code prerender}
-   * <li>{@code prev}
-   * <li>{@code search}
-   * <li>{@code subresource}
+   *   <li>{@code alternate}
+   *   <li>{@code author}
+   *   <li>{@code bookmark}
+   *   <li>{@code canonical}
+   *   <li>{@code cite}
+   *   <li>{@code help}
+   *   <li>{@code icon}
+   *   <li>{@code license}
+   *   <li>{@code next}
+   *   <li>{@code prefetch}
+   *   <li>{@code prerender}
+   *   <li>{@code prev}
+   *   <li>{@code search}
+   *   <li>{@code subresource}
    * </ul>
    *
    * @throws IllegalArgumentException if the {@code href} attribute with a {@code SafeUrl} value is
@@ -345,8 +345,8 @@ public final class SafeHtmlBuilder {
    * <p>The attribute {@code src} with a {@code SafeUrl} value is allowed on these elements:
    *
    * <ul>
-   * <li>{@code img}
-   * <li>{@code input}
+   *   <li>{@code img}
+   *   <li>{@code input}
    * </ul>
    *
    * @throws IllegalArgumentException if the {@code src} attribute with a {@code SafeUrl} value is
@@ -412,12 +412,12 @@ public final class SafeHtmlBuilder {
    * <p>The attribute {@code type} with a {@code String} value is allowed on these elements:
    *
    * <ul>
-   * <li>{@code button}
-   * <li>{@code command}
-   * <li>{@code input}
-   * <li>{@code li}
-   * <li>{@code link}
-   * <li>{@code ol}
+   *   <li>{@code button}
+   *   <li>{@code command}
+   *   <li>{@code input}
+   *   <li>{@code li}
+   *   <li>{@code link}
+   *   <li>{@code ol}
    * </ul>
    *
    * @throws IllegalArgumentException if the {@code type} attribute with a {@code String} value is
