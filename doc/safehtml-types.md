@@ -63,7 +63,7 @@ is guaranteed to reflect programmer intent.)
 The following JavaScript example creates a SafeUrl from a string of unknown
 provenance:
 
-```js
+```javascript
 var safeUrl = goog.html.SafeUrl.sanitize(untrustedUrl);
 ```
 
