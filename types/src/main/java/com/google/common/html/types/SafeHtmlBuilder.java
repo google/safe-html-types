@@ -296,6 +296,33 @@ public final class SafeHtmlBuilder {
     return setAttribute("id", value);
   }
 
+  /** These elements are whitelisted to use media with a String value. */
+  private static final Set<String> MEDIA_STRING_ELEMENT_WHITELIST =
+      createUnmodifiableSet("link", "source");
+
+  /**
+   * Sets the {@code media} attribute for this element.
+   *
+   * <p>The attribute {@code media} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code link}
+   *   <li>{@code source}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code media} attribute with a {@code String} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setMedia(String value) {
+    if (!MEDIA_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"media\" with a String value can only be used "
+              + "by one of the following elements: "
+              + MEDIA_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("media", value);
+  }
+
   /** Sets the {@code name} attribute for this element. */
   public SafeHtmlBuilder setName(@CompileTimeConstant final String value) {
     return setAttribute("name", value);
