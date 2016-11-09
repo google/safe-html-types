@@ -296,6 +296,19 @@ public final class SafeHtmlBuilder {
     return setAttribute("id", value);
   }
 
+  /**
+   * Sets the {@code id} attribute for this element to a {@link CompileTimeConstant} {@code prefix}
+   * and a {@code value} joined by a hyphen.
+   *
+   * @throws IllegalArgumentException if {@code prefix} is an empty string
+   */
+  public SafeHtmlBuilder setIdWithPrefix(@CompileTimeConstant final String prefix, String value) {
+    if (prefix.trim().length() == 0) {
+      throw new IllegalArgumentException("Prefix cannot be empty string");
+    }
+    return setAttribute("id", prefix + "-" + value);
+  }
+
   /** These elements are whitelisted to use media with a String value. */
   private static final Set<String> MEDIA_STRING_ELEMENT_WHITELIST =
       createUnmodifiableSet("link", "source");
@@ -326,6 +339,19 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code name} attribute for this element. */
   public SafeHtmlBuilder setName(@CompileTimeConstant final String value) {
     return setAttribute("name", value);
+  }
+
+  /**
+   * Sets the {@code name} attribute for this element to a {@link CompileTimeConstant} {@code
+   * prefix} and a {@code value} joined by a hyphen.
+   *
+   * @throws IllegalArgumentException if {@code prefix} is an empty string
+   */
+  public SafeHtmlBuilder setNameWithPrefix(@CompileTimeConstant final String prefix, String value) {
+    if (prefix.trim().length() == 0) {
+      throw new IllegalArgumentException("Prefix cannot be empty string");
+    }
+    return setAttribute("name", prefix + "-" + value);
   }
 
   /** Sets the {@code placeholder} attribute for this element. */
@@ -493,19 +519,6 @@ public final class SafeHtmlBuilder {
               + "Name must start with \"data-\" and be followed by letters and '-'.");
     }
     return setAttribute(name, value);
-  }
-
-  /**
-   * Sets the {@code id} attribute for this element, as the concatenation of a {@link
-   * CompileTimeConstant} {@code prefix} and a {@code value}.
-   *
-   * @throws IllegalArgumentException if {@code prefix} is an empty string
-   */
-  public SafeHtmlBuilder setIdWithPrefix(@CompileTimeConstant final String prefix, String value) {
-    if (prefix.trim().length() == 0) {
-      throw new IllegalArgumentException("Prefix cannot be empty string");
-    }
-    return setAttribute("id", prefix + "-" + value);
   }
 
   /**
