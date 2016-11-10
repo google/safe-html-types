@@ -109,4 +109,16 @@ enum CustomSafeUrlScheme {
   // charges.
   TEL = 0;
   SMS = 1;
+  // Similarly to 'tel' can result in unintended calling charges on iOS.
+  CALLTO = 2;
+  WTAI = 3;
+  // Can start a media stream, potentially triggering an exploit for
+  // Stagefright.
+  RTSP = 4;
+  // Can open Play Store dialog with 'Install' button, though will not
+  // automatically install an app.
+  MARKET = 5;
+  GEO = 6;
+  SKYPE = 7;
+  WHATSAPP = 8;
 }

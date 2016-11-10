@@ -107,6 +107,20 @@ public class SafeUrlsTest extends TestCase {
     assertSanitizedAsUnsafeUrl("tel:+1234567890");
     // Not whitelisted by default.
     assertSanitizedAsUnsafeUrl("sms:+1234567890");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("callto:+1234567890");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("wtai://wp/mc;+1234567890");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("rtsp://example.org/");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("market://details?id=app");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("geo:37.7,42.0");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("skype:chat?jid=foo");
+    // Not whitelisted by default.
+    assertSanitizedAsUnsafeUrl("whatsapp://send?text=Hello");
     // Restricted characters before [/?#].
     assertSanitizedAsUnsafeUrl("&");
     assertSanitizedAsUnsafeUrl(":");
@@ -136,6 +150,13 @@ public class SafeUrlsTest extends TestCase {
     Set<CustomSafeUrlScheme> schemes = new HashSet<CustomSafeUrlScheme>();
     schemes.add(CustomSafeUrlScheme.TEL);
     schemes.add(CustomSafeUrlScheme.SMS);
+    schemes.add(CustomSafeUrlScheme.CALLTO);
+    schemes.add(CustomSafeUrlScheme.WTAI);
+    schemes.add(CustomSafeUrlScheme.RTSP);
+    schemes.add(CustomSafeUrlScheme.MARKET);
+    schemes.add(CustomSafeUrlScheme.GEO);
+    schemes.add(CustomSafeUrlScheme.SKYPE);
+    schemes.add(CustomSafeUrlScheme.WHATSAPP);
 
     // Default schemes still permitted.
     String url = "http://example.com/";
@@ -153,6 +174,41 @@ public class SafeUrlsTest extends TestCase {
 
     // 'sms' now allowed.
     url = "sms:+1234567890";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'callto' now allowed.
+    url = "callto:+1234567890";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'wtai' now allowed.
+    url = "wtai://wp/mc;+1234567890";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'rtsp' now allowed.
+    url = "rtsp://example.org/";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'market' now allowed.
+    url = "market://details?id=app";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'geo' now allowed.
+    url = "geo:37.7,42.0";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'skype' now allowed.
+    url = "skype:chat?jid=foo";
+    safeUrl = SafeUrls.sanitize(url, schemes);
+    assertEquals(url, safeUrl.getSafeUrlString());
+
+    // 'whatsapp' now allowed.
+    url = "whatsapp://send?text=Hello";
     safeUrl = SafeUrls.sanitize(url, schemes);
     assertEquals(url, safeUrl.getSafeUrlString());
   }
