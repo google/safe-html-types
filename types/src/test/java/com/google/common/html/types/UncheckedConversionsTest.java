@@ -17,7 +17,9 @@
 package com.google.common.html.types;
 
 import static com.google.common.html.types.UncheckedConversions.safeHtmlFromStringKnownToSatisfyTypeContract;
+import static com.google.common.html.types.UncheckedConversions.safeScriptFromStringKnownToSatisfyTypeContract;
 import static com.google.common.html.types.UncheckedConversions.safeStyleFromStringKnownToSatisfyTypeContract;
+import static com.google.common.html.types.UncheckedConversions.safeStyleSheetFromStringKnownToSatisfyTypeContract;
 import static com.google.common.html.types.UncheckedConversions.safeUrlFromStringKnownToSatisfyTypeContract;
 import static com.google.common.html.types.UncheckedConversions.trustedResourceUrlFromStringKnownToSatisfyTypeContract;
 import static com.google.common.html.types.testing.assertions.Assertions.assertClassIsNotExportable;
@@ -45,11 +47,25 @@ public class UncheckedConversionsTest extends TestCase {
         safeHtmlFromStringKnownToSatisfyTypeContract(html).getSafeHtmlString());
   }
 
+  public void testSafeScriptFromStringKnownToSatisfyTypeContract() {
+    String script = "invalid SafeScript";
+    assertEquals(
+        script,
+        safeScriptFromStringKnownToSatisfyTypeContract(script).getSafeScriptString());
+  }
+
   public void testSafeStyleFromStringKnownToSatisfyTypeContract() {
     String style = "width:expression(this is not valid SafeStyle";
     assertEquals(
         style,
         safeStyleFromStringKnownToSatisfyTypeContract(style).getSafeStyleString());
+  }
+
+  public void testSafeStyleSheetFromStringKnownToSatisfyTypeContract() {
+    String styleSheet = "selector { not a valid SafeStyleSheet";
+    assertEquals(
+        styleSheet,
+        safeStyleSheetFromStringKnownToSatisfyTypeContract(styleSheet).getSafeStyleSheetString());
   }
 
   public void testSafeUrlFromStringKnownToSatisfyTypeContract() {
