@@ -173,7 +173,14 @@ code.
 
 During ongoing refactorings to adopt use of security contract types in an
 existing codebase, it is often convenient or necessary to use unchecked
-conversions.
+conversions.  Special purpose "legacy conversions" typically exist for this
+purpose; e.g.
+[`c.g.c.common.html.types.LegacyConversions`][JavaLegacyConversions]
+and [`goog.html.legacyconversions`][JsLegacyConversions]. These are used to
+distinguish conversions which are guaranteed to produce contract-compliant
+instances of a security contract type - regular unchecked conversions which
+follow this document's guidelines - from those which don't. Legacy conversions
+mark code which still poses security risk.
 
 For example, if a web frontend's HTML rendering is converted to the use of a
 [strict autoescaping template system]
@@ -205,7 +212,9 @@ inherently safe API is not convenient.
 
 
 [F1]: http://research.google.com/pubs/pub38125.html
+[JsLegacyConversions]: https://github.com/google/closure-library/blob/master/closure/goog/html/legacyconversions.js
 
+[JavaLegacyConversions]: https://static.javadoc.io/com.google.common.html.types/types/0.0/com/google/common/html/types/LegacyConversions.html
 [HtmlConversions.newSafeHtmlForTest]: https://static.javadoc.io/com.google.common.html.types/types/0.0/com/google/common/html/types/testing/HtmlConversions.html#newSafeHtmlForTest
 [SafeHtmlUtils.fromTrustedString]: http://static.javadoc.io/com.google.gwt/gwt-user/2.7.0/com/google/gwt/safehtml/shared/SafeHtmlUtils.html#fromTrustedString%28java.lang.String%29
 [SafeHtml]: http://static.javadoc.io/com.google.gwt/gwt-user/2.7.0/com/google/gwt/safehtml/shared/SafeHtml.html
