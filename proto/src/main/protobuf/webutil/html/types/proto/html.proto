@@ -121,4 +121,7 @@ enum CustomSafeUrlScheme {
   GEO = 6;
   SKYPE = 7;
   WHATSAPP = 8;
+
+  // Custom scheme for iBooks URIs. More background: b/32807272.
+  ITMS_BOOKS = 9;
 }

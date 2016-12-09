@@ -222,7 +222,15 @@ public final class SafeUrls {
     }
 
     for (CustomSafeUrlScheme scheme : extraAllowedSchemes) {
-      if (lowerCased.startsWith(scheme.name().toLowerCase() + ":")) {
+      /**
+       * For "-" in a custom URL scheme, it's not possible to write a proto enum with "-" in the
+       * field name. In proto, it has to be "_". But we can safely convert all "_" in the proto name
+       * to "-", since according to the URL Living Standard, a URL-scheme string must be one ASCII
+       * alpha, followed by zero or more of ASCII alphanumeric, "+", "-", and ".".
+       *
+       * @see https://url.spec.whatwg.org/#url-syntax
+       */
+      if (lowerCased.startsWith(scheme.name().toLowerCase().replace('_', '-') + ":")) {
         return true;
       }
     }
