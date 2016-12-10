@@ -378,6 +378,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("rows", value);
   }
 
+  /** Sets the {@code rowspan} attribute for this element. */
+  public SafeHtmlBuilder setRowspan(String value) {
+    return setAttribute("rowspan", value);
+  }
+
   /** Sets the {@code selected} attribute for this element. */
   public SafeHtmlBuilder setSelected(String value) {
     return setAttribute("selected", value);
