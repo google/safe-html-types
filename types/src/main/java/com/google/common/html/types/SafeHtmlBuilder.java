@@ -143,6 +143,31 @@ public final class SafeHtmlBuilder {
     useSlashOnVoid = true;
     return this;
   }
+  /** These elements are whitelisted to use action with a SafeUrl value. */
+  private static final Set<String> ACTION_SAFE_URL_ELEMENT_WHITELIST =
+      createUnmodifiableSet("form");
+
+  /**
+   * Sets the {@code action} attribute for this element.
+   *
+   * <p>The attribute {@code action} with a {@code SafeUrl} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code form}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code action} attribute with a {@code SafeUrl} value
+   *     is not allowed on this element
+   */
+  public SafeHtmlBuilder setAction(SafeUrl value) {
+    if (!ACTION_SAFE_URL_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"action\" with a SafeUrl value can only be used "
+              + "by one of the following elements: "
+              + ACTION_SAFE_URL_ELEMENT_WHITELIST);
+    }
+    return setAttribute("action", value.getSafeUrlString());
+  }
 
   /** Sets the {@code align} attribute for this element. */
   public SafeHtmlBuilder setAlign(String value) {
@@ -334,6 +359,31 @@ public final class SafeHtmlBuilder {
               + MEDIA_STRING_ELEMENT_WHITELIST);
     }
     return setAttribute("media", value);
+  }
+
+  /** These elements are whitelisted to use method with a String value. */
+  private static final Set<String> METHOD_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("form");
+
+  /**
+   * Sets the {@code method} attribute for this element.
+   *
+   * <p>The attribute {@code method} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code form}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code method} attribute with a {@code String} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setMethod(String value) {
+    if (!METHOD_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"method\" with a String value can only be used "
+              + "by one of the following elements: "
+              + METHOD_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("method", value);
   }
 
   /** Sets the {@code name} attribute for this element. */
