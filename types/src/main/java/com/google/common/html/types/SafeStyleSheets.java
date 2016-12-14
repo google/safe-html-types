@@ -21,13 +21,17 @@
 package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.GwtIncompatible;
+import com.google.common.io.Resources;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * Protocol conversions and factory methods for {@link SafeStyleSheet}.
  */
-@GwtCompatible
+@GwtCompatible(emulated = true)
 public final class SafeStyleSheets {
 
   private SafeStyleSheets() {}
@@ -52,6 +56,23 @@ public final class SafeStyleSheets {
     }
     return create(styleSheet);
   }
+
+  /**
+   * Creates a SafeStyleSheet from the given compile-time constant {@code resourceName} using
+   * the given {@code charset}.
+   *
+   * <p>This performs ZERO VALIDATION of the data. We assume that resources should be safe because
+   * they are part of the binary, and therefore not attacker controlled.
+   *
+   * @param contextClass Class relative to which to load the resource.
+   */
+  @GwtIncompatible("Resources")
+  public static SafeStyleSheet fromResource(
+      Class<?> contextClass, @CompileTimeConstant final String resourceName, Charset charset)
+      throws IOException {
+    return create(Resources.toString(Resources.getResource(contextClass, resourceName), charset));
+  }
+
 
   /**
    * Deserializes a SafeStyleSheetProto into a SafeStyleSheet instance.
