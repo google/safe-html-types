@@ -24,6 +24,7 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import java.nio.charset.Charset;
 
 import junit.framework.TestCase;
 
@@ -60,5 +61,15 @@ public class SafeStyleSheetsTest extends TestCase {
           expected.getMessage(),
           expected.getMessage().contains("Forbidden '<' character"));
     }
+  }
+
+  @GwtIncompatible("SafeStylesheets.fromResource")
+  public void testFromResource() throws Exception {
+    SafeStyleSheet styleSheet =
+        SafeStyleSheets.fromResource(
+            SafeStyleSheetsTest.class, "resources/style.css",
+            Charset.forName("UTF-8"));
+    assertEquals(
+      "P.special { color:red ; }\n", styleSheet.getSafeStyleSheetString());
   }
 }
