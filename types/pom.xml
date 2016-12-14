@@ -67,6 +67,9 @@
       <artifactId>guava-testlib</artifactId>
       <!-- Same as guava or else we get convergence errors. -->
       <version>${guava.version}</version>
+      <!-- TODO(mikesamuel): Create separate artifact for testing package. -->
+      <!-- https://github.com/google/safe-html-types/issues/2 -->
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
