@@ -81,9 +81,9 @@ public final class SafeHtmlBuilder {
 
   private final String elementName;
   /** We use LinkedHashMap to maintain attribute insertion order. */
-  private final Map<String, String> attributes = new LinkedHashMap<String, String>();
+  private final Map<String, String> attributes = new LinkedHashMap<>();
 
-  private final List<SafeHtml> contents = new ArrayList<SafeHtml>();
+  private final List<SafeHtml> contents = new ArrayList<>();
 
   private boolean useSlashOnVoid = false;
 
@@ -672,10 +672,8 @@ public final class SafeHtmlBuilder {
   }
 
   private static final Set<String> createUnmodifiableSet(String... strings) {
-    HashSet<String> set = new HashSet<String>();
-    for (String string : strings) {
-      set.add(string);
-    }
+    HashSet<String> set = new HashSet<>();
+    Collections.addAll(set, strings);
     return Collections.unmodifiableSet(set);
   }
 
