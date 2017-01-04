@@ -56,12 +56,33 @@ public final class SafeHtmls {
   }
 
   /**
+   * Wraps a SafeScript inside a &lt;script type="text/javascript"&gt; tag.
+   * The tag has a nonce attribute populated from the provided CSP nonce value.
+   */
+  public static SafeHtml fromScriptWithCspNonce(SafeScript script, String cspNonce) {
+    return create("<script type=\"text/javascript\" nonce=\"" + htmlEscapeInternal(cspNonce)
+        + "\">" + script.getSafeScriptString() + "</script>");
+  }
+
+  /**
    * Creates a &lt;script type="text/javascript" src="<i>url</i>"&gt;&lt;script&gt; where the
    * {@code src} attribute points to the given {@code trustedResourceUrl}.
    */
   public static SafeHtml fromScriptUrl(TrustedResourceUrl trustedResourceUrl) {
     String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
     return create("<script type=\"text/javascript\" src=\"" + escapedUrl + "\"></script>");
+  }
+
+  /**
+   * Creates a &lt;script type="text/javascript" src="<i>url</i>"&gt;&lt;script&gt; where the
+   * {@code src} attribute points to the given {@code trustedResourceUrl}.
+   * The tag has a nonce attribute populated from the provided CSP nonce value.
+   */
+  public static SafeHtml fromScriptUrlWithCspNonce(TrustedResourceUrl trustedResourceUrl,
+      String cspNonce) {
+    String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
+    return create("<script type=\"text/javascript\" nonce=\"" + htmlEscapeInternal(cspNonce)
+        + "\" src=\"" + escapedUrl + "\"></script>");
   }
 
   /**

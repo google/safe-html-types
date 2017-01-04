@@ -47,11 +47,31 @@ public class SafeHtmlsTest extends TestCase {
         html.getSafeHtmlString());
   }
 
+  public void testFromScriptWithCspNonce() {
+    SafeHtml html = SafeHtmls.fromScriptWithCspNonce(SafeScripts.fromConstant("test('<hello>');"),
+      "QswwJvFgUzpcN+HRUB9gDIueLB8");
+    assertEquals(
+        "<script type=\"text/javascript\" "
+        + "nonce=\"QswwJvFgUzpcN+HRUB9gDIueLB8\">test('<hello>');</script>",
+        html.getSafeHtmlString());
+  }
+
   public void testFromScriptUrl() {
     SafeHtml html = SafeHtmls.fromScriptUrl(
         TrustedResourceUrls.fromConstant("https://example.com/&<\"'script.js"));
     assertEquals(
         "<script type=\"text/javascript\" "
+            + "src=\"https://example.com/&amp;&lt;&quot;&#39;script.js\"></script>",
+        html.getSafeHtmlString());
+  }
+
+  public void testFromScriptUrlWithCspNonce() {
+    SafeHtml html = SafeHtmls.fromScriptUrlWithCspNonce(
+        TrustedResourceUrls.fromConstant("https://example.com/&<\"'script.js"),
+          "QswwJvFgUzpcN+HRUB9gDIueLB8");
+    assertEquals(
+        "<script type=\"text/javascript\" "
+            + "nonce=\"QswwJvFgUzpcN+HRUB9gDIueLB8\" "
             + "src=\"https://example.com/&amp;&lt;&quot;&#39;script.js\"></script>",
         html.getSafeHtmlString());
   }
