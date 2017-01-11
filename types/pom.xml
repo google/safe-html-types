@@ -41,12 +41,19 @@
       <artifactId>gwt-user</artifactId>
       <version>${gwt.version}</version>
       <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>jsr250-api</artifactId>
       <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>1.3.9</version>
     </dependency>
 
     <dependency>
@@ -67,6 +74,7 @@
       <artifactId>guava-testlib</artifactId>
       <!-- Same as guava or else we get convergence errors. -->
       <version>${guava.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
