@@ -189,6 +189,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("border", value);
   }
 
+  /** Sets the {@code checked} attribute for this element. */
+  public SafeHtmlBuilder setChecked(String value) {
+    return setAttribute("checked", value);
+  }
+
   /** Sets the {@code class} attribute for this element. */
   public SafeHtmlBuilder setClass(String value) {
     return setAttribute("class", value);
