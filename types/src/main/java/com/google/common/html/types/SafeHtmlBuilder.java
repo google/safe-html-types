@@ -339,6 +339,31 @@ public final class SafeHtmlBuilder {
     return setAttribute("id", prefix + "-" + value);
   }
 
+  /** These elements are whitelisted to use max with a String value. */
+  private static final Set<String> MAX_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
+
+  /**
+   * Sets the {@code max} attribute for this element.
+   *
+   * <p>The attribute {@code max} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code max} attribute with a {@code String} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setMax(String value) {
+    if (!MAX_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"max\" with a String value can only be used "
+              + "by one of the following elements: "
+              + MAX_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("max", value);
+  }
+
   /** These elements are whitelisted to use media with a String value. */
   private static final Set<String> MEDIA_STRING_ELEMENT_WHITELIST =
       createUnmodifiableSet("link", "source");
@@ -389,6 +414,31 @@ public final class SafeHtmlBuilder {
               + METHOD_STRING_ELEMENT_WHITELIST);
     }
     return setAttribute("method", value);
+  }
+
+  /** These elements are whitelisted to use min with a String value. */
+  private static final Set<String> MIN_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
+
+  /**
+   * Sets the {@code min} attribute for this element.
+   *
+   * <p>The attribute {@code min} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code min} attribute with a {@code String} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setMin(String value) {
+    if (!MIN_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"min\" with a String value can only be used "
+              + "by one of the following elements: "
+              + MIN_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("min", value);
   }
 
   /** Sets the {@code name} attribute for this element. */
@@ -478,6 +528,31 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code src} attribute for this element. */
   public SafeHtmlBuilder setSrc(TrustedResourceUrl value) {
     return setAttribute("src", value.getTrustedResourceUrlString());
+  }
+
+  /** These elements are whitelisted to use step with a String value. */
+  private static final Set<String> STEP_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
+
+  /**
+   * Sets the {@code step} attribute for this element.
+   *
+   * <p>The attribute {@code step} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code step} attribute with a {@code String} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setStep(String value) {
+    if (!STEP_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"step\" with a String value can only be used "
+              + "by one of the following elements: "
+              + STEP_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("step", value);
   }
 
   /** Sets the {@code style} attribute for this element. */
