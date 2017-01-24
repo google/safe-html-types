@@ -204,6 +204,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("color", value);
   }
 
+  /** Sets the {@code cols} attribute for this element. */
+  public SafeHtmlBuilder setCols(String value) {
+    return setAttribute("cols", value);
+  }
+
   /** Sets the {@code colspan} attribute for this element. */
   public SafeHtmlBuilder setColspan(String value) {
     return setAttribute("colspan", value);
