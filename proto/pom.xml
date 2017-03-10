@@ -31,8 +31,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <!-- mirror the protobuf package -->
-              <outputDirectory>${project.build.outputDirectory}/webutil/html/types</outputDirectory>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
               <resources>
                 <resource>
                   <directory>src/main/protobuf</directory>
