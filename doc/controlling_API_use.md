@@ -84,28 +84,45 @@ JSCompiler.  See:
 ## Java Error Prone-checked restrictions
 
 In some cases, the approach in the previous section is not possible; for
-instance, if the method whose use must be restricted is in a public API that
-cannot be refactored.
+instance, if the method whose use must be restricted is in a public API whose
+callers cannot be refactored all at once.
 
 In Java, we can use [Error Prone](http://github.com/google/error-prone) to restrict call sites of
 specific methods:
 
-*   Create an Error Prone checker that disallows call-sites to particular
-    methods.
+*   Mark the methods you want to prohibit with the
+    [`RestrictedApi`](http://errorprone.info/api/latest/com/google/errorprone/annotations/RestrictedApi.html)
+    annotation.
 
-    The checker should be declared `UNSUPPRESSIBLE` (to prevent it from being
-    disabled via `@SuppressWarnings`).
-*   Expose the checker as a [`java_plugin`](http:http://bazel.build/docs/be/java.html#java_plugin)
-    which is in turn referenced in the `exported_plugins` of the rule that
-    provides the API that needs to be restricted
-*   Optionally, the checker can be suppressed through an annotation
-    which is BUILD visibility-restricted to be usable only
-    in [testing code](http://bazel.build/docs/be/common-definitions.html#common.testonly)
+    In the annotation, you have to provide a short explanation why the API is
+    restricted and a link to further background documentation. This should
+    include which APIs you want developers to use instead and a point of
+    contact.
 
+*   Create a BUILD-visibility restricted whitelist annotation for existing
+    callers
 
-When introducing such a mechanism, it can be a useful pattern to introduce
-separate annotations to distinguish uses that have actually been reviewed, from
-existing, unreviewed, potentially vulnerable legacy uses
+    Add this class to the `whitelistWithWarningAnnotations` parameter on the
+    `@RestrictedApi` annotation. You can add this annotation to methods or
+    classes surrounding existing callers. Error Prone will emit a warning, but
+    allow compilation to succeed.
+
+*   Optionally, add a separate whitelist annotation for uses which have been
+    reviewed to the `whitelistAnnotations` attribute of `@RestrictedApi`. Call
+    sites in classes or functions marked with this annotation will be allowed
+    without a warning.
+
+    It can be a useful to use separate annotations to distinguish uses that have
+    actually been reviewed, from existing, unreviewed, potentially vulnerable
+    legacy uses
+
+*   If you cannot add annotations to call sites, you can instead whitelist based
+    on the file path of the caller. Specify a regular expression matching files
+    in which calls are allowed in the `allowedPath` parameter.
+
+If adding an annotation is not possible, e.g. when restricting an API part of
+the JDK, you can develop a custom Error Prone to restrict calls.
+
 
 
 ## Presubmit checks
