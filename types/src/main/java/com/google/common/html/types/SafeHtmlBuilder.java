@@ -194,6 +194,35 @@ public final class SafeHtmlBuilder {
     return setAttribute("checked", value);
   }
 
+  /** These elements are whitelisted to use cite with a SafeUrl value. */
+  private static final Set<String> CITE_SAFE_URL_ELEMENT_WHITELIST =
+      createUnmodifiableSet("blockquote", "del", "ins", "q");
+
+  /**
+   * Sets the {@code cite} attribute for this element.
+   *
+   * <p>The attribute {@code cite} with a {@code SafeUrl} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code blockquote}
+   *   <li>{@code del}
+   *   <li>{@code ins}
+   *   <li>{@code q}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code cite} attribute with a {@code SafeUrl} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setCite(SafeUrl value) {
+    if (!CITE_SAFE_URL_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"cite\" with a SafeUrl value can only be used "
+              + "by one of the following elements: "
+              + CITE_SAFE_URL_ELEMENT_WHITELIST);
+    }
+    return setAttribute("cite", value.getSafeUrlString());
+  }
+
   /** Sets the {@code class} attribute for this element. */
   public SafeHtmlBuilder setClass(String value) {
     return setAttribute("class", value);
@@ -239,6 +268,60 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code dir} attribute for this element. */
   public SafeHtmlBuilder setDir(DirValue value) {
     return setAttribute("dir", value.toString());
+  }
+
+  /** These elements are whitelisted to use formaction with a SafeUrl value. */
+  private static final Set<String> FORMACTION_SAFE_URL_ELEMENT_WHITELIST =
+      createUnmodifiableSet("button", "input");
+
+  /**
+   * Sets the {@code formaction} attribute for this element.
+   *
+   * <p>The attribute {@code formaction} with a {@code SafeUrl} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code button}
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code formaction} attribute with a {@code SafeUrl}
+   *     value is not allowed on this element
+   */
+  public SafeHtmlBuilder setFormaction(SafeUrl value) {
+    if (!FORMACTION_SAFE_URL_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"formaction\" with a SafeUrl value can only be used "
+              + "by one of the following elements: "
+              + FORMACTION_SAFE_URL_ELEMENT_WHITELIST);
+    }
+    return setAttribute("formaction", value.getSafeUrlString());
+  }
+
+  /** These elements are whitelisted to use formmethod with a String value. */
+  private static final Set<String> FORMMETHOD_STRING_ELEMENT_WHITELIST =
+      createUnmodifiableSet("button", "input");
+
+  /**
+   * Sets the {@code formmethod} attribute for this element.
+   *
+   * <p>The attribute {@code formmethod} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code button}
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code formmethod} attribute with a {@code String}
+   *     value is not allowed on this element
+   */
+  public SafeHtmlBuilder setFormmethod(String value) {
+    if (!FORMMETHOD_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"formmethod\" with a String value can only be used "
+              + "by one of the following elements: "
+              + FORMMETHOD_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("formmethod", value);
   }
 
   /** Sets the {@code height} attribute for this element. */
@@ -324,6 +407,32 @@ public final class SafeHtmlBuilder {
   public SafeHtmlBuilder setHref(TrustedResourceUrl value) {
     hrefValueContract = AttributeContract.TRUSTED_RESOURCE_URL;
     return setAttribute("href", value.getTrustedResourceUrlString());
+  }
+
+  /** These elements are whitelisted to use icon with a SafeUrl value. */
+  private static final Set<String> ICON_SAFE_URL_ELEMENT_WHITELIST =
+      createUnmodifiableSet("menuitem");
+
+  /**
+   * Sets the {@code icon} attribute for this element.
+   *
+   * <p>The attribute {@code icon} with a {@code SafeUrl} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code menuitem}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code icon} attribute with a {@code SafeUrl} value is
+   *     not allowed on this element
+   */
+  public SafeHtmlBuilder setIcon(SafeUrl value) {
+    if (!ICON_SAFE_URL_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"icon\" with a SafeUrl value can only be used "
+              + "by one of the following elements: "
+              + ICON_SAFE_URL_ELEMENT_WHITELIST);
+    }
+    return setAttribute("icon", value.getSafeUrlString());
   }
 
   /** Sets the {@code id} attribute for this element. */
@@ -469,6 +578,32 @@ public final class SafeHtmlBuilder {
     return setAttribute("placeholder", value);
   }
 
+  /** These elements are whitelisted to use poster with a SafeUrl value. */
+  private static final Set<String> POSTER_SAFE_URL_ELEMENT_WHITELIST =
+      createUnmodifiableSet("video");
+
+  /**
+   * Sets the {@code poster} attribute for this element.
+   *
+   * <p>The attribute {@code poster} with a {@code SafeUrl} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code video}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code poster} attribute with a {@code SafeUrl} value
+   *     is not allowed on this element
+   */
+  public SafeHtmlBuilder setPoster(SafeUrl value) {
+    if (!POSTER_SAFE_URL_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"poster\" with a SafeUrl value can only be used "
+              + "by one of the following elements: "
+              + POSTER_SAFE_URL_ELEMENT_WHITELIST);
+    }
+    return setAttribute("poster", value.getSafeUrlString());
+  }
+
   /**
    * Sets the {@code rel} attribute for this element.
    *
@@ -505,7 +640,7 @@ public final class SafeHtmlBuilder {
 
   /** These elements are whitelisted to use src with a SafeUrl value. */
   private static final Set<String> SRC_SAFE_URL_ELEMENT_WHITELIST =
-      createUnmodifiableSet("img", "input");
+      createUnmodifiableSet("audio", "img", "input", "source", "video");
 
   /**
    * Sets the {@code src} attribute for this element.
@@ -513,8 +648,11 @@ public final class SafeHtmlBuilder {
    * <p>The attribute {@code src} with a {@code SafeUrl} value is allowed on these elements:
    *
    * <ul>
+   *   <li>{@code audio}
    *   <li>{@code img}
    *   <li>{@code input}
+   *   <li>{@code source}
+   *   <li>{@code video}
    * </ul>
    *
    * @throws IllegalArgumentException if the {@code src} attribute with a {@code SafeUrl} value is

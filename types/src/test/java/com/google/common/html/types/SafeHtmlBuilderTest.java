@@ -290,12 +290,18 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
-  public void testDisallowsSafeUrlInVideoSrcAttribute() {
+  public void testDisallowsSafeUrlInIframeSrcAttribute() {
     try {
-      new SafeHtmlBuilder("video").setSrc(newSafeUrlForTest("b"));
-      fail("<video src> should require TrustedResourceUrl.");
+      new SafeHtmlBuilder("iframe").setSrc(newSafeUrlForTest("b"));
+      fail("<iframe src> should require TrustedResourceUrl.");
     } catch (IllegalArgumentException expected) {
     }
+  }
+
+  public void testAllowsSafeUrlInSrcAttributeOnMediaElements() {
+    new SafeHtmlBuilder("audio").setSrc(newSafeUrlForTest("b"));
+    new SafeHtmlBuilder("img").setSrc(newSafeUrlForTest("b"));
+    new SafeHtmlBuilder("video").setSrc(newSafeUrlForTest("b"));
   }
 
   /**
