@@ -618,6 +618,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("rel", value);
   }
 
+  /** Sets the {@code role} attribute for this element. */
+  public SafeHtmlBuilder setRole(String value) {
+    return setAttribute("role", value);
+  }
+
   /** Sets the {@code rows} attribute for this element. */
   public SafeHtmlBuilder setRows(String value) {
     return setAttribute("rows", value);
