@@ -18,7 +18,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.7</java.version>
     <guava.version>19.0</guava.version>
-    <gwt.version>2.8.0-beta1</gwt.version>
   </properties>
 
   <url>https://github.com/google/safe-html-types</url>
