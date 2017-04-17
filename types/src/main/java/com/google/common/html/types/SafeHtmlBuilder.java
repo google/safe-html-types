@@ -270,6 +270,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("dir", value.toString());
   }
 
+  /** Sets the {@code disabled} attribute for this element. */
+  public SafeHtmlBuilder setDisabled(String value) {
+    return setAttribute("disabled", value);
+  }
+
   /** These elements are whitelisted to use formaction with a SafeUrl value. */
   private static final Set<String> FORMACTION_SAFE_URL_ELEMENT_WHITELIST =
       createUnmodifiableSet("button", "input");
@@ -327,6 +332,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code height} attribute for this element. */
   public SafeHtmlBuilder setHeight(String value) {
     return setAttribute("height", value);
+  }
+
+  /** Sets the {@code hidden} attribute for this element. */
+  public SafeHtmlBuilder setHidden(String value) {
+    return setAttribute("hidden", value);
   }
 
   /** These elements are whitelisted to use href with a SafeUrl value. */
