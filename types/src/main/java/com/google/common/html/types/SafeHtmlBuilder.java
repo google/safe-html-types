@@ -275,6 +275,24 @@ public final class SafeHtmlBuilder {
     return setAttribute("disabled", value);
   }
 
+  /** Sets the {@code for} attribute for this element. */
+  public SafeHtmlBuilder setFor(@CompileTimeConstant final String value) {
+    return setAttribute("for", value);
+  }
+
+  /**
+   * Sets the {@code for} attribute for this element to a {@link CompileTimeConstant} {@code prefix}
+   * and a {@code value} joined by a hyphen.
+   *
+   * @throws IllegalArgumentException if {@code prefix} is an empty string
+   */
+  public SafeHtmlBuilder setForWithPrefix(@CompileTimeConstant final String prefix, String value) {
+    if (prefix.trim().length() == 0) {
+      throw new IllegalArgumentException("Prefix cannot be empty string");
+    }
+    return setAttribute("for", prefix + "-" + value);
+  }
+
   /** These elements are whitelisted to use formaction with a SafeUrl value. */
   private static final Set<String> FORMACTION_SAFE_URL_ELEMENT_WHITELIST =
       createUnmodifiableSet("button", "input");
