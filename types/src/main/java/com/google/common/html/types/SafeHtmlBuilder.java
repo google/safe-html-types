@@ -736,6 +736,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("style", value.getSafeStyleString());
   }
 
+  /** Sets the {@code tabindex} attribute for this element. */
+  public SafeHtmlBuilder setTabindex(String value) {
+    return setAttribute("tabindex", value);
+  }
+
   /** Values that can be passed to {@link #setTarget(TargetValue)}. */
   public enum TargetValue {
 
