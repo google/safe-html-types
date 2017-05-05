@@ -179,6 +179,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("alt", value);
   }
 
+  /** Sets the {@code autofocus} attribute for this element. */
+  public SafeHtmlBuilder setAutofocus(String value) {
+    return setAttribute("autofocus", value);
+  }
+
   /** Sets the {@code bgcolor} attribute for this element. */
   public SafeHtmlBuilder setBgcolor(String value) {
     return setAttribute("bgcolor", value);
@@ -275,6 +280,16 @@ public final class SafeHtmlBuilder {
     return setAttribute("disabled", value);
   }
 
+  /** Sets the {@code draggable} attribute for this element. */
+  public SafeHtmlBuilder setDraggable(String value) {
+    return setAttribute("draggable", value);
+  }
+
+  /** Sets the {@code face} attribute for this element. */
+  public SafeHtmlBuilder setFace(String value) {
+    return setAttribute("face", value);
+  }
+
   /** Sets the {@code for} attribute for this element. */
   public SafeHtmlBuilder setFor(@CompileTimeConstant final String value) {
     return setAttribute("for", value);
@@ -345,6 +360,11 @@ public final class SafeHtmlBuilder {
               + FORMMETHOD_STRING_ELEMENT_WHITELIST);
     }
     return setAttribute("formmethod", value);
+  }
+
+  /** Sets the {@code frameborder} attribute for this element. */
+  public SafeHtmlBuilder setFrameborder(String value) {
+    return setAttribute("frameborder", value);
   }
 
   /** Sets the {@code height} attribute for this element. */
@@ -481,29 +501,34 @@ public final class SafeHtmlBuilder {
     return setAttribute("id", prefix + "-" + value);
   }
 
-  /** These elements are whitelisted to use max with a String value. */
-  private static final Set<String> MAX_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
+  /** Sets the {@code ismap} attribute for this element. */
+  public SafeHtmlBuilder setIsmap(String value) {
+    return setAttribute("ismap", value);
+  }
 
-  /**
-   * Sets the {@code max} attribute for this element.
-   *
-   * <p>The attribute {@code max} with a {@code String} value is allowed on these elements:
-   *
-   * <ul>
-   *   <li>{@code input}
-   * </ul>
-   *
-   * @throws IllegalArgumentException if the {@code max} attribute with a {@code String} value is
-   *     not allowed on this element
-   */
+  /** Sets the {@code label} attribute for this element. */
+  public SafeHtmlBuilder setLabel(String value) {
+    return setAttribute("label", value);
+  }
+
+  /** Sets the {@code lang} attribute for this element. */
+  public SafeHtmlBuilder setLang(String value) {
+    return setAttribute("lang", value);
+  }
+
+  /** Sets the {@code loop} attribute for this element. */
+  public SafeHtmlBuilder setLoop(String value) {
+    return setAttribute("loop", value);
+  }
+
+  /** Sets the {@code max} attribute for this element. */
   public SafeHtmlBuilder setMax(String value) {
-    if (!MAX_STRING_ELEMENT_WHITELIST.contains(elementName)) {
-      throw new IllegalArgumentException(
-          "Attribute \"max\" with a String value can only be used "
-              + "by one of the following elements: "
-              + MAX_STRING_ELEMENT_WHITELIST);
-    }
     return setAttribute("max", value);
+  }
+
+  /** Sets the {@code maxlength} attribute for this element. */
+  public SafeHtmlBuilder setMaxlength(String value) {
+    return setAttribute("maxlength", value);
   }
 
   /** These elements are whitelisted to use media with a String value. */
@@ -558,29 +583,19 @@ public final class SafeHtmlBuilder {
     return setAttribute("method", value);
   }
 
-  /** These elements are whitelisted to use min with a String value. */
-  private static final Set<String> MIN_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
-
-  /**
-   * Sets the {@code min} attribute for this element.
-   *
-   * <p>The attribute {@code min} with a {@code String} value is allowed on these elements:
-   *
-   * <ul>
-   *   <li>{@code input}
-   * </ul>
-   *
-   * @throws IllegalArgumentException if the {@code min} attribute with a {@code String} value is
-   *     not allowed on this element
-   */
+  /** Sets the {@code min} attribute for this element. */
   public SafeHtmlBuilder setMin(String value) {
-    if (!MIN_STRING_ELEMENT_WHITELIST.contains(elementName)) {
-      throw new IllegalArgumentException(
-          "Attribute \"min\" with a String value can only be used "
-              + "by one of the following elements: "
-              + MIN_STRING_ELEMENT_WHITELIST);
-    }
     return setAttribute("min", value);
+  }
+
+  /** Sets the {@code multiple} attribute for this element. */
+  public SafeHtmlBuilder setMultiple(String value) {
+    return setAttribute("multiple", value);
+  }
+
+  /** Sets the {@code muted} attribute for this element. */
+  public SafeHtmlBuilder setMuted(String value) {
+    return setAttribute("muted", value);
   }
 
   /** Sets the {@code name} attribute for this element. */
@@ -632,6 +647,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("poster", value.getSafeUrlString());
   }
 
+  /** Sets the {@code preload} attribute for this element. */
+  public SafeHtmlBuilder setPreload(String value) {
+    return setAttribute("preload", value);
+  }
+
   /**
    * Sets the {@code rel} attribute for this element.
    *
@@ -644,6 +664,16 @@ public final class SafeHtmlBuilder {
   public SafeHtmlBuilder setRel(String value) {
     checkLinkDependentAttributes(value, hrefValueContract);
     return setAttribute("rel", value);
+  }
+
+  /** Sets the {@code required} attribute for this element. */
+  public SafeHtmlBuilder setRequired(String value) {
+    return setAttribute("required", value);
+  }
+
+  /** Sets the {@code reversed} attribute for this element. */
+  public SafeHtmlBuilder setReversed(String value) {
+    return setAttribute("reversed", value);
   }
 
   /** Sets the {@code role} attribute for this element. */
@@ -666,9 +696,29 @@ public final class SafeHtmlBuilder {
     return setAttribute("selected", value);
   }
 
+  /** Sets the {@code shape} attribute for this element. */
+  public SafeHtmlBuilder setShape(String value) {
+    return setAttribute("shape", value);
+  }
+
   /** Sets the {@code size} attribute for this element. */
   public SafeHtmlBuilder setSize(String value) {
     return setAttribute("size", value);
+  }
+
+  /** Sets the {@code sizes} attribute for this element. */
+  public SafeHtmlBuilder setSizes(String value) {
+    return setAttribute("sizes", value);
+  }
+
+  /** Sets the {@code span} attribute for this element. */
+  public SafeHtmlBuilder setSpan(String value) {
+    return setAttribute("span", value);
+  }
+
+  /** Sets the {@code spellcheck} attribute for this element. */
+  public SafeHtmlBuilder setSpellcheck(String value) {
+    return setAttribute("spellcheck", value);
   }
 
   /** These elements are whitelisted to use src with a SafeUrl value. */
@@ -706,28 +756,13 @@ public final class SafeHtmlBuilder {
     return setAttribute("src", value.getTrustedResourceUrlString());
   }
 
-  /** These elements are whitelisted to use step with a String value. */
-  private static final Set<String> STEP_STRING_ELEMENT_WHITELIST = createUnmodifiableSet("input");
+  /** Sets the {@code start} attribute for this element. */
+  public SafeHtmlBuilder setStart(String value) {
+    return setAttribute("start", value);
+  }
 
-  /**
-   * Sets the {@code step} attribute for this element.
-   *
-   * <p>The attribute {@code step} with a {@code String} value is allowed on these elements:
-   *
-   * <ul>
-   *   <li>{@code input}
-   * </ul>
-   *
-   * @throws IllegalArgumentException if the {@code step} attribute with a {@code String} value is
-   *     not allowed on this element
-   */
+  /** Sets the {@code step} attribute for this element. */
   public SafeHtmlBuilder setStep(String value) {
-    if (!STEP_STRING_ELEMENT_WHITELIST.contains(elementName)) {
-      throw new IllegalArgumentException(
-          "Attribute \"step\" with a String value can only be used "
-              + "by one of the following elements: "
-              + STEP_STRING_ELEMENT_WHITELIST);
-    }
     return setAttribute("step", value);
   }
 
@@ -769,6 +804,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code title} attribute for this element. */
   public SafeHtmlBuilder setTitle(String value) {
     return setAttribute("title", value);
+  }
+
+  /** Sets the {@code translate} attribute for this element. */
+  public SafeHtmlBuilder setTranslate(String value) {
+    return setAttribute("translate", value);
   }
 
   /** These elements are whitelisted to use type with a String value. */
@@ -815,6 +855,11 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code width} attribute for this element. */
   public SafeHtmlBuilder setWidth(String value) {
     return setAttribute("width", value);
+  }
+
+  /** Sets the {@code wrap} attribute for this element. */
+  public SafeHtmlBuilder setWrap(String value) {
+    return setAttribute("wrap", value);
   }
 
   /**
