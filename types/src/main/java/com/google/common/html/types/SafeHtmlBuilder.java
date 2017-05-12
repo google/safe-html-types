@@ -771,6 +771,11 @@ public final class SafeHtmlBuilder {
     return setAttribute("style", value.getSafeStyleString());
   }
 
+  /** Sets the {@code summary} attribute for this element. */
+  public SafeHtmlBuilder setSummary(String value) {
+    return setAttribute("summary", value);
+  }
+
   /** Sets the {@code tabindex} attribute for this element. */
   public SafeHtmlBuilder setTabindex(String value) {
     return setAttribute("tabindex", value);
