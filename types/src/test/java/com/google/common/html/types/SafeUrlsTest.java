@@ -95,8 +95,7 @@ public class SafeUrlsTest extends TestCase {
     assertSanitizedAsSafeUrl("path?foo=bar#baz");
     assertSanitizedAsSafeUrl("p//ath");
     assertSanitizedAsSafeUrl("p//ath?foo=bar#baz");
-    // Restricted characters ('&', ':', \') after [/?#].
-    assertSanitizedAsSafeUrl("/&");
+    // Restricted character ':' after [/?#].
     assertSanitizedAsSafeUrl("?:");
 
     // Non-whitelisted schemes.
@@ -121,8 +120,7 @@ public class SafeUrlsTest extends TestCase {
     assertSanitizedAsUnsafeUrl("skype:chat?jid=foo");
     // Not whitelisted by default.
     assertSanitizedAsUnsafeUrl("whatsapp://send?text=Hello");
-    // Restricted characters before [/?#].
-    assertSanitizedAsUnsafeUrl("&");
+    // Restricted character before [/?#].
     assertSanitizedAsUnsafeUrl(":");
     // '\' is not treated like '/': no restricted characters allowed after it.
     assertSanitizedAsUnsafeUrl("\\:");

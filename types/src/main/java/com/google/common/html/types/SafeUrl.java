@@ -25,10 +25,11 @@ import jsinterop.annotations.JsType;
  * <p>A SafeUrl is a string-like object that carries the security type contract that its value as a
  * string will not cause untrusted script execution when evaluated as a hyperlink URL in a browser.
  *
- * <p>Values of this type are guaranteed to be safe to use in URL/hyperlink contexts, such as,
- * assignment to URL-valued DOM properties, or interpolation into a HTML template in URL context
- * (e.g., inside a href attribute), in the sense that the use will not result in a
- * Cross-Site-Scripting vulnerability.
+ * <p>Values of this type are guaranteed to be safe to use in URL/hyperlink contexts, such as
+ * assignment to URL-valued DOM properties, in the sense that the use will not result in a
+ * Cross-Site-Scripting vulnerability. Similarly, SafeUrls can be interpolated into the URL context
+ * of an HTML template (e.g., inside a href attribute). However, appropriate HTML-escaping must
+ * still be applied.
  *
  * <p>Note that this type's contract does not imply any guarantees regarding the resource the URL
  * refers to. In particular, SafeUrls are <b>not</b> safe to use in a context where the referred-to

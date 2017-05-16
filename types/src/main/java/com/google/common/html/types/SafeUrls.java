@@ -201,12 +201,6 @@ public final class SafeUrls {
   *     Otherwise, a colon after a double solidus (*) must be in the authority (before port).
   * </ul>
   *
-  * <p>Finally, &amp;, used in HTML entity declarations, is disallowed before one of the
-  * characters in [/?#]. This disallows HTML entities used in the protocol name, which should
-  * never happen, e.g. "h&amp;#116;tp" for "http". It also disallows HTML entities in the first
-  * path part of a relative path, e.g. "foo&lt;bar/baz".  Our existing escaping functions should
-  * not produce that. More importantly, it disallows masking of a colon, e.g. "javascript&#58;...".
-  *
   * <p>We don't use a regex so that we don't need to depend on GWT, which does not support Java's
   * Pattern and requires using its RegExp class.
    */
@@ -243,9 +237,8 @@ public final class SafeUrls {
           // After this the string can end or contain anything else, it won't be interpreted
           // as the scheme.
           return true;
-        case '&':
         case ':':
-          // These are not allowed before seeing one of the above characters.
+          // This character is not allowed before seeing one of the above characters.
           return false;
         default:
           // Other characters ok.
