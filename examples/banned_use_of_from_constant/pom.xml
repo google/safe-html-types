@@ -2,6 +2,12 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>com.google.common.html.types</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.6-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
   <groupId>com.example.safehtmltypes</groupId>
   <artifactId>banned_use_of_from_constant</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -25,7 +31,7 @@
     <dependency>
       <groupId>com.google.common.html.types</groupId>
       <artifactId>types</artifactId>
-      <version>1.0.6-SNAPSHOT</version>
+      <version>${project.parent.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -37,7 +43,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5</version>
         <configuration>
           <compilerId>javac-with-errorprone</compilerId>
           <forceJavacCompilerUse>true</forceJavacCompilerUse>
@@ -58,6 +63,10 @@
             <version>2.0.8</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

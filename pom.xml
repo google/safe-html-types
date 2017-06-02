@@ -18,7 +18,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.7</java.version>
     <guava.version>19.0</guava.version>
-    <gwt.version>2.8.0-beta1</gwt.version>
   </properties>
 
   <url>https://github.com/google/safe-html-types</url>
@@ -147,6 +146,11 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
@@ -163,7 +167,7 @@
         <plugin>
           <groupId>com.comoyo.maven.plugins</groupId>
           <artifactId>protoc-bundled-plugin</artifactId>
-          <version>1.4.56</version>
+          <version>1.4.61</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -183,6 +187,16 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.security</groupId>
+        <artifactId>fences-maven-enforcer-rule</artifactId>
+        <version>1.5-beta</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <!-- sign files -->
   <profiles>
