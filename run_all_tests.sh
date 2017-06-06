@@ -5,15 +5,16 @@ set -e
 # This should be run from the project directory.
 [ -f pom.xml ]
 
-if [ -z "$MVN" ]; then
-  export MVN="$(which mvn)"
+if [ -z ${MVN} ]; then
+  declare -a MVN
+  MVN=( "$(which mvn)" )
 fi
-[ -n "$MVN" ]
-echo using MVN="$MVN"
+[ -n ${MVN} ]
+echo using MVN=${MVN[*]}
 
 # Make sure that the tests run, and we can produce the 3 jars needed
 # by maven central
-$MVN clean verify \
+${MVN[*]} clean verify \
     org.apache.maven.plugins:maven-javadoc-plugin:jar \
     org.apache.maven.plugins:maven-source-plugin:jar \
     install \
@@ -34,14 +35,14 @@ function require_in_log() {
 }
 
 function expect_broken_build() {
-  ($MVN -B clean verify >& mvn-log.txt) \
+  (${MVN[*]} -B clean verify >& mvn-log.txt) \
   && fail "$(basename "$PWD") should not build"
 
   require_in_log 'BUILD FAILURE'
 }
 
 function expect_successful_build() {
-  ($MVN -B clean verify >& mvn-log.txt) \
+  (${MVN[*]} -B clean verify >& mvn-log.txt) \
   || fail "$(basename "$PWD") should build"
 
   require_in_log 'BUILD SUCCESS'
