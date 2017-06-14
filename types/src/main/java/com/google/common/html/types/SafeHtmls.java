@@ -74,6 +74,15 @@ public final class SafeHtmls {
   }
 
   /**
+   * Creates a &lt;script defer type="text/javascript" src="<i>url</i>"&gt;&lt;script&gt; where the
+   * {@code src} attribute points to the given {@code trustedResourceUrl}.
+   */
+  public static SafeHtml fromScriptUrlDeferred(TrustedResourceUrl trustedResourceUrl) {
+    String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
+    return create("<script defer type=\"text/javascript\" src=\"" + escapedUrl + "\"></script>");
+  }
+
+  /**
    * Creates a &lt;script type="text/javascript" src="<i>url</i>"&gt;&lt;script&gt; where the
    * {@code src} attribute points to the given {@code trustedResourceUrl}.
    * The tag has a nonce attribute populated from the provided CSP nonce value.
@@ -82,6 +91,18 @@ public final class SafeHtmls {
       String cspNonce) {
     String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
     return create("<script type=\"text/javascript\" nonce=\"" + htmlEscapeInternal(cspNonce)
+        + "\" src=\"" + escapedUrl + "\"></script>");
+  }
+
+  /**
+   * Creates a &lt;script defer type="text/javascript" src="<i>url</i>"&gt;&lt;script&gt; where the
+   * {@code src} attribute points to the given {@code trustedResourceUrl}.
+   * The tag has a nonce attribute populated from the provided CSP nonce value.
+   */
+  public static SafeHtml fromScriptUrlWithCspNonceDeferred(TrustedResourceUrl trustedResourceUrl,
+      String cspNonce) {
+    String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
+    return create("<script defer type=\"text/javascript\" nonce=\"" + htmlEscapeInternal(cspNonce)
         + "\" src=\"" + escapedUrl + "\"></script>");
   }
 
