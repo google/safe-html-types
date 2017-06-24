@@ -179,6 +179,16 @@ public final class SafeHtmlBuilder {
     return setAttribute("alt", value);
   }
 
+  /** Sets the {@code autocapitalize} attribute for this element. */
+  public SafeHtmlBuilder setAutocapitalize(String value) {
+    return setAttribute("autocapitalize", value);
+  }
+
+  /** Sets the {@code autocomplete} attribute for this element. */
+  public SafeHtmlBuilder setAutocomplete(String value) {
+    return setAttribute("autocomplete", value);
+  }
+
   /** Sets the {@code autofocus} attribute for this element. */
   public SafeHtmlBuilder setAutofocus(String value) {
     return setAttribute("autofocus", value);
