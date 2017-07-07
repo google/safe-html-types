@@ -78,7 +78,7 @@ a variety of values, while using a mix of runtime and compile-time checks.
 
 ```java
 SafeHtml safeHtml = new SafeHtmlBuilder("a")
-    .setSrc(SafeUrl.sanitize(untrustedUrl))
+    .setSrc(SafeUrls.sanitize(untrustedUrl))
     .setStyle(SafeStyle.fromConstant("color:red;"))
     .setClass("user-link")
     .build();
