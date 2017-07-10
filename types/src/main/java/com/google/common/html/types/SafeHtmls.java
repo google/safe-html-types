@@ -24,6 +24,7 @@ import static com.google.common.html.types.BuilderUtils.coerceToInterchangeValid
 import static com.google.common.html.types.BuilderUtils.escapeHtmlInternal;
 
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.base.Preconditions;
 import java.util.Arrays;
 
 /**
@@ -104,6 +105,15 @@ public final class SafeHtmls {
     String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
     return create("<script defer type=\"text/javascript\" nonce=\"" + htmlEscapeInternal(cspNonce)
         + "\" src=\"" + escapedUrl + "\"></script>");
+  }
+
+  /**
+   * Wraps a SafeStyleSheet inside a &lt;style type="text/css"&gt; tag.
+   */
+  public static SafeHtml fromStyleSheet(SafeStyleSheet safeStyleSheet) {
+    Preconditions.checkArgument(!safeStyleSheet.getSafeStyleSheetString().contains("<"));
+    return create("<style type=\"text/css\">" + safeStyleSheet.getSafeStyleSheetString()
+        + "</style>");
   }
 
   /**

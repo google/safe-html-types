@@ -96,6 +96,26 @@ public class SafeHtmlsTest extends TestCase {
         html.getSafeHtmlString());
   }
 
+  public void testFromStyleSheet() {
+    SafeHtml html = SafeHtmls.fromStyleSheet(SafeStyleSheets.fromConstant(
+        ".title { color: #000000; };"));
+    assertEquals(
+        "<style type=\"text/css\">.title { color: #000000; };</style>",
+        html.getSafeHtmlString());
+  }
+
+  public void testFromStyleSheetIllegal() {
+    SafeStyleSheet unsafeStyle =
+        UncheckedConversions.safeStyleSheetFromStringKnownToSatisfyTypeContract(
+            ".title { color: #000000; };</style><script>alert('malicious script');</script>");
+    try {
+      SafeHtmls.fromStyleSheet(unsafeStyle);
+      fail("Should throw an AssertionError if style contains \"<\" or \">\"");
+    } catch (IllegalArgumentException e) {
+      assertNotNull(e);
+    }
+  }
+
   public void testToAndFromProto() {
     String html = "<b>Hello World</b>";
     SafeHtml safeHtml = newSafeHtmlForTest(html);
