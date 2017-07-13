@@ -117,6 +117,15 @@ public final class SafeHtmls {
   }
 
   /**
+   * Creates a &lt;style type="text/css" src="<i>url</i>"&gt;&lt;style&gt; where the
+   * {@code src} attribute points to the given {@code trustedResourceUrl}.
+   */
+  public static SafeHtml fromStyleUrl(TrustedResourceUrl trustedResourceUrl) {
+    String escapedUrl = htmlEscapeInternal(trustedResourceUrl.getTrustedResourceUrlString());
+    return create("<style type=\"text/css\" src=\"" + escapedUrl + "\"></style>");
+  }
+
+  /**
    * Serializes a SafeHtml into its opaque protocol message representation.
    *
    * <p>Protocol message forms of this type are intended to be opaque. The fields of the returned

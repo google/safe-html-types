@@ -116,6 +116,14 @@ public class SafeHtmlsTest extends TestCase {
     }
   }
 
+  public void testFromStyleUrl() {
+    SafeHtml html = SafeHtmls.fromStyleUrl(
+        TrustedResourceUrls.fromConstant("https://example.com/&<\"'style.css"));
+    assertEquals("<style type=\"text/css\" "
+        + "src=\"https://example.com/&amp;&lt;&quot;&#39;style.css\"></style>",
+        html.getSafeHtmlString());
+  }
+
   public void testToAndFromProto() {
     String html = "<b>Hello World</b>";
     SafeHtml safeHtml = newSafeHtmlForTest(html);
