@@ -25,14 +25,16 @@ import jsinterop.annotations.JsType;
  * security type contract that its value, as a string, will not cause untrusted script execution
  * (XSS) when evaluated as CSS in a browser.
  *
- * <p>A SafeStyle's string representation ({@link #getSafeStyleString()}) can safely:
+ * <p>A SafeStyle's string representation ({@link #getSafeStyleString()}) can safely be:
  * <ul>
- * <li>Be interpolated as the content of a <b>quoted</b> HTML style attribute. The SafeStyle
- * string <b>must be HTML-attribute-escaped</b> (where " and ' are escaped) before interpolation.
- * <li>Be interpolated as the content of a {}-wrapped block within a stylesheet. The SafeStyle
- * string should not be escaped before interpolation. SafeStyle's contract also guarantees that the
- * string will not be able to introduce new properties or elide existing ones.
- * <li>Be assigned to the style property of a DOM node. The SafeStyle string should not be escaped
+ * <li>Interpolated as the content of a <b>quoted</b> HTML style attribute. However, the SafeStyle
+ * string <b>must be HTML-attribute-escaped</b> before interpolation.
+ * <li>Interpolated as the content of a {}-wrapped block within a stylesheet. '<' characters in the
+ * SafeStyle string <b>must be CSS-escaped</b> before interpolation. The SafeStyle string is also
+ * guaranteed not to be able to introduce new properties or elide existing ones.
+ * <li>Interpolated as the content of a {}-wrapped block within an HTML <style> element. '<'
+ * characters in the SafeStyle string <b>must be CSS-escaped</b> before interpolation.
+ * <li>Assigned to the style property of a DOM node. The SafeStyle string should not be escaped
  * before being assigned to the property.
  * </ul>
  *
