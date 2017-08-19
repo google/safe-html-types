@@ -216,7 +216,7 @@ for these.
 
 #### Script/Style sourced from untrusted source
 
-Closure Templates has no concept equivalent to the`[TrustedResourceUrl` type](#safehtml_types).
+Closure Templates has no concept equivalent to the[`TrustedResourceUrl` type](#safehtml_types).
 I.e. it is possible for template authors to write,
 
 ```html
