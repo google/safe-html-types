@@ -526,6 +526,24 @@ public final class SafeHtmlBuilder {
     return setAttribute("lang", value);
   }
 
+  /** Sets the {@code list} attribute for this element. */
+  public SafeHtmlBuilder setList(@CompileTimeConstant final String value) {
+    return setAttribute("list", value);
+  }
+
+  /**
+   * Sets the {@code list} attribute for this element to a {@link CompileTimeConstant} {@code
+   * prefix} and a {@code value} joined by a hyphen.
+   *
+   * @throws IllegalArgumentException if {@code prefix} is an empty string
+   */
+  public SafeHtmlBuilder setListWithPrefix(@CompileTimeConstant final String prefix, String value) {
+    if (prefix.trim().length() == 0) {
+      throw new IllegalArgumentException("Prefix cannot be empty string");
+    }
+    return setAttribute("list", prefix + "-" + value);
+  }
+
   /** Sets the {@code loop} attribute for this element. */
   public SafeHtmlBuilder setLoop(String value) {
     return setAttribute("loop", value);
