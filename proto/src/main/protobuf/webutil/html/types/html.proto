@@ -2,6 +2,7 @@
 // fields accessed. The language specific wrapper, like SafeHtml.java,
 // is to be used instead.
 //
+//
 // To create or read a proto, use its respective programming language type or
 // function. See:
 // - For Java: com.google.common.html.types
