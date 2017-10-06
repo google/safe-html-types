@@ -165,8 +165,7 @@ HTML escaping) or `deprecated-contextual` (contextual escaping, but not strict),
 in any of the `.soy` files in the transitive closure of the apps's dependencies.
 
 *    Strict mode is the Closure Templates default, i.e. an explicit `autoescape="strict"` is
-     not required (there are likely still lots of them, and presubmits to
-     enforce them, from before the switch in the default).
+     not required.
 *    Many projects have presubmit rules to prevent addition of new templates
      with non-strict autoescape modes
      This may be useful in large projects that are not fully migrated, to
