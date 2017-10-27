@@ -74,74 +74,14 @@ public class SafeUrlsTest extends TestCase {
   }
 
   public void testSanitize_validatesUrl() {
-    // Whitelisted schemes.
-    assertSanitizedAsSafeUrl("http://example.com/");
-    assertSanitizedAsSafeUrl("https://example.com");
-    assertSanitizedAsSafeUrl("mailto:foo@example.com");
-    assertSanitizedAsSafeUrl("ftp://example.com");
-    assertSanitizedAsSafeUrl("ftp://username@example.com");
-    assertSanitizedAsSafeUrl("ftp://username:password@example.com");
-    // Scheme is case-insensitive
-    assertSanitizedAsSafeUrl("HTtp://example.com/");
-    // Different URL components go through.
-    assertSanitizedAsSafeUrl("https://example.com/path?foo=bar#baz");
-    // Scheme-less URL with authority.
-    assertSanitizedAsSafeUrl("//example.com/path");
-    // Absolute path with no authority.
-    assertSanitizedAsSafeUrl("/path");
-    assertSanitizedAsSafeUrl("/path?foo=bar#baz");
-    // Relative path.
-    assertSanitizedAsSafeUrl("path");
-    assertSanitizedAsSafeUrl("path?foo=bar#baz");
-    assertSanitizedAsSafeUrl("p//ath");
-    assertSanitizedAsSafeUrl("p//ath?foo=bar#baz");
-    // Restricted character ':' after [/?#].
-    assertSanitizedAsSafeUrl("?:");
-
-    // Non-whitelisted schemes.
-    assertSanitizedAsUnsafeUrl("javascript:evil();");
-    assertSanitizedAsUnsafeUrl("javascript:evil();//\nhttp://good.com/");
-    assertSanitizedAsUnsafeUrl("data:blah");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("tel:+1234567890");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("sms:+1234567890");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("callto:+1234567890");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("wtai://wp/mc;+1234567890");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("rtsp://example.org/");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("market://details?id=app");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("geo:37.7,42.0");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("skype:chat?jid=foo");
-    // Not whitelisted by default.
-    assertSanitizedAsUnsafeUrl("whatsapp://send?text=Hello");
-    // Restricted character before [/?#].
-    assertSanitizedAsUnsafeUrl(":");
-    // '\' is not treated like '/': no restricted characters allowed after it.
-    assertSanitizedAsUnsafeUrl("\\:");
-    // Regex anchored to the left: doesn't match on "/:".
-    assertSanitizedAsUnsafeUrl(":/:");
-    // Regex multiline not enabled: first line would match but second one wouldn't.
-    assertSanitizedAsUnsafeUrl("path\n:");
-  }
-
-  private static void assertSanitizedAsSafeUrl(String url) {
-    SafeUrl safeUrl = SafeUrls.sanitize(url);
-    assertEquals(url, safeUrl.getSafeUrlString());
-
-    assertEquals(url, SafeUrls.sanitizeAsString(url, "irrelevant"));
-  }
-
-  private static void assertSanitizedAsUnsafeUrl(String url) {
-    SafeUrl safeUrl = SafeUrls.sanitize(url);
-    assertEquals(SafeUrl.INNOCUOUS, safeUrl);
-
-    assertEquals("about:invalid#id", SafeUrls.sanitizeAsString(url, "id"));
+    for (SafeUrlsTestVectors.Vector v : SafeUrlsTestVectors.kVectors) {
+      assertEquals(v.expected(), SafeUrls.sanitize(v.input()).getSafeUrlString());
+      if (v.safe()) {
+        assertEquals(v.expected(), SafeUrls.sanitizeAsString(v.input(), "irrelevant"));
+      } else {
+        assertEquals("about:invalid#id", SafeUrls.sanitizeAsString(v.input(), "id"));
+      }
+    }
   }
 
   public void testSanitize_customSchemes() {
