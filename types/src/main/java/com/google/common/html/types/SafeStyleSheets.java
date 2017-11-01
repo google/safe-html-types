@@ -27,6 +27,7 @@ import com.google.errorprone.annotations.CompileTimeConstant;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 /**
  * Protocol conversions and factory methods for {@link SafeStyleSheet}.
@@ -103,6 +104,31 @@ public final class SafeStyleSheets {
         .setPrivateDoNotAccessOrElseSafeStyleSheetWrappedValue(
             style.getSafeStyleSheetString())
         .build();
+  }
+
+  /**
+   * Creates a new SafeStyleSheet which contains, in order, the string representations of the given
+   * {@code stylesheets}.
+   */
+  public static SafeStyleSheet concat(SafeStyleSheet... stylesheets) {
+    return concat(Arrays.asList(stylesheets));
+  }
+
+  /**
+   * Creates a new SafeStyleSheet which contains, in order, the string representations of the given
+   * {@code stylesheets}.
+   */
+  public static SafeStyleSheet concat(Iterable<SafeStyleSheet> stylesheets) {
+    int concatLength = 0;
+    for (SafeStyleSheet stylesheet : stylesheets) {
+      concatLength += stylesheet.getSafeStyleSheetString().length();
+    }
+
+    StringBuilder result = new StringBuilder(concatLength);
+    for (SafeStyleSheet stylesheet : stylesheets) {
+      result.append(stylesheet.getSafeStyleSheetString());
+    }
+    return create(result.toString());
   }
 
   static SafeStyleSheet create(String style) {

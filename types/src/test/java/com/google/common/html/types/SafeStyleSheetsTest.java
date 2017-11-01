@@ -25,7 +25,8 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import java.nio.charset.Charset;
-
+import java.util.ArrayList;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -61,6 +62,23 @@ public class SafeStyleSheetsTest extends TestCase {
           expected.getMessage(),
           expected.getMessage().contains("Forbidden '<' character"));
     }
+  }
+
+  public void testConcats() {
+    assertEquals("", SafeStyleSheets.concat().getSafeStyleSheetString());
+
+    assertEquals(
+        "ab", SafeStyleSheets.concat(SafeStyleSheets.fromConstant("ab")).getSafeStyleSheetString());
+
+    assertEquals(
+        "ab",
+        SafeStyleSheets.concat(SafeStyleSheets.fromConstant("a"), SafeStyleSheets.fromConstant("b"))
+            .getSafeStyleSheetString());
+
+    List<SafeStyleSheet> stylesheets = new ArrayList<>();
+    stylesheets.add(SafeStyleSheets.fromConstant("a"));
+    stylesheets.add(SafeStyleSheets.fromConstant("b"));
+    assertEquals("ab", SafeStyleSheets.concat(stylesheets).getSafeStyleSheetString());
   }
 
   @GwtIncompatible("SafeStylesheets.fromResource")
