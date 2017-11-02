@@ -22,12 +22,14 @@ package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CompileTimeConstant;
+import javax.annotation.CheckReturnValue;
 
 
 /**
  * Protocol conversions and factory methods for {@link SafeStyle}.
  */
 @GwtCompatible
+@CheckReturnValue
 public final class SafeStyles {
 
   private SafeStyles() {}

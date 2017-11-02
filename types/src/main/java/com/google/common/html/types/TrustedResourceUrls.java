@@ -24,12 +24,14 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nullable;
 
 /**
  * Protocol conversions and factory methods for {@link TrustedResourceUrl}.
  */
 @GwtCompatible(emulated = true)
+@CheckReturnValue
 public final class TrustedResourceUrls {
 
   private TrustedResourceUrls() {}
