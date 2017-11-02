@@ -26,12 +26,14 @@ import com.google.common.io.Resources;
 import com.google.errorprone.annotations.CompileTimeConstant;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import javax.annotation.CheckReturnValue;
 
 
 /**
  * Protocol conversions and factory methods for {@link SafeScript}.
  */
 @GwtCompatible(emulated = true)
+@CheckReturnValue
 public final class SafeScripts {
 
   private SafeScripts() {}

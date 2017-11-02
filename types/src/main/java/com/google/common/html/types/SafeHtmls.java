@@ -25,11 +25,13 @@ import static com.google.common.html.types.BuilderUtils.escapeHtmlInternal;
 
 import com.google.common.annotations.GwtCompatible;
 import java.util.Arrays;
+import javax.annotation.CheckReturnValue;
 
 /**
  * Protocol conversions, builders and factory methods for {@link SafeHtml}.
  */
 @GwtCompatible
+@CheckReturnValue
 public final class SafeHtmls {
 
   /**
@@ -153,4 +155,3 @@ public final class SafeHtmls {
 
   private SafeHtmls() { }
 }
-

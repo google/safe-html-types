@@ -27,11 +27,13 @@ import com.google.errorprone.annotations.CompileTimeConstant;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import javax.annotation.CheckReturnValue;
 
 /**
  * Protocol conversions and factory methods for {@link SafeStyleSheet}.
  */
 @GwtCompatible(emulated = true)
+@CheckReturnValue
 public final class SafeStyleSheets {
 
   private SafeStyleSheets() {}

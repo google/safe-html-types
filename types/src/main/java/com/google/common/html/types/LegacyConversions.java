@@ -16,6 +16,8 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
+
 /**
  * Transitional utilities to unsafely trust random strings as {@code com.google.common.html.types}
  * types. Intended for temporary use when upgrading code that used to accept plain strings to use
@@ -28,6 +30,7 @@ package com.google.common.html.types;
  * sanitizers. If that’s not possible it should use {@link UncheckedConversions} and undergo
  * security review.
  */
+ @CheckReturnValue
 public final class LegacyConversions {
 
   private LegacyConversions() {}

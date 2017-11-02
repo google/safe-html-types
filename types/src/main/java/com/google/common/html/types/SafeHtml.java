@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -31,6 +32,7 @@ import jsinterop.annotations.JsType;
  */
 @Immutable
 @JsType
+@CheckReturnValue
 public final class SafeHtml {
 
   /** The SafeHtml wrapping an empty string. */

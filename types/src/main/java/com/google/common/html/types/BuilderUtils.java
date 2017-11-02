@@ -23,6 +23,7 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.Escaper;
 import com.google.common.escape.Escapers;
+import javax.annotation.CheckReturnValue;
 
 
 /**
@@ -30,6 +31,7 @@ import com.google.common.escape.Escapers;
  * {@link SafeHtmls}, {@link SafeHtmlBuilder}, etc.
  */
 @GwtCompatible
+@CheckReturnValue
 final class BuilderUtils {
 
   private BuilderUtils() {}

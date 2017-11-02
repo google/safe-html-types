@@ -16,6 +16,8 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
+
 /**
  * Unchecked conversions to create values of {@code com.google.common.html} types from plain
  * strings. Use of these functions could potentially result in instances of safe HTML types that
@@ -37,6 +39,7 @@ package com.google.common.html.types;
  * </ul>
  *
  */
+ @CheckReturnValue
 public final class UncheckedConversions {
 
   private UncheckedConversions() {}
