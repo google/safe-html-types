@@ -40,8 +40,7 @@ public final class SafeUrls {
   private static final Set<String> DEFAULT_SAFE_SCHEMES = createUnmodifiableSet(
       "http", "https", "mailto", "ftp");
 
-  private static final Set<CustomSafeUrlScheme> EMPTY_CUSTOM_SCHEMES =
-      new HashSet<CustomSafeUrlScheme>();
+  private static final Set<CustomSafeUrlScheme> EMPTY_CUSTOM_SCHEMES = Collections.emptySet();
 
   private SafeUrls() {}
 
