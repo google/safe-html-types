@@ -4,18 +4,30 @@ package com.google.common.html.types;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.GwtCompatible;
+import java.util.EnumSet;
+import java.util.Set;
+import javax.annotation.Generated;
 
 /** HTML safe types test vectors. */
-@GwtCompatible public final class SafeUrlsTestVectors {
+@Generated("test_vectors_templates/java.tpl")
+@GwtCompatible
+public final class SafeUrlsTestVectors {
   /** Structure encapsulating a single HTML safe types test vector. */
   @GwtCompatible @AutoValue public abstract static class Vector {
+    static Vector create(
+        String input, String expected, boolean safe, Set<CustomSafeUrlScheme> schemes) {
+      return new AutoValue_SafeUrlsTestVectors_Vector(input, expected, safe, schemes);
+    }
+
     static Vector create(String input, String expected, boolean safe) {
-      return new AutoValue_SafeUrlsTestVectors_Vector(input, expected, safe);
+      return new AutoValue_SafeUrlsTestVectors_Vector(
+          input, expected, safe, EnumSet.noneOf(CustomSafeUrlScheme.class));
     }
 
     public abstract String input();
     public abstract String expected();
     public abstract boolean safe();
+    public abstract Set<CustomSafeUrlScheme> customSchemes();
   }
 
   public static final Vector[] kVectors = {
@@ -303,6 +315,114 @@ import com.google.common.annotations.GwtCompatible;
       "http://www.f\00\00.com",
       "http://www.f\00\00.com",
       true
+    ),
+    Vector.create(
+      "tEl:+1(23)129-29192A.ABC#;eXt=29",
+      "tEl:+1(23)129-29192A.ABC#;eXt=29",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "tEL:123;randmomparam=123",
+      "tEL:123;randmomparam=123",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "",
+      "",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      ":",
+      "about:invalid#zGuavaz",
+      false,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "tell:",
+      "about:invalid#zGuavaz",
+      false,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "not-tel:+1",
+      "about:invalid#zGuavaz",
+      false,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      " tel:+1",
+      "about:invalid#zGuavaz",
+      false,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "javascript:evil()",
+      "about:invalid#zGuavaz",
+      false,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "http://www.google.com",
+      "http://www.google.com",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "tel:+1234567890",
+      "tel:+1234567890",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.TEL)
+    ),
+    Vector.create(
+      "sms:+1234567890",
+      "sms:+1234567890",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.SMS)
+    ),
+    Vector.create(
+      "callto:+1234567890",
+      "callto:+1234567890",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.CALLTO)
+    ),
+    Vector.create(
+      "wtai://wp/mc;+1234567890",
+      "wtai://wp/mc;+1234567890",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.WTAI)
+    ),
+    Vector.create(
+      "rtsp://example.org/",
+      "rtsp://example.org/",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.RTSP)
+    ),
+    Vector.create(
+      "market://details?id=app",
+      "market://details?id=app",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.MARKET)
+    ),
+    Vector.create(
+      "geo:37.7,42.0",
+      "geo:37.7,42.0",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.GEO)
+    ),
+    Vector.create(
+      "skype:chat?jid=foo",
+      "skype:chat?jid=foo",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.SKYPE)
+    ),
+    Vector.create(
+      "whatsapp://send?text=Hello",
+      "whatsapp://send?text=Hello",
+      true,
+      EnumSet.of(CustomSafeUrlScheme.WHATSAPP)
     ),
   };
 
