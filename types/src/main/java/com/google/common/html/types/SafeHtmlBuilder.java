@@ -626,6 +626,32 @@ public final class SafeHtmlBuilder {
     return setAttribute("name", prefix + "-" + value);
   }
 
+  /** These elements are whitelisted to use pattern with a String value. */
+  private static final Set<String> PATTERN_STRING_ELEMENT_WHITELIST =
+      createUnmodifiableSet("input");
+
+  /**
+   * Sets the {@code pattern} attribute for this element.
+   *
+   * <p>The attribute {@code pattern} with a {@code String} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code input}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code pattern} attribute with a {@code String} value
+   *     is not allowed on this element
+   */
+  public SafeHtmlBuilder setPattern(String value) {
+    if (!PATTERN_STRING_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"pattern\" with a String value can only be used "
+              + "by one of the following elements: "
+              + PATTERN_STRING_ELEMENT_WHITELIST);
+    }
+    return setAttribute("pattern", value);
+  }
+
   /** Sets the {@code placeholder} attribute for this element. */
   public SafeHtmlBuilder setPlaceholder(String value) {
     return setAttribute("placeholder", value);
