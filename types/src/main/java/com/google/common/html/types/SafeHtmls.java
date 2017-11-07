@@ -26,10 +26,12 @@ import static com.google.common.html.types.BuilderUtils.escapeHtmlInternal;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
 import java.util.Arrays;
+import javax.annotation.CheckReturnValue;
 
 /**
  * Protocol conversions, builders and factory methods for {@link SafeHtml}.
  */
+@CheckReturnValue
 @GwtCompatible
 public final class SafeHtmls {
 

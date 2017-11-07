@@ -23,12 +23,14 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.Escaper;
 import com.google.common.escape.Escapers;
+import javax.annotation.CheckReturnValue;
 
 
 /**
  * Static utility methods shared by safe-HTML types' factory and builder classes, such as
  * {@link SafeHtmls}, {@link SafeHtmlBuilder}, etc.
  */
+@CheckReturnValue
 @GwtCompatible
 final class BuilderUtils {
 

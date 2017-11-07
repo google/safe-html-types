@@ -22,7 +22,7 @@ package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CompileTimeConstant;
-
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.NotThreadSafe;
 
 /**
@@ -65,6 +65,7 @@ public final class TrustedResourceUrlBuilder {
   /**
    * Returns the TrustedResourceUrl built so far.
    */
+  @CheckReturnValue
   public TrustedResourceUrl build() {
     return TrustedResourceUrls.create(url.toString());
   }

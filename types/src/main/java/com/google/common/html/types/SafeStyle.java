@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -86,6 +87,7 @@ import jsinterop.annotations.JsType;
  *
  * @see http://www.w3.org/TR/css3-syntax/
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class SafeStyle {

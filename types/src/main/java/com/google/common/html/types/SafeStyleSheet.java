@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -39,6 +40,7 @@ import jsinterop.annotations.JsType;
  * http://www.w3.org/TR/html5/scripting-1.html#restrictions-for-contents-of-script-elements
  * (similar considerations apply to the style element).
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class SafeStyleSheet {

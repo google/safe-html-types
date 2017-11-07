@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -43,6 +44,7 @@ import jsinterop.annotations.JsType;
  * character references, such as {@code &amp;lt;}, are not allowed. See
  * http://www.w3.org/TR/html5/scripting-1.html#restrictions-for-contents-of-script-elements.
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class SafeScript {

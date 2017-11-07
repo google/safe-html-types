@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -1016,6 +1017,7 @@ public final class SafeHtmlBuilder {
     return appendContent(SafeHtmls.htmlEscape(text));
   }
 
+  @CheckReturnValue
   public SafeHtml build() {
     StringBuilder sb = new StringBuilder("<" + elementName);
     for (Map.Entry<String, String> entry : attributes.entrySet()) {

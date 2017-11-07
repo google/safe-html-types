@@ -29,10 +29,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.CheckReturnValue;
 
 /**
  * Protocol conversions and factory methods for {@link SafeUrl}.
  */
+@CheckReturnValue
 @GwtCompatible
 public final class SafeUrls {
 

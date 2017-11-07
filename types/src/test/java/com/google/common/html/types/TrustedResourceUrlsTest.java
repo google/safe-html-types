@@ -48,7 +48,9 @@ public class TrustedResourceUrlsTest extends TestCase {
   public void testFromEnvironmentVariable() {
     // Environment variable might exist so we don't check return value. Check that call doesn't
     // throw and that runs on all enviroments the code is transpiled to.
-    TrustedResourceUrls.fromEnvironmentVariable("somevaluethatprobablydoesntexist");
+    @SuppressWarnings("unused")
+    TrustedResourceUrl url = TrustedResourceUrls.fromEnvironmentVariable(
+        "somevaluethatprobablydoesntexist");
   }
 
 }

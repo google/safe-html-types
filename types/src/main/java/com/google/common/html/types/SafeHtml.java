@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -29,6 +30,7 @@ import jsinterop.annotations.JsType;
  * the innerHTML DOM property, or interpolation into a HTML template in HTML PC_DATA context, in
  * the sense that the use will not result in a Cross-Site-Scripting vulnerability.
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class SafeHtml {

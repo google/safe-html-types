@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -35,6 +36,7 @@ import jsinterop.annotations.JsType;
  * refers to. In particular, SafeUrls are <b>not</b> safe to use in a context where the referred-to
  * resource is interpreted as trusted code, e.g., as the src of a script tag.
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class SafeUrl {

@@ -16,6 +16,7 @@
 
 package com.google.common.html.types;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -28,6 +29,7 @@ import jsinterop.annotations.JsType;
  * likely to be easily detectable during testing. Given the wide number of non-RFC compliant URLs
  * in use, stricter validation could prevent some applications from being able to use this class.
  */
+@CheckReturnValue
 @Immutable
 @JsType
 public final class TrustedResourceUrl {

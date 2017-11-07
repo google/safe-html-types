@@ -27,6 +27,7 @@ import com.google.common.net.PercentEscaper;
 import com.google.errorprone.annotations.CompileTimeConstant;
 
 import java.util.LinkedHashMap;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.concurrent.NotThreadSafe;
 
 /**
@@ -596,6 +597,7 @@ public final class SafeStyleBuilder {
     return this;
   }
 
+  @CheckReturnValue
   public SafeStyle build() {
     StringBuilder sb = new StringBuilder();
     if (!properties.isEmpty()) {
