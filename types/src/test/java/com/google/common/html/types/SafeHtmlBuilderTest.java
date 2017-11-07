@@ -19,6 +19,7 @@
  */
 package com.google.common.html.types;
 
+import static com.google.common.html.types.testing.HtmlConversions.newSafeHtmlForTest;
 import static com.google.common.html.types.testing.HtmlConversions.newSafeUrlForTest;
 import static com.google.common.html.types.testing.assertions.Assertions.assertClassIsNotExportable;
 
@@ -193,7 +194,7 @@ public class SafeHtmlBuilderTest extends TestCase {
 
   }
 
-  public void testDisallowsAllowSafeUrlArbitraryTagHrefAttr() {
+  public void testDisallowsSafeUrlArbitraryTagHrefAttr() {
     // Test case-insensitive too.
     try {
       new SafeHtmlBuilder("foo").setHref(newSafeUrlForTest("a"));
@@ -296,6 +297,13 @@ public class SafeHtmlBuilderTest extends TestCase {
       fail("<iframe src> should require TrustedResourceUrl.");
     } catch (IllegalArgumentException expected) {
     }
+  }
+
+  public void testAllowsSafeHtmlInIframeSrcdocAttribute() {
+    assertSameHtml(
+        "<iframe srcdoc=\"&lt;a href=&quot;https://www.foo.com&quot;&gt;foo&lt;/a&gt;\"></iframe>",
+        new SafeHtmlBuilder("iframe")
+            .setSrcdoc(newSafeHtmlForTest("<a href=\"https://www.foo.com\">foo</a>")));
   }
 
   public void testAllowsSafeUrlInSrcAttributeOnMediaElements() {

@@ -66,7 +66,6 @@ public final class SafeHtmlBuilder {
           "applet",
           "base",
           "embed",
-          "iframe",
           "math",
           "meta",
           "object",
@@ -809,6 +808,32 @@ public final class SafeHtmlBuilder {
   /** Sets the {@code src} attribute for this element. */
   public SafeHtmlBuilder setSrc(TrustedResourceUrl value) {
     return setAttribute("src", value.getTrustedResourceUrlString());
+  }
+
+  /** These elements are whitelisted to use srcdoc with a SafeHtml value. */
+  private static final Set<String> SRCDOC_SAFE_HTML_ELEMENT_WHITELIST =
+      createUnmodifiableSet("iframe");
+
+  /**
+   * Sets the {@code srcdoc} attribute for this element.
+   *
+   * <p>The attribute {@code srcdoc} with a {@code SafeHtml} value is allowed on these elements:
+   *
+   * <ul>
+   *   <li>{@code iframe}
+   * </ul>
+   *
+   * @throws IllegalArgumentException if the {@code srcdoc} attribute with a {@code SafeHtml} value
+   *     is not allowed on this element
+   */
+  public SafeHtmlBuilder setSrcdoc(SafeHtml value) {
+    if (!SRCDOC_SAFE_HTML_ELEMENT_WHITELIST.contains(elementName)) {
+      throw new IllegalArgumentException(
+          "Attribute \"srcdoc\" with a SafeHtml value can only be used "
+              + "by one of the following elements: "
+              + SRCDOC_SAFE_HTML_ELEMENT_WHITELIST);
+    }
+    return setAttribute("srcdoc", value.getSafeHtmlString());
   }
 
   /** Sets the {@code start} attribute for this element. */
