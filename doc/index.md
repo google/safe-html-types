@@ -1,7 +1,7 @@
 # Preventing Security Bugs At Scale through Strict Safe Coding Practices
 
 
-Certain classes of security vulnerabilities, such as [cross-site scripting](http://www.google.com/about/appsecurity/learning/xss/),
+Certain classes of security vulnerabilities, such as [cross-site scripting](https://www.google.com/about/appsecurity/learning/xss/),
 have traditionally been notoriously difficult to avoid in large-scale
 development[^1]. At Google, we have developed a practical approach to prevent
 such vulnerabilities from ever being introduced during development.  This
@@ -53,7 +53,7 @@ Inherently safe APIs developed at Google include:
   XSS-vulnerability-prone, raw DOM API.
 
 * Both strict contextual templates and safe DOM API wrappers accept values of
-  ["Safe HTML" types](http://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md).
+  ["Safe HTML" types](safehtml-types.md).
   These types (`SafeHtml`, `SafeUrl`, etc)
   carry contracts stipulating that their value is safe to use (with respect to
   XSS vulnerabilities) in corresponding contexts.  These types come with builder
@@ -72,7 +72,7 @@ underlying raw, vulnerability-prone APIs (such as `.innerHTML` assignment).
 Adherence to the safe, "vulnerability-proof" coding style is statically
 enforced. In some cases, this is accomplished through the implementation
 language's type system; in some cases, we use custom static checkers such as
-[Error Prone](http://github.com/google/error-prone) or [JSConformance](http://github.com/google/closure-compiler/wiki/JS-Conformance-Framework).
+[Error Prone](https://github.com/google/error-prone) or [JSConformance](https://github.com/google/closure-compiler/wiki/JS-Conformance-Framework).
 
 ### Reviewed exceptions
 
@@ -125,8 +125,8 @@ APIs (HTML template systems, etc), and any uses of the
 
 ## Further reading
 
-* [Securing the Tangled Web](http://research.google.com/pubs/archive/42934.pdf)
-* [Strict Closure Templates](http://developers.google.com/closure/templates/docs/security#strict)
+* [Securing the Tangled Web](https://research.google.com/pubs/archive/42934.pdf)
+* [Strict Closure Templates](https://developers.google.com/closure/templates/docs/security#strict)
 
 
 [bug stats]: https://software-security.sans.org/downloads/appsec-2011-files/vrp-presentation.pdf
