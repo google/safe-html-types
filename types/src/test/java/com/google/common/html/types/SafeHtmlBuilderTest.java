@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/SafeHtmlBuilderTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -20,7 +16,10 @@
 package com.google.common.html.types;
 
 import static com.google.common.html.types.testing.HtmlConversions.newSafeHtmlForTest;
+import static com.google.common.html.types.testing.HtmlConversions.newSafeScriptForTest;
+import static com.google.common.html.types.testing.HtmlConversions.newSafeStyleSheetForTest;
 import static com.google.common.html.types.testing.HtmlConversions.newSafeUrlForTest;
+import static com.google.common.html.types.testing.HtmlConversions.newTrustedResourceUrlForTest;
 import static com.google.common.html.types.testing.assertions.Assertions.assertClassIsNotExportable;
 
 import com.google.common.annotations.GwtCompatible;
@@ -72,20 +71,17 @@ public class SafeHtmlBuilderTest extends TestCase {
     assertSameHtml("<a title=\"\"></a>", new SafeHtmlBuilder("a").setTitle(""));
   }
 
-  /**
-   * Same string as used in {@link SafeHtmlsTest}, see documentation there.
-   */
+  /** Same string as used in {@link SafeHtmlsTest}, see documentation there. */
   public void testPreservesNonAsciiCharacters() {
     assertSameHtml(
-      "<div>丄ê𐒖t</div>",
-      new SafeHtmlBuilder("div")
-          .escapeAndAppendContent("\u4E04\u00EA\uD801\uDC96t"));
+        "<div>丄ê𐒖t</div>",
+        new SafeHtmlBuilder("div").escapeAndAppendContent("\u4E04\u00EA\uD801\uDC96t"));
   }
 
   public void testEscapesContent() {
-    assertSameHtml("<a>&lt;&amp;</a>", new SafeHtmlBuilder("a")
-        .escapeAndAppendContent("<")
-        .escapeAndAppendContent("&"));
+    assertSameHtml(
+        "<a>&lt;&amp;</a>",
+        new SafeHtmlBuilder("a").escapeAndAppendContent("<").escapeAndAppendContent("&"));
   }
 
   public void testAppendsContent() {
@@ -137,8 +133,9 @@ public class SafeHtmlBuilderTest extends TestCase {
   }
 
   public void testSupportsDataAttributes() {
-    assertSameHtml("<abbr data-tooltip=\"a\"></abbr>", new SafeHtmlBuilder("abbr")
-        .setDataAttribute("data-tooltip", "a"));
+    assertSameHtml(
+        "<abbr data-tooltip=\"a\"></abbr>",
+        new SafeHtmlBuilder("abbr").setDataAttribute("data-tooltip", "a"));
   }
 
   public void testDisallowsArbitraryDataAttribute() {
@@ -172,9 +169,18 @@ public class SafeHtmlBuilderTest extends TestCase {
   }
 
   public void testAllowsSafeUrlInLinkedIcon() {
-    assertSameHtml("<link rel=\"icon\" href=\"a\">", new SafeHtmlBuilder("link")
-        .setRel("icon")
-        .setHref(newSafeUrlForTest("a")));
+    assertSameHtml(
+        "<link rel=\"icon\" href=\"a\">",
+        new SafeHtmlBuilder("link").setRel("icon").setHref(newSafeUrlForTest("a")));
+  }
+
+  public void testAllowsSafeUrlInRelAnchor() {
+    assertSameHtml(
+        "<a rel=\"noreferrer nofollow\" href=\"foo\"></a>",
+        new SafeHtmlBuilder("a").setRel("noreferrer nofollow").setHref(newSafeUrlForTest("foo")));
+    assertSameHtml(
+        "<a href=\"foo\" rel=\"noreferrer nofollow\"></a>",
+        new SafeHtmlBuilder("a").setHref(newSafeUrlForTest("foo")).setRel("noreferrer nofollow"));
   }
 
   public void testDisallowsSafeUrlInLinkedStylesheets() {
@@ -191,7 +197,6 @@ public class SafeHtmlBuilderTest extends TestCase {
       fail("Setting <link href> to SafeUrl with rel=\"stylesheet\" shouldn't be allowed.");
     } catch (IllegalArgumentException expected) {
     }
-
   }
 
   public void testDisallowsSafeUrlArbitraryTagHrefAttr() {
@@ -201,7 +206,6 @@ public class SafeHtmlBuilderTest extends TestCase {
       fail("Setting <foo href> to SafeUrl shouldn't be allowed.");
     } catch (IllegalArgumentException expected) {
     }
-
   }
 
   public void testDisallowsSafeUrlInOtherDangerousContexts() {
@@ -247,12 +251,6 @@ public class SafeHtmlBuilderTest extends TestCase {
 
   public void testDisallowsUnsafeTagNames() {
     try {
-      new SafeHtmlBuilder("script");
-      fail("<script> shouldn't be allowed.");
-    } catch (IllegalArgumentException expected) {
-    }
-
-    try {
       new SafeHtmlBuilder("scRipt");
       fail("<scRipt> shouldn't be allowed.");
     } catch (IllegalArgumentException expected) {
@@ -277,10 +275,24 @@ public class SafeHtmlBuilderTest extends TestCase {
     }
   }
 
+  public void testDisallowsEscapingIntoScript() {
+    try {
+      new SafeHtmlBuilder("script").escapeAndAppendContent("foo");
+      fail("<script> shouldn't be allowed with escaped contents.");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsEscapingIntoStyle() {
+    try {
+      new SafeHtmlBuilder("style").escapeAndAppendContent("foo");
+      fail("<style> shouldn't be allowed with escaped contents.");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
   public void testSettingAttributeAgainIsAllowed() {
-    assertSameHtml(
-        "<a title=\"c\"></a>",
-        new SafeHtmlBuilder("a").setTitle("a").setTitle("c"));
+    assertSameHtml("<a title=\"c\"></a>", new SafeHtmlBuilder("a").setTitle("a").setTitle("c"));
   }
 
   public void testDisallowsUsingNullValues() {
@@ -312,9 +324,7 @@ public class SafeHtmlBuilderTest extends TestCase {
     new SafeHtmlBuilder("video").setSrc(newSafeUrlForTest("b"));
   }
 
-  /**
-   * Whitelists depend on element name being lower cased.
-   */
+  /** Allowlists depend on element name being lower cased. */
   public void testDisallowsUpperCaseElementNames() {
     try {
       new SafeHtmlBuilder("dIv");
@@ -324,32 +334,137 @@ public class SafeHtmlBuilderTest extends TestCase {
   }
 
   public void testPreservesAttributesOrder() {
-    assertSameHtml("<div class=\"a\" id=\"id1\"></div>",
+    assertSameHtml(
+        "<div class=\"a\" id=\"id1\"></div>",
         new SafeHtmlBuilder("div").setClass("a").setId("id1"));
-    assertSameHtml("<div id=\"id2\" class=\"a\"></div>",
+    assertSameHtml(
+        "<div id=\"id2\" class=\"a\"></div>",
         new SafeHtmlBuilder("div").setId("id2").setClass("a"));
   }
 
   public void testAllowsNameTypeValueForInput() {
     assertSameHtml(
         "<input name=\"myName\" value=\"myValue\" type=\"hidden\">",
-        new SafeHtmlBuilder("input")
-            .setName("myName")
-            .setValue("myValue")
-            .setType("hidden"));
+        new SafeHtmlBuilder("input").setName("myName").setValue("myValue").setType("hidden"));
   }
 
-  public void testDisallowsTypeAttributeForNonWhitelistedElement() {
+  public void testDisallowsHrefAttributeForNonAllowedElement() {
     try {
-      new SafeHtmlBuilder("img").setType("hidden");
-      fail("<img> should not allow 'type' attribute");
+      new SafeHtmlBuilder("img").setHref(newSafeUrlForTest("."));
+      fail("<img> should not allow 'href' attribute");
     } catch (IllegalArgumentException expected) {
     }
   }
 
+  public void testStyle() {
+    assertSameHtml(
+        "<style>foo</style>",
+        new SafeHtmlBuilder("style").appendStyleContent(newSafeStyleSheetForTest("foo")));
+  }
+
+  public void testDisallowsHtmlInStyle() {
+    try {
+      new SafeHtmlBuilder("style").appendContent(newSafeHtmlForTest("foo"));
+      fail("<style> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsIterableHtmlInStyle() {
+    ArrayList<SafeHtml> htmls = new ArrayList<>();
+    htmls.add(newSafeHtmlForTest("<br/>"));
+    htmls.add(newSafeHtmlForTest("<i>foo</i>"));
+    try {
+      new SafeHtmlBuilder("style").appendContent(htmls);
+      fail("<style> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsIteratorHtmlInStyle() {
+    ArrayList<SafeHtml> htmls = new ArrayList<>();
+    htmls.add(newSafeHtmlForTest("<br/>"));
+    htmls.add(newSafeHtmlForTest("<i>foo</i>"));
+    try {
+      new SafeHtmlBuilder("style").appendContent(htmls.iterator());
+      fail("<style> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testScript() {
+    assertSameHtml(
+        "<script>foo</script>",
+        new SafeHtmlBuilder("script").appendScriptContent(newSafeScriptForTest("foo")));
+  }
+
+  public void testScriptSrc() {
+    assertSameHtml(
+        "<script src=\"trusted\"></script>",
+        new SafeHtmlBuilder("script").setSrc(newTrustedResourceUrlForTest("trusted")));
+  }
+
+  public void testScriptSrcSafeUrlProhibited() {
+    try {
+      new SafeHtmlBuilder("script").setSrc(newSafeUrlForTest("trusted"));
+      fail("<script src=SafeUrl> should be prohibited");
+    } catch (IllegalArgumentException expected) {
+    }
+  }
+
+  public void testDisallowsHtmlInScript() {
+    try {
+      new SafeHtmlBuilder("script").appendContent(newSafeHtmlForTest("foo"));
+      fail("<script> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsIterableHtmlInScript() {
+    ArrayList<SafeHtml> htmls = new ArrayList<SafeHtml>();
+    htmls.add(newSafeHtmlForTest("<br/>"));
+    htmls.add(newSafeHtmlForTest("<i>foo</i>"));
+    try {
+      new SafeHtmlBuilder("script").appendContent(htmls);
+      fail("<script> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsIteratorHtmlInScript() {
+    ArrayList<SafeHtml> htmls = new ArrayList<SafeHtml>();
+    htmls.add(newSafeHtmlForTest("<br/>"));
+    htmls.add(newSafeHtmlForTest("<i>foo</i>"));
+    try {
+      new SafeHtmlBuilder("script").appendContent(htmls.iterator());
+      fail("<script> should not allow SafeHtml contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsScriptInStyle() {
+    try {
+      new SafeHtmlBuilder("style").appendScriptContent(newSafeScriptForTest("foo"));
+      fail("<style> should not allow SafeScript contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testDisallowsStyleInScript() {
+    try {
+      new SafeHtmlBuilder("script").appendStyleContent(newSafeStyleSheetForTest("foo"));
+      fail("<script> should not allow SafeStyleSheet contents");
+    } catch (IllegalStateException expected) {
+    }
+  }
+
+  public void testAsyncScript() {
+    assertSameHtml(
+        "<script async=\"async\"></script>",
+        new SafeHtmlBuilder("script").setAsync(SafeHtmlBuilder.AsyncValue.ASYNC));
+  }
 
   private static void assertSameHtml(String expected, SafeHtmlBuilder builder) {
     assertEquals(expected, builder.build().getSafeHtmlString());
   }
-
 }

@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// java/com/google/common/html/types/SafeScripts.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -23,29 +19,37 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.io.Resources;
+import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.CompileTimeConstant;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import javax.annotation.CheckReturnValue;
 
-
-/**
- * Protocol conversions and factory methods for {@link SafeScript}.
- */
+/** Protocol conversions and factory methods for {@link SafeScript}. */
 @CheckReturnValue
 @GwtCompatible(emulated = true)
 public final class SafeScripts {
 
   private SafeScripts() {}
 
-  /**
-   * Creates a SafeScript from the given compile-time constant string {@code script}.
-   */
+  /** Creates a SafeScript from the given compile-time constant string {@code script}. */
   public static SafeScript fromConstant(@CompileTimeConstant final String script) {
     if (script.length() == 0) {
       return SafeScript.EMPTY;
     }
     return create(script);
+  }
+
+  /**
+   * Creates a SafeScript from the given compile-time constant {@code resourceName} using the given
+   * {@code charset}. The resource will be loaded using {@link Resources#getResource(String)}.
+   *
+   * <p>This performs ZERO VALIDATION of the data. We assume that resources should be safe because
+   * they are part of the binary, and therefore not attacker controlled.
+   */
+  @GwtIncompatible("Resources")
+  public static SafeScript fromResource(
+      @CompileTimeConstant final String resourceName, Charset charset) throws IOException {
+    return create(Resources.toString(Resources.getResource(resourceName), charset));
   }
 
   /**
@@ -65,6 +69,15 @@ public final class SafeScripts {
   }
 
   /**
+   * Creates a SafeScript wrapping the given script in an immediately invoked function expression
+   * (IIFE). This has the sole effect of placing the contents in an inner scope, for all variables
+   * in {@code contents} declared with {@code var}.
+   */
+  public static SafeScript immediatelyInvokedFunctionExpression(SafeScript contents) {
+    return create("(function(){" + contents.getSafeScriptString() + "})();");
+  }
+
+  /**
    * Deserializes a SafeScriptProto into a SafeScript instance.
    *
    * <p>Protocol-message forms are intended to be opaque. The fields of the protocol message should
@@ -73,8 +86,8 @@ public final class SafeScripts {
    * in other implementation languages.
    *
    * <p><b>Important:</b> It is unsafe to invoke this method on a protocol message that has been
-   * received from an entity outside the application's trust domain. Data coming from the browser
-   * is outside the application's trust domain.
+   * received from an entity outside the application's trust domain. Data coming from the browser is
+   * outside the application's trust domain.
    */
   public static SafeScript fromProto(SafeScriptProto proto) {
     return create(proto.getPrivateDoNotAccessOrElseSafeScriptWrappedValue());
@@ -85,12 +98,13 @@ public final class SafeScripts {
    *
    * <p>Protocol message forms of this type are intended to be opaque. The fields of the returned
    * protocol message should be considered encapsulated and are not intended for direct inspection
-   * or manipulation. Protocol messages can be converted back into a SafeScript using
-   * {@link #fromProto(SafeScriptProto)}.
+   * or manipulation. Protocol messages can be converted back into a SafeScript using {@link
+   * #fromProto(SafeScriptProto)}.
    */
   public static SafeScriptProto toProto(SafeScript script) {
     return SafeScriptProto.newBuilder()
-        .setPrivateDoNotAccessOrElseSafeScriptWrappedValue(script.getSafeScriptString()).build();
+        .setPrivateDoNotAccessOrElseSafeScriptWrappedValue(script.getSafeScriptString())
+        .build();
   }
 
   static SafeScript create(String script) {

@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-/**
- * Java implementation of the safe-HTML types.
- */
+/** Java implementation of the safe-HTML types. */
 package com.google.common.html.types;

@@ -2,7 +2,7 @@
   <parent>
     <groupId>com.google.common.html.types</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.9-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>com.google.errorprone</groupId>
       <artifactId>error_prone_annotations</artifactId>
-      <version>2.0.2</version>
+      <version>2.3.2</version>
     </dependency>
 
     <dependency>
@@ -192,7 +192,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0</version>
         <configuration>
+          <!--TODO(b/123646401): try out maven-javadoc-plugin 3.1.0 and see if source 8 can be removed then-->
+          <source>8</source>
           <notimestamp>true</notimestamp>
           <windowtitle>Safe HTML Types</windowtitle>
           <author>false</author>
@@ -216,7 +219,9 @@
                   </div>
                 ]]>
           </bottom>
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <additionalOptions>
+            <additionalOption>-Xdoclint:none</additionalOption>
+          </additionalOptions>
         </configuration>
       </plugin>
     </plugins>

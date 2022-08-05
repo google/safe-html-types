@@ -16,7 +16,8 @@
 
 package com.google.common.html.types;
 
-import javax.annotation.CheckReturnValue;
+import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -27,8 +28,8 @@ import jsinterop.annotations.JsType;
  * string will not cause untrusted script execution when evaluated as HTML in a browser.
  *
  * <p>Values of this type are guaranteed to be safe to use in HTML contexts, such as, assignment to
- * the innerHTML DOM property, or interpolation into a HTML template in HTML PC_DATA context, in
- * the sense that the use will not result in a Cross-Site-Scripting vulnerability.
+ * the innerHTML DOM property, or interpolation into a HTML template in HTML PC_DATA context, in the
+ * sense that the use will not result in a Cross-Site-Scripting vulnerability.
  */
 @CheckReturnValue
 @Immutable
@@ -37,6 +38,12 @@ public final class SafeHtml {
 
   /** The SafeHtml wrapping an empty string. */
   public static final SafeHtml EMPTY = new SafeHtml("");
+
+  /** The SafeHtml wrapping line break. */
+  public static final SafeHtml BR = new SafeHtml("<br>");
+
+  /** The SafeHtml wrapping the HTML doctype. */
+  public static final SafeHtml DOCTYPE = new SafeHtml("<!DOCTYPE html>");
 
   private final String privateDoNotAccessOrElseSafeHtmlWrappedValue;
 
@@ -53,7 +60,7 @@ public final class SafeHtml {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     if (!(other instanceof SafeHtml)) {
       return false;
     }
@@ -66,9 +73,9 @@ public final class SafeHtml {
    * Returns a debug representation of this value's underlying string, NOT the string representation
    * of the SafeHtml.
    *
-   * <p>Having {@code toString()} return a debug representation is intentional. This type has
-   * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method
-   * method name provides a modicum of type-safety.
+   * <p>Having {@code toString()} return a debug representation is intentional. This type has a
+   * GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method method
+   * name provides a modicum of type-safety.
    *
    * @see #getSafeHtmlString
    */

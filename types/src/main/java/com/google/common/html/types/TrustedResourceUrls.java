@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// java/com/google/common/html/types/TrustedResourceUrls.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -20,16 +16,14 @@
 
 package com.google.common.html.types;
 
+
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.CompileTimeConstant;
-
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nullable;
 
-/**
- * Protocol conversions and factory methods for {@link TrustedResourceUrl}.
- */
+/** Protocol conversions and factory methods for {@link TrustedResourceUrl}. */
 @CheckReturnValue
 @GwtCompatible(emulated = true)
 public final class TrustedResourceUrls {
@@ -45,8 +39,8 @@ public final class TrustedResourceUrls {
    * equivalent in other implementation languages.
    *
    * <p><b>Important:</b> It is unsafe to invoke this method on a protocol message that has been
-   * received from an entity outside the application's trust domain. Data coming from the browser
-   * is outside the application's trust domain.
+   * received from an entity outside the application's trust domain. Data coming from the browser is
+   * outside the application's trust domain.
    */
   public static TrustedResourceUrl fromProto(TrustedResourceUrlProto proto) {
     return create(proto.getPrivateDoNotAccessOrElseTrustedResourceUrlWrappedValue());
@@ -57,8 +51,8 @@ public final class TrustedResourceUrls {
    *
    * <p>Protocol message forms of this type are intended to be opaque. The fields of the returned
    * protocol message should be considered encapsulated and are not intended for direct inspection
-   * or manipulation. Protocol messages can be converted back into a TrustedResourceUrl using
-   * {@link #fromProto(TrustedResourceUrlProto)}.
+   * or manipulation. Protocol messages can be converted back into a TrustedResourceUrl using {@link
+   * #fromProto(TrustedResourceUrlProto)}.
    */
   public static TrustedResourceUrlProto toProto(TrustedResourceUrl url) {
     return TrustedResourceUrlProto.newBuilder()
@@ -82,12 +76,11 @@ public final class TrustedResourceUrls {
    * setting, environment variables are part of the application's deployment configuration and are
    * hence considered application-controlled. If the variable is not defined returns null.
    *
-   *
    * <p>No runtime validation or sanitization is performed on the value of the environment variable;
    * being under application control, it is simply assumed to comply with the TrustedResourceUrl
    * contract.
    *
-   * @throws SecurityException  if a security manager exists and its checkPermission method doesn't
+   * @throws SecurityException if a security manager exists and its checkPermission method doesn't
    *     allow access to the environment variable name
    */
   @GwtIncompatible("System.getEnv")
@@ -100,7 +93,6 @@ public final class TrustedResourceUrls {
     }
     return create(var);
   }
-
 
   /** Also called from TrustedResourceUrlBuilder. */
   static TrustedResourceUrl create(String url) {

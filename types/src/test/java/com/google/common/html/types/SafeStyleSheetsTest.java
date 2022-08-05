@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/SafeStyleSheetsTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -29,9 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeStyleSheets}.
- */
+/** Unit tests for {@link SafeStyleSheets}. */
 @GwtCompatible
 public class SafeStyleSheetsTest extends TestCase {
 
@@ -44,9 +38,7 @@ public class SafeStyleSheetsTest extends TestCase {
     final String styleSheet = "P.special { color:red ; }";
     SafeStyleSheet safeStyleSheet = SafeStyleSheets.fromConstant(styleSheet);
     SafeStyleSheetProto proto = SafeStyleSheets.toProto(safeStyleSheet);
-    assertEquals(
-      styleSheet,
-      SafeStyleSheets.fromProto(proto).getSafeStyleSheetString());
+    assertEquals(styleSheet, SafeStyleSheets.fromProto(proto).getSafeStyleSheetString());
   }
 
   public void testFromConstant_allowEmptyString() {
@@ -58,9 +50,7 @@ public class SafeStyleSheetsTest extends TestCase {
       SafeStyleSheets.fromConstant("x<x");
       fail("Should throw");
     } catch (IllegalArgumentException expected) {
-      assertTrue(
-          expected.getMessage(),
-          expected.getMessage().contains("Forbidden '<' character"));
+      assertTrue(expected.getMessage(), expected.getMessage().contains("Forbidden '<' character"));
     }
   }
 
@@ -81,13 +71,20 @@ public class SafeStyleSheetsTest extends TestCase {
     assertEquals("ab", SafeStyleSheets.concat(stylesheets).getSafeStyleSheetString());
   }
 
-  @GwtIncompatible("SafeStylesheets.fromResource")
+  @GwtIncompatible("SafeStyleSheets.fromResource")
   public void testFromResource() throws Exception {
     SafeStyleSheet styleSheet =
         SafeStyleSheets.fromResource(
-            SafeStyleSheetsTest.class, "resources/style.css",
-            Charset.forName("UTF-8"));
-    assertEquals(
-      "P.special { color:red ; }\n", styleSheet.getSafeStyleSheetString());
+            "com/google/common/html/types/resources/style.css", Charset.forName("UTF-8"));
+
+    assertEquals("P.special { color:red ; }\n", styleSheet.getSafeStyleSheetString());
+  }
+
+  @GwtIncompatible("SafeStyleSheets.fromResource")
+  public void testFromResourceContext() throws Exception {
+    SafeStyleSheet styleSheet =
+        SafeStyleSheets.fromResource(
+            SafeStyleSheetsTest.class, "resources/style.css", Charset.forName("UTF-8"));
+    assertEquals("P.special { color:red ; }\n", styleSheet.getSafeStyleSheetString());
   }
 }

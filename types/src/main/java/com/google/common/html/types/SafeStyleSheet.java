@@ -16,7 +16,8 @@
 
 package com.google.common.html.types;
 
-import javax.annotation.CheckReturnValue;
+import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -25,21 +26,22 @@ import jsinterop.annotations.JsType;
  * contract that its value, as a string, will not cause untrusted script execution (XSS) when
  * evaluated as CSS in a browser.
  *
- * A SafeStyleSheet's string representation ({@link #getSafeStyleSheetString()}) can safely be
- * interpolated as the content of a style element within HTML. The SafeStyleSheet string should
- * not be escaped before interpolation.
+ * <p>A SafeStyleSheet's string representation ({@link #getSafeStyleSheetString()}) can safely be
+ * interpolated as the content of a style element within HTML. The SafeStyleSheet string should not
+ * be escaped before interpolation.
  *
- * A SafeStyleSheet can be constructed via security-reviewed unchecked conversions. In this case
+ * <p>A SafeStyleSheet can be constructed via security-reviewed unchecked conversions. In this case
  * producers of SafeStyleSheet must ensure themselves that the SafeStyleSheet does not contain
  * unsafe script. Note in particular that {@code &lt;} is dangerous, even when inside CSS strings,
- * and so should always be forbidden or CSS-escaped in user controlled input. For example,
- * if {@code &lt;/style&gt;&lt;script&gt;evil&lt;/script&gt;"} were interpolated
- * inside a CSS string, it would break out of the context of the original style element and
- * {@code evil} would execute. Also note that within an HTML style (raw text) element, HTML
- * character references, such as {@code &amp;lt;}, are not allowed. See
- * http://www.w3.org/TR/html5/scripting-1.html#restrictions-for-contents-of-script-elements
- * (similar considerations apply to the style element).
+ * and so should always be forbidden or CSS-escaped in user controlled input. For example, if {@code
+ * &lt;/style&gt;&lt;script&gt;evil&lt;/script&gt;"} were interpolated inside a CSS string, it would
+ * break out of the context of the original style element and {@code evil} would execute. Also note
+ * that within an HTML style (raw text) element, HTML character references, such as {@code
+ * &amp;lt;}, are not allowed. See
+ * http://www.w3.org/TR/html5/scripting-1.html#restrictions-for-contents-of-script-elements (similar
+ * considerations apply to the style element).
  */
+@com.google.errorprone.annotations.Immutable
 @CheckReturnValue
 @Immutable
 @JsType
@@ -63,7 +65,7 @@ public final class SafeStyleSheet {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     if (!(other instanceof SafeStyleSheet)) {
       return false;
     }
@@ -76,9 +78,9 @@ public final class SafeStyleSheet {
    * Returns a debug representation of this value's underlying string, NOT the string representation
    * of the style declaration(s).
    *
-   * <p>Having {@code toString()} return a debug representation is intentional. This type has
-   * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method
-   * method name provides a modicum of type-safety.
+   * <p>Having {@code toString()} return a debug representation is intentional. This type has a
+   * GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method method
+   * name provides a modicum of type-safety.
    *
    * @see #getSafeStyleSheetString
    */

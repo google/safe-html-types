@@ -20,12 +20,9 @@ import static com.google.common.html.types.testing.HtmlConversions.newSafeUrlFor
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeUrl}.
- */
+/** Unit tests for {@link SafeUrl}. */
 @GwtCompatible
 public class SafeUrlTest extends TestCase {
 
@@ -38,12 +35,8 @@ public class SafeUrlTest extends TestCase {
 
   public void testEqualsAndHashCode() {
     new EqualsTester()
-        .addEqualityGroup(
-            newSafeUrlForTest("url1"),
-            newSafeUrlForTest("url1"))
-        .addEqualityGroup(
-            newSafeUrlForTest("url2"),
-            newSafeUrlForTest("url2"))
+        .addEqualityGroup(newSafeUrlForTest("url1"), newSafeUrlForTest("url1"))
+        .addEqualityGroup(newSafeUrlForTest("url2"), newSafeUrlForTest("url2"))
         .testEquals();
   }
 }

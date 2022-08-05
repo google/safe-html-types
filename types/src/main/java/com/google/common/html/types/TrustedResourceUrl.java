@@ -16,7 +16,8 @@
 
 package com.google.common.html.types;
 
-import javax.annotation.CheckReturnValue;
+import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import jsinterop.annotations.JsType;
 
@@ -26,8 +27,8 @@ import jsinterop.annotations.JsType;
  *
  * <p>Given that the URL can only be constructed from strings under application control and is used
  * to load resources, bugs resulting in a malformed URL should not have a security impact and are
- * likely to be easily detectable during testing. Given the wide number of non-RFC compliant URLs
- * in use, stricter validation could prevent some applications from being able to use this class.
+ * likely to be easily detectable during testing. Given the wide number of non-RFC compliant URLs in
+ * use, stricter validation could prevent some applications from being able to use this class.
  */
 @CheckReturnValue
 @Immutable
@@ -49,7 +50,7 @@ public final class TrustedResourceUrl {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     if (!(other instanceof TrustedResourceUrl)) {
       return false;
     }
@@ -62,9 +63,9 @@ public final class TrustedResourceUrl {
    * Returns a debug representation of this value's underlying string, NOT the string representation
    * of the URL.
    *
-   * <p>Having {@code toString()} return a debug representation is intentional. This type has
-   * a GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method
-   * method name provides a modicum of type-safety.
+   * <p>Having {@code toString()} return a debug representation is intentional. This type has a
+   * GWT-compiled JavaScript version; JavaScript has no static typing and a distinct method method
+   * name provides a modicum of type-safety.
    *
    * @see #getTrustedResourceUrlString
    */

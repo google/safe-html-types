@@ -2,7 +2,6 @@
 // fields accessed. The language specific wrapper, like SafeHtml.java,
 // is to be used instead.
 //
-//
 // To create or read a proto, use its respective programming language type or
 // function. See:
 // - For Java: com.google.common.html.types
@@ -13,10 +12,9 @@
 // - For JS: goog.html.testing
 
 // Protocol buffer representations of types with security type contracts in the
-// HTML realm. See http://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md for an overview of each of the types
+// HTML realm. See https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md for an overview of each of the types
 // and their programming language API.
 syntax = "proto2";
-
 
 option java_package = "com.google.common.html.types";
 option java_outer_classname = "Html";
@@ -43,11 +41,10 @@ message SafeHtmlProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
   // packages with which to create or read this message.
-  optional string private_do_not_access_or_else_safe_html_wrapped_value = 2
-      [ctype=CORD
-      ];
+  optional string private_do_not_access_or_else_safe_html_wrapped_value = 2 [
+    ctype = CORD
+  ];
 }
-
 
 // Message containing a string that is safe to use in URL contexts in DOM APIs
 // and HTML documents, where the URL context does not refer to a resource that
@@ -69,7 +66,7 @@ message TrustedResourceUrlProto {
   // packages with which to create or read this message.
   optional string
       private_do_not_access_or_else_trusted_resource_url_wrapped_value = 4
-          ;
+      ;
 }
 
 // Message containing a sequence of CSS declarations safe to use in style
@@ -88,9 +85,9 @@ message SafeScriptProto {
   // IMPORTANT: Never set or read this field, even from tests, it is private.
   // See documentation at the top of .proto file for programming language
   // packages with which to create or read this message.
-  optional string private_do_not_access_or_else_safe_script_wrapped_value = 6
-      [ctype=CORD
-      ];
+  optional string private_do_not_access_or_else_safe_script_wrapped_value = 6 [
+    ctype = CORD
+  ];
 }
 
 // Message containing a complete CSS style sheet, safe to use in style contexts
@@ -100,16 +97,16 @@ message SafeStyleSheetProto {
   // See documentation at the top of .proto file for programming language
   // packages with which to create or read this message.
   optional string private_do_not_access_or_else_safe_style_sheet_wrapped_value =
-      7
-      [ctype=CORD
+      7 [
+        ctype = CORD
       ];
 }
 
 enum CustomSafeUrlScheme {
   // Schemes that are safe w.r.t. XSS but that may trigger other problematic
   // actions when presented in the context of a "regular" link are not
-  // whitelisted by default but can still be converted to SafeUrl by
-  // whitelisting them explicitly in the SafeUrl sanitization API. In other
+  // allowed by default but can still be converted to SafeUrl by
+  // allowing them explicitly in the SafeUrl sanitization API. In other
   // words, the caller has to indicate that they're expecting to process
   // such custom schemes.
   //
@@ -131,6 +128,36 @@ enum CustomSafeUrlScheme {
   SKYPE = 7;
   WHATSAPP = 8;
 
+  // Custom scheme for iTunes URIs.
+  ITMS = 20;
   // Custom scheme for iBooks URIs. More background: b/32807272.
   ITMS_BOOKS = 9;
+  // Custom scheme for Google Glass URIs. More background: b/74019421.
+  GLASS = 10;
+  // Custom schemes for App Store URIs. More background: b/77343280.
+  ITMS_APPS = 11;
+  ITMS_APPSS = 19;
+  // Custom scheme for iTunes enterprise/development app downloads.
+  ITMS_SERVICES = 22;
+  GOOGLEASSISTANT = 12;
+  ASSISTANT_SETTINGS = 13;
+  // Can open a terminal; some terminal emulators have a history of RCE.
+  // At least chrome opens a confirmation prompt.
+  SSH = 14;
+  // Only "browseable" intents can be opened with an intent: URI. Any webpage
+  // can open any intent URL. However, switching apps can be disruptive to UX.
+  INTENT = 15;
+  // "sip:" is very much like "tel:" but with an email address.
+  SIP = 16;
+  GOOGLEHOME = 17;
+  CHROMECAST = 18;
+  PAY = 21;
+  GOOGLEAPP = 23;
+  // cid: schemes are not interpreted by browsers, but by mail clients.
+  // and only typically refer to resources that are already part of the message.
+  CID = 24;
+  // webcal: safe w.r.t. XSS. Navigates to a calendar app, which will subscribe
+  // to the .ical file rather than downloading the file. Google calendar asks
+  // confirmation if the user wants to subscribe to the calendar.
+  WEBCAL = 25;
 }

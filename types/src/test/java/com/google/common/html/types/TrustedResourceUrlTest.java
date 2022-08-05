@@ -20,12 +20,9 @@ import static com.google.common.html.types.testing.HtmlConversions.newTrustedRes
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link TrustedResourceUrl}.
- */
+/** Unit tests for {@link TrustedResourceUrl}. */
 @GwtCompatible
 public class TrustedResourceUrlTest extends TestCase {
 
@@ -39,11 +36,9 @@ public class TrustedResourceUrlTest extends TestCase {
   public void testEqualsAndHashCode() {
     new EqualsTester()
         .addEqualityGroup(
-            newTrustedResourceUrlForTest("url1"),
-            newTrustedResourceUrlForTest("url1"))
+            newTrustedResourceUrlForTest("url1"), newTrustedResourceUrlForTest("url1"))
         .addEqualityGroup(
-            newTrustedResourceUrlForTest("url2"),
-            newTrustedResourceUrlForTest("url2"))
+            newTrustedResourceUrlForTest("url2"), newTrustedResourceUrlForTest("url2"))
         .testEquals();
   }
 }

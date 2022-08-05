@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/SafeScriptsTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -24,12 +20,9 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import java.nio.charset.Charset;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeScripts}.
- */
+/** Unit tests for {@link SafeScripts}. */
 @GwtCompatible
 public class SafeScriptsTest extends TestCase {
 
@@ -53,8 +46,32 @@ public class SafeScriptsTest extends TestCase {
   public void testFromResource() throws Exception {
     SafeScript safeScript =
         SafeScripts.fromResource(
+            "com/google/common/html/types/resources/script.js", Charset.forName("UTF-8"));
+
+    assertEquals("alert('test');\n", safeScript.getSafeScriptString());
+  }
+
+  @GwtIncompatible("SafeScripts.fromResource")
+  public void testFromResourceContext() throws Exception {
+    SafeScript safeScript =
+        SafeScripts.fromResource(
             SafeScriptsTest.class, "resources/script.js", Charset.forName("UTF-8"));
 
     assertEquals("alert('test');\n", safeScript.getSafeScriptString());
+  }
+
+  public void testIife_empty() throws Exception {
+    assertEquals(
+        "(function(){})();",
+        SafeScripts.immediatelyInvokedFunctionExpression(SafeScripts.fromConstant(""))
+            .getSafeScriptString());
+  }
+
+  public void testIife() throws Exception {
+    assertEquals(
+        "(function(){console.log('hello');\n})();",
+        SafeScripts.immediatelyInvokedFunctionExpression(
+                SafeScripts.fromConstant("console.log('hello');\n"))
+            .getSafeScriptString());
   }
 }

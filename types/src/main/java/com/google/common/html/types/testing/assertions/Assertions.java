@@ -36,15 +36,17 @@ public final class Assertions {
    * Closure JS (which these annotations enable) because there would be no way to enforce the
    * annotation's semantics when the JS code gets compiled.
    *
-   * <p>Note that it's still ok for them to get GWT-compiled to JS, because only other Java GWT
-   * code can call them.
+   * <p>Note that it's still ok for them to get GWT-compiled to JS, because only other Java GWT code
+   * can call them.
    */
   public static void assertClassIsNotExportable(Class<?> klass) {
     for (Class<?> annotation : EXPORTABLE_CLASS_ANNOTATIONS) {
       if (klass.isAnnotationPresent(annotation.asSubclass(Annotation.class))) {
         throw new AssertionError(
-            "Class should not have annotation " + annotation.getName()
-            + ", @CompileTimeConstant can be bypassed: " + klass);
+            "Class should not have annotation "
+                + annotation.getName()
+                + ", @CompileTimeConstant can be bypassed: "
+                + klass);
       }
     }
   }

@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/TrustedResourceUrlsTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -23,12 +19,9 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link TrustedResourceUrls}.
- */
+/** Unit tests for {@link TrustedResourceUrls}. */
 @GwtCompatible(emulated = true)
 public class TrustedResourceUrlsTest extends TestCase {
 
@@ -49,8 +42,7 @@ public class TrustedResourceUrlsTest extends TestCase {
     // Environment variable might exist so we don't check return value. Check that call doesn't
     // throw and that runs on all enviroments the code is transpiled to.
     @SuppressWarnings("unused")
-    TrustedResourceUrl url = TrustedResourceUrls.fromEnvironmentVariable(
-        "somevaluethatprobablydoesntexist");
+    TrustedResourceUrl url =
+        TrustedResourceUrls.fromEnvironmentVariable("somevaluethatprobablydoesntexist");
   }
-
 }

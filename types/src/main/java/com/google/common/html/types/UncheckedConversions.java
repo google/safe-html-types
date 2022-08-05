@@ -16,7 +16,7 @@
 
 package com.google.common.html.types;
 
-import javax.annotation.CheckReturnValue;
+import com.google.errorprone.annotations.CheckReturnValue;
 
 /**
  * Unchecked conversions to create values of {@code com.google.common.html} types from plain
@@ -26,16 +26,16 @@ import javax.annotation.CheckReturnValue;
  * <p>Avoid use of the methods in this file whenever possible; instead prefer to create instances of
  * {@code com.google.common.html} types using inherently safe builders or template systems.
  *
- * <p>See
- * <a href="http://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md">
- * Guidelines for use of Unchecked Conversions of Security-Contract Types</a> if you need to use
- * these methods.
+ * <p>See <a href="https://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md">Guidelines for use of Unchecked Conversions of
+ * Security-Contract Types</a> if you need to use these methods.
  *
  * <p>Example appropriate uses include:
+ *
  * <ul>
- * <li>Wrapping the result of general-purpose or application-specific content sanitizer libraries.
- * <li>Wrapping the result of rendering strictly contextually autoescaping templates (assuming the
- * template's autoescaping implementation is indeed strict enough to support the type contract).
+ *   <li>Wrapping the result of general-purpose or application-specific content sanitizer libraries.
+ *   <li>Wrapping the result of rendering strictly contextually autoescaping templates (assuming the
+ *       template's autoescaping implementation is indeed strict enough to support the type
+ *       contract).
  * </ul>
  *
  */
@@ -44,7 +44,7 @@ public final class UncheckedConversions {
 
   private UncheckedConversions() {}
 
-/**
+  /**
    * Converts a String into a SafeHtml.
    */
   public static SafeHtml safeHtmlFromStringKnownToSatisfyTypeContract(String html) {

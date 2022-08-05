@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// java/com/google/common/html/types/SafeStyleSheets.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -23,16 +19,13 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.io.Resources;
+import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.CompileTimeConstant;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import javax.annotation.CheckReturnValue;
 
-/**
- * Protocol conversions and factory methods for {@link SafeStyleSheet}.
- */
+/** Protocol conversions and factory methods for {@link SafeStyleSheet}. */
 @CheckReturnValue
 @GwtCompatible(emulated = true)
 public final class SafeStyleSheets {
@@ -42,8 +35,8 @@ public final class SafeStyleSheets {
   /**
    * Creates a SafeStyleSheet from the given compile-time constant string {@code style}.
    *
-   * <p>{@code styleSheet} must not have any &lt; characters in it so that the syntactic
-   * structure of any surrounding CSS and HTML is not affected.
+   * <p>{@code styleSheet} must not have any &lt; characters in it so that the syntactic structure
+   * of any surrounding CSS and HTML is not affected.
    *
    * @throws IllegalArgumentException if {@code styleSheet} contains &lt;
    */
@@ -61,8 +54,21 @@ public final class SafeStyleSheets {
   }
 
   /**
-   * Creates a SafeStyleSheet from the given compile-time constant {@code resourceName} using
-   * the given {@code charset}.
+   * Creates a SafeStyleSheet from the given compile-time constant {@code resourceName} using the
+   * given {@code charset}. The resource will be loaded using {@link Resources#getResource(String)}.
+   *
+   * <p>This performs ZERO VALIDATION of the data. We assume that resources should be safe because
+   * they are part of the binary, and therefore not attacker controlled.
+   */
+  @GwtIncompatible("Resources")
+  public static SafeStyleSheet fromResource(
+      @CompileTimeConstant final String resourceName, Charset charset) throws IOException {
+    return create(Resources.toString(Resources.getResource(resourceName), charset));
+  }
+
+  /**
+   * Creates a SafeStyleSheet from the given compile-time constant {@code resourceName} using the
+   * given {@code charset}.
    *
    * <p>This performs ZERO VALIDATION of the data. We assume that resources should be safe because
    * they are part of the binary, and therefore not attacker controlled.
@@ -76,7 +82,6 @@ public final class SafeStyleSheets {
     return create(Resources.toString(Resources.getResource(contextClass, resourceName), charset));
   }
 
-
   /**
    * Deserializes a SafeStyleSheetProto into a SafeStyleSheet instance.
    *
@@ -86,8 +91,8 @@ public final class SafeStyleSheets {
    * equivalent in other implementation languages.
    *
    * <p><b>Important:</b> It is unsafe to invoke this method on a protocol message that has been
-   * received from an entity outside the application's trust domain. Data coming from the browser
-   * is outside the application's trust domain.
+   * received from an entity outside the application's trust domain. Data coming from the browser is
+   * outside the application's trust domain.
    */
   public static SafeStyleSheet fromProto(SafeStyleSheetProto proto) {
     return create(proto.getPrivateDoNotAccessOrElseSafeStyleSheetWrappedValue());
@@ -98,13 +103,12 @@ public final class SafeStyleSheets {
    *
    * <p>Protocol message forms of this type are intended to be opaque. The fields of the returned
    * protocol message should be considered encapsulated and are not intended for direct inspection
-   * or manipulation. Protocol messages can be converted back into a SafeStyleSheet using
-   * {@link #fromProto(SafeStyleSheetProto)}.
+   * or manipulation. Protocol messages can be converted back into a SafeStyleSheet using {@link
+   * #fromProto(SafeStyleSheetProto)}.
    */
   public static SafeStyleSheetProto toProto(SafeStyleSheet style) {
     return SafeStyleSheetProto.newBuilder()
-        .setPrivateDoNotAccessOrElseSafeStyleSheetWrappedValue(
-            style.getSafeStyleSheetString())
+        .setPrivateDoNotAccessOrElseSafeStyleSheetWrappedValue(style.getSafeStyleSheetString())
         .build();
   }
 

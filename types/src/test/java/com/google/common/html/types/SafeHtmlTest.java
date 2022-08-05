@@ -20,12 +20,9 @@ import static com.google.common.html.types.testing.HtmlConversions.newSafeHtmlFo
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeHtml}.
- */
+/** Unit tests for {@link SafeHtml}. */
 @GwtCompatible
 public class SafeHtmlTest extends TestCase {
 

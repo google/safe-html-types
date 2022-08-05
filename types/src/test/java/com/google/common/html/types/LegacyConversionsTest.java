@@ -24,54 +24,39 @@ import static com.google.common.html.types.LegacyConversions.riskilyAssumeSafeUr
 import static com.google.common.html.types.LegacyConversions.riskilyAssumeTrustedResourceUrl;
 
 import com.google.common.annotations.GwtCompatible;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link LegacyConversions}.
- */
+/** Unit tests for {@link LegacyConversions}. */
 @GwtCompatible
 public class LegacyConversionsTest extends TestCase {
 
   public void testRiskilyAssumeSafeHtml() {
     String html = "<script>this is not valid SafeHtml";
-    assertEquals(
-        html,
-        riskilyAssumeSafeHtml(html).getSafeHtmlString());
+    assertEquals(html, riskilyAssumeSafeHtml(html).getSafeHtmlString());
   }
 
   public void testRiskilyAssumeSafeScript() {
     String script = "invalid SafeScript";
-    assertEquals(
-        script,
-        riskilyAssumeSafeScript(script).getSafeScriptString());
+    assertEquals(script, riskilyAssumeSafeScript(script).getSafeScriptString());
   }
 
   public void testRiskilyAssumeSafeStyle() {
     String style = "width:expression(this is not valid SafeStyle";
-    assertEquals(
-        style,
-        riskilyAssumeSafeStyle(style).getSafeStyleString());
+    assertEquals(style, riskilyAssumeSafeStyle(style).getSafeStyleString());
   }
 
   public void testRiskilyAssumeSafeStyleSheet() {
     String styleSheet = "selector { not a valid SafeStyleSheet";
-    assertEquals(
-        styleSheet,
-        riskilyAssumeSafeStyleSheet(styleSheet).getSafeStyleSheetString());
+    assertEquals(styleSheet, riskilyAssumeSafeStyleSheet(styleSheet).getSafeStyleSheetString());
   }
 
   public void testRiskilyAssumeSafeUrl() {
     String url = "data:this will not be sanitized";
-    assertEquals(
-        url,
-        riskilyAssumeSafeUrl(url).getSafeUrlString());
+    assertEquals(url, riskilyAssumeSafeUrl(url).getSafeUrlString());
   }
 
   public void testRiskilyAssumeTrustedResourceUrl() {
     String url = "data:this will not be sanitized";
-    assertEquals(
-        url,
-        riskilyAssumeTrustedResourceUrl(url).getTrustedResourceUrlString());
+    assertEquals(url, riskilyAssumeTrustedResourceUrl(url).getTrustedResourceUrlString());
   }
 }

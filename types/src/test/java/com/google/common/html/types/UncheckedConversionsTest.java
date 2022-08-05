@@ -26,12 +26,9 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link UncheckedConversions}.
- */
+/** Unit tests for {@link UncheckedConversions}. */
 @GwtCompatible
 public class UncheckedConversionsTest extends TestCase {
 
@@ -42,23 +39,18 @@ public class UncheckedConversionsTest extends TestCase {
 
   public void testSafeHtmlFromStringKnownToSatisfyTypeContract() {
     String html = "<script>this is not valid SafeHtml";
-    assertEquals(
-        html,
-        safeHtmlFromStringKnownToSatisfyTypeContract(html).getSafeHtmlString());
+    assertEquals(html, safeHtmlFromStringKnownToSatisfyTypeContract(html).getSafeHtmlString());
   }
 
   public void testSafeScriptFromStringKnownToSatisfyTypeContract() {
     String script = "invalid SafeScript";
     assertEquals(
-        script,
-        safeScriptFromStringKnownToSatisfyTypeContract(script).getSafeScriptString());
+        script, safeScriptFromStringKnownToSatisfyTypeContract(script).getSafeScriptString());
   }
 
   public void testSafeStyleFromStringKnownToSatisfyTypeContract() {
     String style = "width:expression(this is not valid SafeStyle";
-    assertEquals(
-        style,
-        safeStyleFromStringKnownToSatisfyTypeContract(style).getSafeStyleString());
+    assertEquals(style, safeStyleFromStringKnownToSatisfyTypeContract(style).getSafeStyleString());
   }
 
   public void testSafeStyleSheetFromStringKnownToSatisfyTypeContract() {
@@ -70,9 +62,7 @@ public class UncheckedConversionsTest extends TestCase {
 
   public void testSafeUrlFromStringKnownToSatisfyTypeContract() {
     String url = "data:this will not be sanitized";
-    assertEquals(
-        url,
-        safeUrlFromStringKnownToSatisfyTypeContract(url).getSafeUrlString());
+    assertEquals(url, safeUrlFromStringKnownToSatisfyTypeContract(url).getSafeUrlString());
   }
 
   public void testTrustedResourceUrlFromStringKnownToSatisfyTypeContract() {

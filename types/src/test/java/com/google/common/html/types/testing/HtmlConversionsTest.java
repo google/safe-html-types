@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/testing/HtmlConversionsTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -35,12 +31,9 @@ import com.google.common.html.types.SafeUrlProto;
 import com.google.common.html.types.SafeUrls;
 import com.google.common.html.types.TrustedResourceUrlProto;
 import com.google.common.html.types.TrustedResourceUrls;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link HtmlConversions}.
- */
+/** Unit tests for {@link HtmlConversions}. */
 @GwtCompatible
 public class HtmlConversionsTest extends TestCase {
 

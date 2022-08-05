@@ -16,7 +16,7 @@
 
 package com.google.common.html.types;
 
-import javax.annotation.CheckReturnValue;
+import com.google.errorprone.annotations.CheckReturnValue;
 
 /**
  * Transitional utilities to unsafely trust random strings as {@code com.google.common.html.types}
@@ -24,8 +24,8 @@ import javax.annotation.CheckReturnValue;
  * {@code com.google.common.html.types} types, but where it's not practical to transitively update
  * callers.
  *
- * IMPORTANT: No new code should use the conversion methods in this package, they are intended for
- * refactoring old code to use {@code com.google.common.html.types} types. New code should
+ * <p>IMPORTANT: No new code should use the conversion methods in this package, they are intended
+ * for refactoring old code to use {@code com.google.common.html.types} types. New code should
  * construct {@code com.google.common.html.types} types via their APIs, template systems or
  * sanitizers. If that’s not possible it should use {@link UncheckedConversions} and undergo
  * security review.
@@ -70,7 +70,8 @@ public final class LegacyConversions {
   /**
    * Converts a String into a SafeUrl, for refactoring legacy code. Please read class documentation
    * before using.
-   */  public static SafeUrl riskilyAssumeSafeUrl(String url) {
+   */
+  public static SafeUrl riskilyAssumeSafeUrl(String url) {
     return new SafeUrl(url);
   }
 

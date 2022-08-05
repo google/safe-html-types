@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// javatests/com/google/common/html/types/SafeStylesTest.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -24,12 +20,9 @@ import static com.google.common.html.types.testing.assertions.Assertions.assertC
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeStyles}.
- */
+/** Unit tests for {@link SafeStyles}. */
 @GwtCompatible
 public class SafeStylesTest extends TestCase {
 
@@ -54,18 +47,14 @@ public class SafeStylesTest extends TestCase {
       SafeStyles.fromConstant("width: x<;");
       fail("Should throw");
     } catch (IllegalArgumentException expected) {
-      assertTrue(
-          expected.getMessage(),
-          expected.getMessage().contains("Forbidden characters"));
+      assertTrue(expected.getMessage(), expected.getMessage().contains("Forbidden characters"));
     }
 
     try {
       SafeStyles.fromConstant("width: x>;");
       fail("Should throw");
     } catch (IllegalArgumentException expected) {
-      assertTrue(
-          expected.getMessage(),
-          expected.getMessage().contains("Forbidden characters"));
+      assertTrue(expected.getMessage(), expected.getMessage().contains("Forbidden characters"));
     }
   }
 
@@ -75,7 +64,6 @@ public class SafeStylesTest extends TestCase {
       fail("Should throw");
     } catch (IllegalArgumentException expected) {
     }
-
   }
 
   public void testFromConstant_throwsIfNoColon() {
@@ -84,5 +72,16 @@ public class SafeStylesTest extends TestCase {
       fail("Should throw");
     } catch (IllegalArgumentException expected) {
     }
+  }
+
+  public void testConcat() {
+    SafeStyle concatenated =
+        SafeStyles.concat(
+            SafeStyles.fromConstant("display: none;"), SafeStyles.fromConstant("width: 1em;"));
+    assertEquals("display: none;width: 1em;", concatenated.getSafeStyleString());
+  }
+
+  public void testConcat_returnsEmptyStyle() {
+    assertEquals(SafeStyle.EMPTY, SafeStyles.concat());
   }
 }

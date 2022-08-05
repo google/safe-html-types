@@ -18,12 +18,9 @@ package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeStyleSheet}.
- */
+/** Unit tests for {@link SafeStyleSheet}. */
 @GwtCompatible
 public class SafeStyleSheetTest extends TestCase {
 
@@ -35,9 +32,7 @@ public class SafeStyleSheetTest extends TestCase {
 
   public void testEqualsAndHashCode() {
     new EqualsTester()
-        .addEqualityGroup(
-            SafeStyleSheet.EMPTY,
-            SafeStyleSheets.fromConstant(""))
+        .addEqualityGroup(SafeStyleSheet.EMPTY, SafeStyleSheets.fromConstant(""))
         .addEqualityGroup(
             SafeStyleSheets.fromConstant("P.special { color:red ; }"),
             SafeStyleSheets.fromConstant("P.special { color:red ; " + "}"))

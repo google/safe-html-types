@@ -18,20 +18,15 @@ package com.google.common.html.types;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeScript}.
- */
+/** Unit tests for {@link SafeScript}. */
 @GwtCompatible
 public class SafeScriptTest extends TestCase {
 
   public void testToString_returnsDebugString() {
     final String script = "var string = 'hello';";
-    assertEquals(
-        "SafeScript{" + script + "}",
-        SafeScripts.fromConstant(script).toString());
+    assertEquals("SafeScript{" + script + "}", SafeScripts.fromConstant(script).toString());
   }
 
   public void testEqualsAndHashCode() {

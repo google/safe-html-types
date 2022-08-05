@@ -1,7 +1,3 @@
-// **** GENERATED CODE, DO NOT MODIFY ****
-// This file was generated via preprocessing from input:
-// java/com/google/common/html/types/BuilderUtils.java.tpl
-// ***************************************
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -23,12 +19,11 @@ package com.google.common.html.types;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.Escaper;
 import com.google.common.escape.Escapers;
-import javax.annotation.CheckReturnValue;
-
+import com.google.errorprone.annotations.CheckReturnValue;
 
 /**
- * Static utility methods shared by safe-HTML types' factory and builder classes, such as
- * {@link SafeHtmls}, {@link SafeHtmlBuilder}, etc.
+ * Static utility methods shared by safe-HTML types' factory and builder classes, such as {@link
+ * SafeHtmls}, {@link SafeHtmlBuilder}, etc.
  */
 @CheckReturnValue
 @GwtCompatible
@@ -37,16 +32,15 @@ final class BuilderUtils {
   private BuilderUtils() {}
 
   static String coerceToInterchangeValid(String text) {
-      // MOE elided code that uses a non-public library to make sure text only
-      // contains minimally-encoded Unicode scalar values that can appear in
-      // both HTML and XML.
-      return text;
+    // MOE elided code that uses a non-public library to make sure text only
+    // contains minimally-encoded Unicode scalar values that can appear in
+    // both HTML and XML.
+    return text;
 
-   }
+  }
 
   static String escapeHtmlInternal(String s) {
     return HTML_ESCAPER.escape(s);
-
   }
 
   // This is exactly what j.c.g.common.html.HtmlEscapers.htmlEscaper() does. However, depending on

@@ -20,12 +20,9 @@ import static com.google.common.html.types.testing.HtmlConversions.newSafeStyleF
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
-
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link SafeStyle} and its factory methods.
- */
+/** Unit tests for {@link SafeStyle} and its factory methods. */
 @GwtCompatible
 public class SafeStyleTest extends TestCase {
 
@@ -33,22 +30,14 @@ public class SafeStyleTest extends TestCase {
   // version of builders.
 
   public void testToString_returnsDebugString() {
-    assertEquals(
-        "SafeStyle{width: 1em;}",
-        newSafeStyleForTest("width: 1em;").toString());
+    assertEquals("SafeStyle{width: 1em;}", newSafeStyleForTest("width: 1em;").toString());
   }
 
   public void testEqualsAndHashCode() {
     new EqualsTester()
-        .addEqualityGroup(
-            newSafeStyleForTest("width: 1em;"),
-            newSafeStyleForTest("width: 1em;"))
-        .addEqualityGroup(
-            newSafeStyleForTest("height: 1em;"),
-            newSafeStyleForTest("height: 1em;"))
-        .addEqualityGroup(
-            newSafeStyleForTest("width: 2em;"),
-            newSafeStyleForTest("width: 2em;"))
+        .addEqualityGroup(newSafeStyleForTest("width: 1em;"), newSafeStyleForTest("width: 1em;"))
+        .addEqualityGroup(newSafeStyleForTest("height: 1em;"), newSafeStyleForTest("height: 1em;"))
+        .addEqualityGroup(newSafeStyleForTest("width: 2em;"), newSafeStyleForTest("width: 2em;"))
         .testEquals();
   }
 }
