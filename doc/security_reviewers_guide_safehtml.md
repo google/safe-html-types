@@ -131,7 +131,7 @@ and shouldn't result in much work.[^automation]
     into callers of the code you're reviewing; it should be possible to
     determine if a call-site of a potentially-dangerous API is actually safe
     only by looking at the surrounding code. If this is not the case, the code
-    is not conforming to [unchecked Safe HTML](https://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md)
+    is not conforming to [unchecked Safe HTML](https://github.com/google/safe-html-types/blob/main/doc/safehtml-unchecked.md)
     guidelines
 
 In a time-constrained review, you may not be able to exhaustively check all

@@ -12,7 +12,7 @@
 // - For JS: goog.html.testing
 
 // Protocol buffer representations of types with security type contracts in the
-// HTML realm. See https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md for an overview of each of the types
+// HTML realm. See https://github.com/google/safe-html-types/blob/main/doc/safehtml-types.md for an overview of each of the types
 // and their programming language API.
 syntax = "proto2";
 

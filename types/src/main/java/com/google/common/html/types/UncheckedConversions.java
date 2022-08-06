@@ -26,7 +26,7 @@ import com.google.errorprone.annotations.CheckReturnValue;
  * <p>Avoid use of the methods in this file whenever possible; instead prefer to create instances of
  * {@code com.google.common.html} types using inherently safe builders or template systems.
  *
- * <p>See <a href="https://github.com/google/safe-html-types/blob/master/doc/safehtml-unchecked.md">Guidelines for use of Unchecked Conversions of
+ * <p>See <a href="https://github.com/google/safe-html-types/blob/main/doc/safehtml-unchecked.md">Guidelines for use of Unchecked Conversions of
  * Security-Contract Types</a> if you need to use these methods.
  *
  * <p>Example appropriate uses include:
