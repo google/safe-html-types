@@ -1,7 +1,5 @@
 # Security contracts for Safe HTML Types
 
-[TOC]
-
 This page contains the security contract that each Safe HTML Type satisfies. See
 [Safe HTML Types](safehtml-types.md) for an overview.
 
