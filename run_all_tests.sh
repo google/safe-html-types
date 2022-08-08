@@ -60,7 +60,7 @@ pushd examples/banned_use_of_unchecked_conversions
   require_in_log '1 access policy violation'
   # Violation location
   require_in_log \
-      'com.example.safehtmltypes:banned_use_of_unchecked_conversions:jar:1.0.0-SNAPSHOT : Example.java : L28'
+      'com.example.safehtmltypes:banned_use_of_unchecked_conversions:jar:1.0.0-SNAPSHOT : Example.java : L26'
   # Violation text
   require_in_log \
       'com.google.common.html.types.UncheckedConversions.safeUrlFromStringKnownToSatisfyTypeContract() cannot be accessed from com.example.Example$Unapproved'

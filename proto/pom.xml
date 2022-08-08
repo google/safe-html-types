@@ -13,7 +13,7 @@
     A protocol buffer that defines wrappers for strings in web-content
     languages.
 
-    https://github.com/google/safe-html-types/blob/master/README.md
+    https://github.com/google/safe-html-types/blob/main/README.md
   </description>
 
   <build>

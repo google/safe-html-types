@@ -19,7 +19,7 @@
     This is meant to be used in conjunction with the
     error_prone checker, and safe template languages.
 
-    https://github.com/google/safe-html-types/blob/master/README.md
+    https://github.com/google/safe-html-types/blob/main/README.md
   </description>
 
   <dependencies>

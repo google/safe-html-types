@@ -10,7 +10,7 @@
     Parent project for typed strings of web content that can be
     used to bring safe-by-construction methods to web applications.
 
-    https://github.com/google/safe-html-types/blob/master/README.md
+    https://github.com/google/safe-html-types/blob/main/README.md
   </description>
 
   <properties>
