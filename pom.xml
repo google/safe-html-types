@@ -19,7 +19,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.7</java.version>
     <guava.version>19.0</guava.version>
-    <protobuf.version>3.3.0</protobuf.version>
+    <protobuf.version>3.16.3</protobuf.version>
     <autovalue.version>1.5.2</autovalue.version>
   </properties>
 
